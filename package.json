@@ -5,11 +5,18 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next build ; next export",
+    "deploy": "rsync -avh out/ basin:public_html/classes/cs312-f20"
   },
   "dependencies": {
+    "date-fns": "^2.15.0",
+    "gray-matter": "^4.0.2",
     "next": "9.5.2",
+    "prop-types": "^15.7.2",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "remark": "^12.0.1",
+    "remark-html": "^12.0.0"
   }
 }

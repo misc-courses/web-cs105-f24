@@ -1,0 +1,23 @@
+.mainPage {
+  margin: 5rem auto;
+  padding-left: 14rem;
+  max-width: 900px;
+}
+
+@media (max-width: 800px) {
+  .mainPage {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media print {
+  .mainPage {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.footer {
+  font-size: 75%;
+}
