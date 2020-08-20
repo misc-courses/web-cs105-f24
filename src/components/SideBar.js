@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 import PropTypes from "prop-types";
 
+import PageContext from "./PageContext";
 import styles from "./Sidebar.module.css";
+import Page from "./Page";
 
 // const SideLink = ({ name, path, currentPage }) => {
 //   const className =
@@ -137,6 +139,10 @@ import styles from "./Sidebar.module.css";
 // };
 
 function Sidebar({ unhide, currentPage }) {
+  const { sections, setSections } = useContext(PageContext);
+
+  console.log(sections);
+
   return (
     <div className={styles.sidebar}>
       <ul>

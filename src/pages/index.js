@@ -1,8 +1,19 @@
 import Head from "next/head";
+import path from "path";
+import { useState, useEffect, useContext } from "react";
+import PageContext from "../components/PageContext";
+import { getAllPageIds, getOrderedPageList } from "../lib/markdown-utils";
+
 import styles from "../styles/Home.module.css";
 import Layout from "../components/Layout";
 
 export default function Home() {
+  const { setSections } = useContext(PageContext);
+
+  // useEffect(() => {
+  //   setSections(paths);
+  // }, [paths]);
+
   return (
     <Layout currentPage={{ path: "/", title: "Home" }} modified={"2020-08-19"}>
       <div className={styles.container}>
@@ -35,3 +46,33 @@ export default function Home() {
     </Layout>
   );
 }
+
+/**
+ * Fetch the data for the page to be rendered.
+ *
+ * @param {*} param0
+ */
+// export function getStaticProps({ params }) {
+//   const sections = [
+//     "assignments",
+//     "lectures",
+//     "practicals",
+//     "project",
+//     "resources",
+//   ];
+
+//   const paths = sections.map((section) => {
+//     const sectionPaths = getOrderedPageList(
+//       path.join(process.cwd(), "content", section)
+//     ).map((sp) => sp.id);
+
+//     return {
+//       section,
+//       paths: sectionPaths,
+//     };
+//   });
+
+//   return {
+//     props: { paths },
+//   };
+// }
