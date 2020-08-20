@@ -67,8 +67,6 @@ Directory.propTypes = {
 };
 
 function Sidebar({ unhide, currentPage }) {
-  console.log(contents);
-
   const items = contents.map((item) => {
     if (item.type === "directory") {
       return (

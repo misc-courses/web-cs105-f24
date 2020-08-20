@@ -68,6 +68,7 @@ function generateSitemap() {
   const sitemap = [];
 
   sitemap.push(makeNode("Home", "/"));
+  sitemap.push(makeNode("Course info", "/info"));
 
   contentDirectories.forEach((section) => {
     const contents = getOrderedPageList(
