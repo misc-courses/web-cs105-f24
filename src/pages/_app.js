@@ -1,16 +1,9 @@
 import "../styles/globals.css";
 
-import React, { useState } from "react";
-import PageContext from "../components/PageContext";
+import React from "react";
 
-function MyApp({ Component, pageProps, props }) {
-  const [sections, setSections] = useState([]);
-
-  return (
-    <PageContext.Provider value={{ sections, setSections }}>
-      <Component {...pageProps} />
-    </PageContext.Provider>
-  );
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />;
 }
 
 export default MyApp;

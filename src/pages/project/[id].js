@@ -27,6 +27,7 @@ export async function getStaticPaths() {
  */
 export async function getStaticProps({ params }) {
   const pageData = await getPageData(resourcesDirectory, params.id);
+  pageData.path = path.join("/project", params.id);
   return {
     props: { pageData },
   };

@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run sitemap:build; next build",
     "start": "next start",
-    "export": "next build ; next export",
-    "deploy": "rsync -avh out/ basin:public_html/classes/cs312-f20"
+    "export": "npm run build ; next export",
+    "deploy": "rsync -avh out/ basin:public_html/classes/cs312-f20",
+    "sitemap:build": "node src/lib/generate-sitemap.js"
   },
   "dependencies": {
     "date-fns": "^2.15.0",
