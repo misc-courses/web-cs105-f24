@@ -5,27 +5,25 @@ dueDate: "2019-11-01 5p"
 path: "/practicals/practical08"
 template: "assignment"
 name: "Practical 8"
-published: true
+published: false
 ---
-
-
 
 In this practical you will adapt a simple memory-backed server for Simplepedia to use a RDBMS backend. We will test our implementation against the SQLite file-based database, but by using the [Knex library](http://knexjs.org). The same code would also work with MySQL or PostgreSQL (Heroku, for instance, provides PostgreSQL).
 
 #### Goals
-* Gain familiarity with RDBMS-backed servers, Knex, SQLite, and the Objection ORM library.
-* Implement model validations as an example of aspect-oriented programming (AOP). 
-* Employ code generators. Code generation (like with CRA) is very a helpful feature for working with complex libraries (that, for example, expect specific files in specific directories).
+
+- Gain familiarity with RDBMS-backed servers, Knex, SQLite, and the Objection ORM library.
+- Implement model validations as an example of aspect-oriented programming (AOP).
+- Employ code generators. Code generation (like with CRA) is very a helpful feature for working with complex libraries (that, for example, expect specific files in specific directories).
 
 ## Prerequisites
 
 1. Click through to the GitHub [classroom assignment](https://classroom.github.com/a/k66Epe6q) to create your private repository. Then clone that newly created repository to your local computer as you have done previously.
 
-1. Install the package dependencies by running `npm install` inside the root directory of the newly cloned repository. 
+1. Install the package dependencies by running `npm install` inside the root directory of the newly cloned repository.
 
 1. Make sure that you have installed `sqlite3` as described in [Getting Started](../resources/getting_started).
 
- 
 ## Setup Knex
 
 Knex is both a library and a command line tool (usable via `npx`). Install Knex and the database clients (for SQLite 3 and PostgreSQL):
@@ -36,31 +34,31 @@ npm install --save knex sqlite3 pg
 
 Initialize Knex with `npx knex init`. This will create a configuration file named `./knexfile.js`.
 
-Remove the descriptions of the staging and production servers. Edit the file to look like the snippet below. You are configuring a SQLite-based `test` environment (using a specific seed and database file), an SQLite-based `development` environment and a `production` configuration using PostgreSQL. You won't need to use the production configuration today, but you would use something similar when deploying to Heroku (e.g., for your project). 
+Remove the descriptions of the staging and production servers. Edit the file to look like the snippet below. You are configuring a SQLite-based `test` environment (using a specific seed and database file), an SQLite-based `development` environment and a `production` configuration using PostgreSQL. You won't need to use the production configuration today, but you would use something similar when deploying to Heroku (e.g., for your project).
 
 ```javascript
 module.exports = {
   test: {
-    client: 'sqlite3',
+    client: "sqlite3",
     connection: {
-      filename: './simplepedia-test.db',
+      filename: "./simplepedia-test.db",
     },
     useNullAsDefault: true,
     seeds: {
-      directory: './seeds/test',
+      directory: "./seeds/test",
     },
   },
 
   development: {
-    client: 'sqlite3',
+    client: "sqlite3",
     connection: {
-      filename: './simplepedia.db',
+      filename: "./simplepedia.db",
     },
     useNullAsDefault: true,
   },
 
   production: {
-    client: 'pg',
+    client: "pg",
     connection: process.env.DATABASE_URL,
     ssl: true,
   },
@@ -80,17 +78,17 @@ In the database, you want to create a table named `Article` with the four column
 ```javascript
 /* eslint-disable func-names */
 /* eslint no-unused-vars: ["error", { "args": "none" }] */
-exports.up = function(knex, Promise) {
-  return knex.schema.createTable('Article', table => {
-    table.increments('id');
-    table.string('title');
-    table.text('extract');
-    table.string('edited');
+exports.up = function (knex, Promise) {
+  return knex.schema.createTable("Article", (table) => {
+    table.increments("id");
+    table.string("title");
+    table.text("extract");
+    table.string("edited");
   });
 };
 
-exports.down = function(knex, Promise) {
-  return knex.schema.dropTableIfExists('Article');
+exports.down = function (knex, Promise) {
+  return knex.schema.dropTableIfExists("Article");
 };
 ```
 
@@ -99,11 +97,12 @@ When defining the schema, you can specify additional constraints on the columns 
 <hidden-block message="View the schema">
 
 ```javascript
-table.increments('id');
-table.string('title').unique().notNullable();
-table.text('extract');
-table.string('edited').notNullable();
+table.increments("id");
+table.string("title").unique().notNullable();
+table.text("extract");
+table.string("edited").notNullable();
 ```
+
 </hidden-block>
 
 Once you have completed your migration, run any [unperformed migrations](http://knexjs.org/#Migrations) (in this case just one) with the following command. Note we are explicitly specifying the environment (and thus the database that should be modified).
@@ -112,17 +111,17 @@ Once you have completed your migration, run any [unperformed migrations](http://
 npx knex migrate:latest --env development
 ```
 
-The migration should have created a `simplepedia.db` file. To check out the current schema, open the database with the SQLite client application via `sqlite3 simplepedia.db` and execute `.schema` at the interpreter prompt. You should see the schema for your new `Article` table (as well as a `knex` table that `knex` added to keep track of migrations -- don't tinker with this). To get of the `sqlite3` command line, type <kbd>Ctrl+D</kbd> or `.exit`. 
+The migration should have created a `simplepedia.db` file. To check out the current schema, open the database with the SQLite client application via `sqlite3 simplepedia.db` and execute `.schema` at the interpreter prompt. You should see the schema for your new `Article` table (as well as a `knex` table that `knex` added to keep track of migrations -- don't tinker with this). To get of the `sqlite3` command line, type <kbd>Ctrl+D</kbd> or `.exit`.
 
-*The `sqlite3` client accepts two different types of commands. You can type raw `SQL` statements to interact with the database directly, or you have a small collection of system commands for working with the client. The system commands all start with a dot (like `.schema`). You can get a full list of these commands with `.help `.*
+_The `sqlite3` client accepts two different types of commands. You can type raw `SQL` statements to interact with the database directly, or you have a small collection of system commands for working with the client. The system commands all start with a dot (like `.schema`). You can get a full list of these commands with `.help`._
 
 ## Seeding the Article Data
 
-"Seeding" is the process of pre-populating databases. It is worth noting that we frequently do not need to do this. If you are making a blog, online market, scheduling tool, etc, your content comes dynamically from your users. Even Simplepedia could conceptually be started "clean". However, seeding will frequently be used for testing. 
+"Seeding" is the process of pre-populating databases. It is worth noting that we frequently do not need to do this. If you are making a blog, online market, scheduling tool, etc, your content comes dynamically from your users. Even Simplepedia could conceptually be started "clean". However, seeding will frequently be used for testing.
 
 ### Create the Seed File
 
-Seed files are short scripts that populate the database. Create a skeleton seed file with: 
+Seed files are short scripts that populate the database. Create a skeleton seed file with:
 
 ```javascript
 npx knex seed:make load-articles --env development
@@ -133,20 +132,21 @@ The above command should have created a `seeds/load-articles.js` file. Modify th
 ```javascript
 /* eslint-disable func-names */
 /* eslint no-unused-vars: ["error", { "args": "none" }] */
-const fs = require('fs');
+const fs = require("fs");
 
 exports.seed = function (knex, Promise) {
-  const contents = fs.readFileSync('seed.json');
+  const contents = fs.readFileSync("seed.json");
   const data = JSON.parse(contents);
 
   // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex("table_name")
+    .del()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+      return knex("table_name").insert([
+        { id: 1, colName: "rowValue1" },
+        { id: 2, colName: "rowValue2" },
+        { id: 3, colName: "rowValue3" },
       ]);
     });
 };
@@ -158,13 +158,14 @@ If you followed the directions above, the column names in the database match the
 
 ```javascript
 exports.seed = function (knex, Promise) {
-  const contents = fs.readFileSync('seed.json');
+  const contents = fs.readFileSync("seed.json");
   const data = JSON.parse(contents);
 
   // Deletes ALL existing entries
   // Use batch insert because we have too many articles for simple insert
-  return knex('Article').del()
-    .then(() => knex.batchInsert('Article', data, 100));
+  return knex("Article")
+    .del()
+    .then(() => knex.batchInsert("Article", data, 100));
 };
 ```
 
@@ -172,8 +173,7 @@ exports.seed = function (knex, Promise) {
 
 Run the seed with `npx knex seed:run --env development` to populate your database. Now reopen your database with the SQLite3 command-line tool via `sqlite3 simplepedia.db`. Execute the following command in the SQLite interpreter to view the first 10 articles.
 
-*A note about SQLite grammar: the semi-colon is required, but the keywords in SQL are not case-sensitive. You will frequently see them in all caps, but the parser will accept them either way.*
-
+_A note about SQLite grammar: the semi-colon is required, but the keywords in SQL are not case-sensitive. You will frequently see them in all caps, but the parser will accept them either way._
 
 ```sql
 select * from Article limit 10;
@@ -187,6 +187,7 @@ While you have the interpreter open, experiment with a few SQL queries. How coul
 select * from Article where id = 11;
 select * from Article where title like 'C%';
 ```
+
 </hidden-block>
 
 ## Update the Server
@@ -196,8 +197,8 @@ select * from Article where title like 'C%';
 Before you can update the routes in `routes.js` to use the database, you need to initialize Knex. Do so in `routes.js` by `require`ing the Knex configuration and use that configuration to initialize the `knex` package itself. Note the common pattern in which we use `process.env.NODE_ENV` to specify the environment (e.g. `production`, `development`, etc.) or default to `development`.
 
 ```javascript
-const knexConfig = require('./knexfile');
-const knex = require('knex')(knexConfig[process.env.NODE_ENV || 'development']);
+const knexConfig = require("./knexfile");
+const knex = require("knex")(knexConfig[process.env.NODE_ENV || "development"]);
 ```
 
 ### Update the GET '/articles' Route
@@ -205,22 +206,24 @@ const knex = require('knex')(knexConfig[process.env.NODE_ENV || 'development']);
 In order to fetch all of the articles, you want to perform a select [query with Knex](http://knexjs.org/#Builder). If you don't give the function any arguments, it is the equivalent of `SELECT *`, which returns all the columns. As with the queries described earlier, the Knex Query builder [creates a Promise](http://knexjs.org/#Interfaces-Promises). The function you provide to `then()` should take one argument, the array of results. You can send this array back to the client directly with `response.send()` as shown below (Express automatically sets the status code and content-type).
 
 ```javascript
-knex('Article').select().then((rows) => {
-  response.send(rows);
-}, next);
+knex("Article")
+  .select()
+  .then((rows) => {
+    response.send(rows);
+  }, next);
 ```
 
 ### Running your Express Server
 
-Now that you are using the seeded database, you no longer need the `articles` initialization code in `index.js`. Simplify the server startup in `index.js` to just: 
+Now that you are using the seeded database, you no longer need the `articles` initialization code in `index.js`. Simplify the server startup in `index.js` to just:
 
 ```javascript
 /* eslint-disable no-console */
-const http = require('http');
-const { app } = require('./routes');
+const http = require("http");
+const { app } = require("./routes");
 
 const server = http.createServer(app).listen(process.env.PORT || 3001);
-console.log('Listening on port %d', server.address().port);
+console.log("Listening on port %d", server.address().port);
 ```
 
 You can start your server in the usual way (`npm start`), or you can use `npm watch`, which will launch the `nodemon` tool. This will give you the hot loading behavior you were familiar with from using `create-react-app`.
@@ -240,19 +243,20 @@ The skeleton includes a simple test suite using the [SuperTest](https://github.c
 1. Export the `knex` object from `routes.js` instead of `articles` so that it can be used in the testing functions) and import it in `routes.test.js` (again instead of `articles`).
 1. Take a look at `routes.test.js`. Notice that in the `beforeEach` function, the test suite resets the `article` object to a consistent state. We want to do the same by rolling back the database (invoking all the "down" functions in the migrations), then migrating and seeding the test database anew before each test. That way the database is always in a known, "clean", state and the tests are Independent and Repeatable (recall FIRST). Replace the `beforeEach` function and add an `afterEach` function like shown below:
 
-    ```javascript
-    beforeEach(() => {
-      return knex.migrate.rollback()
-        .then(() => knex.migrate.latest())
-        .then(() => knex.seed.run());
-    });
+   ```javascript
+   beforeEach(() => {
+     return knex.migrate
+       .rollback()
+       .then(() => knex.migrate.latest())
+       .then(() => knex.seed.run());
+   });
 
-    afterEach(() => {
-      return knex.migrate.rollback();
-    });
-    ```
+   afterEach(() => {
+     return knex.migrate.rollback();
+   });
+   ```
 
-    The Jest test runner automatically sets `NODE_ENV=test`; thus Knex will use the test database you defined in `knexfile.js` (not the development database you just seeded). Note the simpler `./seeds/test/load-articles.js` script. In test mode the database is just seeded with a single article. This is just one example of how being able to define different database environments is a very helpful feature of Knex.
+   The Jest test runner automatically sets `NODE_ENV=test`; thus Knex will use the test database you defined in `knexfile.js` (not the development database you just seeded). Note the simpler `./seeds/test/load-articles.js` script. In test mode the database is just seeded with a single article. This is just one example of how being able to define different database environments is a very helpful feature of Knex.
 
 Now run the tests with `npm test`. The test the GET '/articles' route you implemented you should pass but most every other test should not.
 
@@ -267,26 +271,26 @@ Install the package `npm install --save objection` and create a
 
 ```javascript
 /* eslint-disable camelcase */
-const { Model } = require('objection');
+const { Model } = require("objection");
 
 class Article extends Model {
   // Table name is the only required property.
   static get tableName() {
-    return 'Article';
+    return "Article";
   }
 
   // Objection.js assumes primary key is `id` by default
 
   static get jsonSchema() {
     return {
-      type: 'object',
-      required: ['title'],
+      type: "object",
+      required: ["title"],
 
       properties: {
-        id: { type: 'integer' },
-        title: { type: 'string' },
-        extract: { type: 'text' },
-        edited: { type: 'string' },
+        id: { type: "integer" },
+        title: { type: "string" },
+        extract: { type: "text" },
+        edited: { type: "string" },
       },
     };
   }
@@ -302,18 +306,18 @@ The `jsonSchema` function specifies the properties of the model using the [JSON 
 To use your newly created Model, require the necessary modules in `routes.js` and bind your Objection models to the Knex instance (so that the models can execute queries against the database).
 
 ```javascript
-const { Model, ValidationError } = require('objection');
-const Article = require('./models/Article');
+const { Model, ValidationError } = require("objection");
+const Article = require("./models/Article");
 
 // Bind all Models to a knex instance.
 Model.knex(knex);
 ```
 
-Update your GET '/articles' query to use your Model instead of Knex like shown below. The [default query](https://vincit.github.io/objection.js/#fetch-queries) fetches all the articles from the database. 
+Update your GET '/articles' query to use your Model instead of Knex like shown below. The [default query](https://vincit.github.io/objection.js/#fetch-queries) fetches all the articles from the database.
 
 ```javascript
 // Notice the "next" argument to the handler
-app.get('/api/articles', (request, response, next) => { 
+app.get("/api/articles", (request, response, next) => {
   Article.query().then((rows) => {
     response.send(rows);
   }, next); // <- Notice the "next" function as the rejection handler
@@ -330,7 +334,7 @@ Notice the inclusion of `next` as an argument in the route handler and an as arg
 
 Now update the rest of the handlers to work with your newly created `Article` model. The relevant [Objection.js query methods](https://vincit.github.io/objection.js/api/query-builder/) will likely be `insertAndFetch`, `deleteById` and `updateAndFetchById`. These will all need to be called on a query (`Article.query().insertAndFetch(...)`) like shown above, not on the raw model (`Article`). All of your routes should be similar and have just a few lines of code. Those methods will require one or more arguments, e.g. the article you will be inserting into the database or the Id of the article you want to delete.
 
-Rerun your tests and make sure that the *basic* operations of `GET`, `POST`, `PUT`, and `DELETE` all pass (the first one of each test suite).
+Rerun your tests and make sure that the _basic_ operations of `GET`, `POST`, `PUT`, and `DELETE` all pass (the first one of each test suite).
 
 One feature missing in the skeleton is validating the `id` property on PUT request. As you may have encountered in the Simplepedia assignments, the `id` of object sent in the PUT request must match the URL. We will need to check that requirement is satisfied by writing code in our route handler (that validation isn't a feature of Objection). Use [de-structuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) and [spreading](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to "split out" just the `id` property like shown below.
 
@@ -343,16 +347,19 @@ You can now test if the `id` in the request and in the URL parameter match befor
 ```javascript
 // request.params.id is a string, and so needs to be converted to an integer before comparison
 if (id !== parseInt(request.params.id, 10)) {
-  throw new ValidationError({ statusCode: 400, message: 'URL id and request id do not match' });
+  throw new ValidationError({
+    statusCode: 400,
+    message: "URL id and request id do not match",
+  });
 }
 // Now update the database entry
 ```
 
 ### Refining Your Validations
 
-With all the routes in place, most, but not all, of the tests should pass. The remaining failing test should be testing what happens if an article is created without an `extract` field. 
+With all the routes in place, most, but not all, of the tests should pass. The remaining failing test should be testing what happens if an article is created without an `extract` field.
 
-Since the `id` mismatch validation check depended on both the route and the data, we needed to implement it in the route handler. But this test is just about data integrity, thus it is best addressed in the Model. Modify the `Article` model to include a suitable default (thus fixing that issue everywhere an `Article` instance might be created) making the test pass (i.e., add a `default` field to the `extract` property as described in the JSON Schema [documentation](https://json-schema.org/understanding-json-schema/reference/generic.html)). 
+Since the `id` mismatch validation check depended on both the route and the data, we needed to implement it in the route handler. But this test is just about data integrity, thus it is best addressed in the Model. Modify the `Article` model to include a suitable default (thus fixing that issue everywhere an `Article` instance might be created) making the test pass (i.e., add a `default` field to the `extract` property as described in the JSON Schema [documentation](https://json-schema.org/understanding-json-schema/reference/generic.html)).
 
 We would like our server to be even more robust. At present, we allow any string for the `edited` time, but we should really only allow valid dates. Write a test for an invalid date, and then add to the validation to introduce the necessary constraint. Check out the JSON Schema [documentation](https://json-schema.org/understanding-json-schema/reference/string.html) for strings for relevant examples.
 
@@ -361,13 +368,14 @@ We would like our server to be even more robust. At present, we allow any string
 First create a possible test for an invalid `edited` time:
 
 ```javascript
-test('Should reject article with invalid edited time', () => {
+test("Should reject article with invalid edited time", () => {
   return request(app)
-    .post('/api/articles')
-    .send({ title: 'A title', edited: '4' })
+    .post("/api/articles")
+    .send({ title: "A title", edited: "4" })
     .expect(400);
 });
 ```
+
 and then add the corresponding constraint in the schema to make that test pass:
 
 ```javascript
@@ -378,34 +386,31 @@ edited: { type: 'string', format: 'date-time' },
 
 ## Use Your New Server
 
-When you are all done, you can use your newly implemented server with the Simplepedia client you implemented in assignment 4! Start the server you just created for this practical. In another terminal, update the proxy field in the `package.json` file *of your assignment 4 solution* to point to `http://localhost:3001` (instead of basin). Then start your assignment 4 solution. You should be able to load, create and edit articles just as did before!
+When you are all done, you can use your newly implemented server with the Simplepedia client you implemented in assignment 4! Start the server you just created for this practical. In another terminal, update the proxy field in the `package.json` file _of your assignment 4 solution_ to point to `http://localhost:3001` (instead of basin). Then start your assignment 4 solution. You should be able to load, create and edit articles just as did before!
 
 ## Finishing Up
 
-1. Add and commit your changes to Github. *Make sure to add and commit the new files you created.*
+1. Add and commit your changes to Github. _Make sure to add and commit the new files you created._
 1. Submit your repository to Gradescope
 
 ## Grading
 
-Points | Requirement
------- | --------
-&#x2713;/&#x2717; | Server passes all tests
-&#x2713;/&#x2717; | Can successfully create and migrate development database
-&#x2713;/&#x2717; | Tests for (and handles) bad edited field 
-&#x2713;/&#x2717; | Passes all ESLint checks 
-
+| Points            | Requirement                                              |
+| ----------------- | -------------------------------------------------------- |
+| &#x2713;/&#x2717; | Server passes all tests                                  |
+| &#x2713;/&#x2717; | Can successfully create and migrate development database |
+| &#x2713;/&#x2717; | Tests for (and handles) bad edited field                 |
+| &#x2713;/&#x2717; | Passes all ESLint checks                                 |
 
 ## Extra
 
 ### Other Server Examples
 
-Check out the more complicated [server](https://github.com/csci312a-s19/film-explorer/tree/master/server-sqlite) used by the Film Explorer. The latter demonstrates the use of simple associations in Objection. 
-
+Check out the more complicated [server](https://github.com/csci312a-s19/film-explorer/tree/master/server-sqlite) used by the Film Explorer. The latter demonstrates the use of simple associations in Objection.
 
 <!-- A more complex set of associations (including users and ratings) is on a
 [branch](https://github.com/csci312a-s18/film-explorer/tree/add-user/server-sqlite)
 in the Film Explorer repository. -->
-
 
 ### Deploy to Heroku
 
@@ -436,7 +441,7 @@ heroku run 'npx knex migrate:latest'
 heroku run 'npx knex seed:run'
 ```
 
-*Project note: This practical creates just the server (i.e. just the `server` directory in your project skeleton); your project will have both a client and server directories. When performing the migration and seeding on Heroku for your projects, you will need Heroku to run the above commands in the server directory, i.e.*
+_Project note: This practical creates just the server (i.e. just the `server` directory in your project skeleton); your project will have both a client and server directories. When performing the migration and seeding on Heroku for your projects, you will need Heroku to run the above commands in the server directory, i.e._
 
 ```
 heroku run 'cd server && npx knex migrate:latest'

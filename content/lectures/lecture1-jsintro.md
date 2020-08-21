@@ -2,7 +2,7 @@
 path: "/lectures/lecture1-js"
 title: "Lecture 1 - JavaScript"
 name: "Lecture 1 - JS"
-date: "2019-09-10"
+date: "2020-09-10"
 published: true
 ---
 
@@ -10,7 +10,7 @@ published: true
 
 This is not a comprehensive introduction to JavaScript (JS). Instead I am
 aiming to highlight some of the common "gotchas" when coming to JS from other
-languages like Java or Python.
+languages like Java or Python as well as some of the features you will encounter in JavaScript that you will not have seen before.
 
 For a more comprehensive introduction to JavaScript, I suggest the 3rd
 edition of [Eloquent
@@ -34,11 +34,12 @@ various vendors (namely the browser creators) are now more faithfully
 implementing the standard.
 
 There are numerous implementations:
-* V8 (Chrome and Node)
-* Spidermonkey (Firefox)
-* Nitro (WebKit, Safari)
-* Chakra (IE Edge)
-* ...
+
+- V8 (Chrome and Node)
+- Spidermonkey (Firefox)
+- Nitro (WebKit, Safari)
+- Chakra (IE Edge)
+- ...
 
 Not all engines support all features. We will be using ECMAScript 2015 or ES6,
 an update to the standard that adds numerous helpful features. Fortunately, at
@@ -47,7 +48,7 @@ browsers](https://kangax.github.io/compat-table/es6/) support the ES6
 specification. That is not necessarily true for newer features (newer than ES6)
 or older browsers.
 
-We will also learn about and use tools, such as
+We will also be using tools, such as
 [transpilers](https://babeljs.io) and polyfills, which mitigate compatibility
 problem enabling us to write to a single modern standard (ES6).
 
@@ -66,7 +67,6 @@ Parts"](http://shop.oreilly.com/product/9780596517748.do), promoted as:
 > maintainable than the language as a whole—a subset you can use to create
 > truly extensible and efficient code.
 
-
 Thus be careful reading online suggestions/tutorials. Some are good, some are
 outdated, some are opinionated in good ways, some are opinionated in bad ways,
 and some are just wrong.
@@ -82,7 +82,7 @@ Some examples of those gotchas mentioned earlier...
 
 Semicolons are optional in JavaScript. If there is a line break without a
 semicolon, JavaScript will insert one according to a very complicated set of
-rules. Don't do it. Always use semicolons to explicitly end a statement.
+rules. There are many opinions on this. I favor using semi-colons. Consistency is probably the most important rule to follow here.
 
 ### Equality (and truthiness)
 
@@ -126,8 +126,6 @@ top of the function (or globally). As a result the latter is preferred to avoid
 tricky bugs like the following. You should use `const` or `let`, but be aware
 you will likely see examples with `var`.
 
-
-
 As an example compare the two following functions (adapted from MDN):
 
 ```javascript
@@ -137,7 +135,7 @@ function varTest() {
     var x = 2;
     console.log(x);
   }
-  console.log(x);  // What will print here?  
+  console.log(x); // What will print here?
 }
 ```
 
@@ -148,7 +146,7 @@ function letTest() {
     let x = 2;
     console.log(x);
   }
-  console.log(x);  // What will print here?  
+  console.log(x); // What will print here?
 }
 ```
 
@@ -158,7 +156,7 @@ Functions are just another kind of value (a feature adapted from functional
 programming), e.g.
 
 ```javascript
-const f = function() { };
+const f = function () {};
 ```
 
 Here we are creating an anonymous function and assigning it to a variable (with
@@ -170,28 +168,30 @@ guide](https://github.com/airbnb/javascript#functions) recommends using named
 function expressions, .e.g.
 
 ```javascript
-const f = function moreDescriptiveNameForF() { };
+const f = function moreDescriptiveNameForF() {};
 ```
 
 so the function is scoped but will always have an informative name in stack
 traces (although many engines infer the name from the assignment), etc. Think
 of that as a "belt and suspenders" approach...
 
-Anonymous functions are a common concept in JavaScript. We create small
-functions and pass them as arguments to other function. Consider this simple
-`for` loop
+Anonymous functions are a common concept in JavaScript. JavaScript borrows from the functional programming paradigm, and the use of _higher-order functions_ (functions that take functions as arguments) is common.
+
+Consider this simple `for` loop
 
 ```javascript
-const m = [4,6,2,7];
+const m = [4, 6, 2, 7];
 for (let i = 0; i < m.length; i++) {
   console.log(m[i]);
 }
 ```
 
-We would rather write this loop as:
+We might rewrite this loop as:
 
 ```javascript
-m.forEach(function(i) { console.log(i); });
+m.forEach(function (i) {
+  console.log(i);
+});
 ```
 
 or using an ES6 ["arrow" function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions):
@@ -200,21 +200,21 @@ or using an ES6 ["arrow" function](https://developer.mozilla.org/en-US/docs/Web/
 m.forEach((i) => console.log(i));
 ```
 
-Note that arrow functions can have either "concise body", like above,
+Note that arrow functions can have either "concise body", like the above,
 containing a single expression which becomes the return value, or the "block
 body" surrounded by curly braces. The latter requires an explicit return
-statement. 
+statement.
 
-In general arrow functions are preferred for their conciseness. For example, instead of 
+In general arrow functions are preferred for their conciseness. For example, instead of
 
-```
-const f = function moreDescriptiveNameForF() { };
+```javascript
+const f = function moreDescriptiveNameForF() {};
 ```
 
 we could write
 
-```
-const f = () => { };
+```javascript
+const f = () => {};
 ```
 
 Also note that arrow functions and anonymous functions created with `function` have subtle differences that won't matter much for us now, but may become important later:
@@ -225,38 +225,36 @@ they are called. This probably doesn't make any sense to you now, but at some po
 
 </hidden-block>
 
-
 Some common methods (operations) that use this pattern are `map`, `filter`,
-`reduce`, and `sort`.  In each of these examples we are using *higher-order
-functions* (that is functions that can passed as arguments to or returned from
-other functions) to abstract over actions (e.g. filtering an array to keep just
+`reduce`, and `sort`. In each of these examples we are using higher-order
+functions to abstract over actions (e.g. filtering an array to keep just
 those elements that satisfy a predicate) not just values. What do we mean by
 abstracting over actions? Instead of a writing a function that filters data
 with specific (and fixed) predicate and applying that function to arbitrary
 data, we are writing a generic filter function that can be applied to arbitrary
-data *and* implement arbitrary predicates (by supplying a different predicate
+data _and_ implement arbitrary predicates (by supplying a different predicate
 function value). For example:
 
 ```javascript
 const filterPos = (array) => {
   let result = [];
-  for (let i=0; i<array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     if (array[i] >= 0) {
-        result.push(array[i]);
+      result.push(array[i]);
     }
   }
   return result;
-}
+};
 
 const filterNeg = (array) => {
   let result = [];
-  for (let i=0; i<array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     if (array[i] < 0) {
-        result.push(array[i]);
+      result.push(array[i]);
     }
   }
   return result;
-}
+};
 
 filterPos([-1, 0, 1]);
 filterNeg([-1, 0, 1]);
@@ -265,8 +263,8 @@ filterNeg([-1, 0, 1]);
 Can be written as:
 
 ```javascript
-[-1, 0, 1].filter(item => item >= 0);
-[-1, 0, 1].filter(item => item < 0);
+[-1, 0, 1].filter((item) => item >= 0);
+[-1, 0, 1].filter((item) => item < 0);
 ```
 
 What is the difference between `forEach` and `map`? The latter returns a new
@@ -275,13 +273,13 @@ argument on the input array. Knowing that, how could we implement `map` with
 `forEach`, i.e. how would you implement `function map(a, f)` such that
 
 ```javascript
-const a = [4,6,7,9];
-map(a, item => item + 1);  // Equivalent to map(m, (item) => { return item + 1; });
+const a = [4, 6, 7, 9];
+map(a, (item) => item + 1); // Equivalent to map(m, (item) => { return item + 1; });
 ```
 
 produces `[5, 7, 8, 10]`. As a hint, check out the [Array
 methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
-and note that an empty array can be created with `[]`. 
+and note that an empty array can be created with `[]`.
 
 <hidden-block message="Click for solution">
 
@@ -292,11 +290,10 @@ const map = (a, f) => {
     result.push(f(item));
   });
   return result;
-}
+};
 ```
 
 </hidden-block>
-
 
 ### Closures
 
@@ -308,7 +305,7 @@ What will get printed?
 const wrapValue = (n) => {
   let local = n;
   return () => local;
-}
+};
 
 let wrap1 = wrapValue(1);
 let wrap2 = wrapValue(2);
@@ -322,7 +319,7 @@ use the local `local` variable (similar to many other programming languages).
 
 More than just have "access" to variables in enclosing scopes, defining a
 function references a variable defined in an enclosing scope creates a
-*closure*, i.e. the combination of the function *and* the lexical environment in
+_closure_, i.e. the combination of the function _and_ the lexical environment in
 which that function was declared. That environment includes any local variables
 that were in scope when the function was defined. Thus this code will print
 
@@ -344,25 +341,22 @@ function that formed a closure over the necessary data for that action.
 Alternately you could think about closures as being similar to objects (in a
 OO sense) with only one method.
 
-
-
 What will be printed by the following
 loops ([source](https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example))?
 
-
-
 ```javascript
 var funcs = [];
-for (var i = 0; i < 3; i++) {      // Create 3 functions and
-  funcs[i] = () => {               // store them in the funcs array,
+for (var i = 0; i < 3; i++) {
+  // Create 3 functions and
+  funcs[i] = () => {
+    // store them in the funcs array,
     console.log("My value: " + i); // each should log its value.
   };
 }
 for (var j = 0; j < 3; j++) {
-  funcs[j]();                      // Run each function to print values
+  funcs[j](); // Run each function to print values
 }
 ```
-
 
 <hidden-block message="Click for solution">
 
@@ -377,19 +371,16 @@ My value: 3
 What you are observing is the interaction between `var` scoping rules and
 closures. Recall that the scope of the `var` is the entire function (or in this
 the case global environment). Thus each function is closing over the same
-`var`. If we replace `for (var i = 0; i < 3; i++)` with `for (let i = 0; i < 3;
-i++)` the loop will work as intended, because each `let` variable is scoped to
+`var`. If we replace `for (var i = 0; i < 3; i++)` with `for (let i = 0; i < 3; i++)` the loop will work as intended, because each `let` variable is scoped to
 the loop body and there are thus three different "i" variables (slightly
 different than C/C++).
 
 Earlier we said not to use `var`, why then are we learning more about it here
 (especially since `let` would "do the right thing" here)? Recall that part of
 this course is learning about working with legacy code and `var` is used in a
-lot of JS legacy code. *But don't use it yourself*
+lot of JS legacy code. _But don't use it yourself_
 
 </hidden-block>
-
-
 
 ### Objects
 
@@ -407,7 +398,9 @@ let rectangle = {
   y: 20,
   width: 10,
   height: 25,
-  aspectRatio: () => { this.width / this.height},
+  aspectRatio: () => {
+    this.width / this.height;
+  },
 };
 ```
 
@@ -429,7 +422,7 @@ let rectangle = {
 
 In our above example, `aspectRatio` is a method (a property that is a
 function), but it is only available on the `rectangle` object. To share properties
-between objects that are instances of a class we can use prototypes. 
+between objects that are instances of a class we can use prototypes.
 
 JavaScript is a "prototype-based language", that is each object has a
 prototype. You can think of the prototype as a "fallback". From [Eloquent
@@ -445,7 +438,7 @@ These prototypes (accessible via `Object.getPrototypeOf(obj)`) forms a tree with
 `Object.prototype` at the root.
 
 To create a new instance of a class we need to create an object with the
-appropriate prototype *and* all the properties that instance must have. Doing
+appropriate prototype _and_ all the properties that instance must have. Doing
 so is the constructor's job. An example JavaScript constructor:
 
 ```javascript
@@ -466,13 +459,10 @@ function, and the latter holds the prototype for objects created via that
 constructor. Properties that should be shared by all instances of a class are
 added to the constructor's prototype property, e.g. `Hello.prototype`.
 
-This may seem foreign to you (it does to your instructor too, and many other
-people). ES6 introduced class declarations (using the `class` keyword)
+This may seem foreign to you. ES6 introduced class declarations (using the `class` keyword)
 implemented on top of JavaScript's much more flexible prototypal inheritance
 features. These classes will likely seem more familiar to you and we will use
-them this semester. 
-
-
+them this semester.
 
 Consider the following
 example ([source](https://github.com/addyosmani/es6-equivalents-in-es5#classes)):
@@ -484,17 +474,17 @@ class Hello {
   }
 
   hello() {
-    return 'Hello ' + this.name + '!';
+    return "Hello " + this.name + "!";
   }
 
   static sayHelloAll() {
-    return 'Hello everyone!';
+    return "Hello everyone!";
   }
 }
 
 class HelloWorld extends Hello {
   constructor() {
-    super('World');
+    super("World");
   }
 
   echo() {
@@ -518,15 +508,15 @@ function Hello(name) {
 }
 
 Hello.prototype.hello = function hello() {
-  return 'Hello ' + this.name + '!';
+  return "Hello " + this.name + "!";
 };
 
 Hello.sayHelloAll = function () {
-  return 'Hello everyone!';
+  return "Hello everyone!";
 };
 
 function HelloWorld() {
-  Hello.call(this, 'World');
+  Hello.call(this, "World");
 }
 
 HelloWorld.prototype = Object.create(Hello.prototype);
@@ -564,7 +554,7 @@ following implementation of a counter.
 const counter = function CounterClosure() {
   let count = 0;
   return () => count++;
-}
+};
 ```
 
 In action:
@@ -580,13 +570,13 @@ undefined
 
 Why does the first `cn()` call return 0 (when it should be incrementing)?
 Postfix
-[increment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Increment_()),
+[increment](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Increment_()>),
 i.e. `++` after the variable, returns the value of the variable before the
 increment operation, where as prefix increment returns the value after the
 increment, e.g.
 
 ```javascript
-// Postfix 
+// Postfix
 var x = 3;
 y = x++; // y = 3, x = 4
 
@@ -595,22 +585,21 @@ var a = 2;
 b = ++a; // a = 3, b = 3
 ```
 
-
 Here, `count` is effectively a private member that can be manipulated by the
 returned closure but not accessed outside it. How could we use "everything as
 an object" to obtain access to the `count` field without incrementing? That is how could you
 implement a `value` method that would return the private `count`? As a hint,
-because functions are objects, they have properties... 
+because functions are objects, they have properties...
 
 <hidden-block message="Peek at an implementation">
 
 ```javascript
 const richCounter = () => {
-  let count = 0;  // "Private" count variable
+  let count = 0; // "Private" count variable
   const increment = () => count++;
   increment.value = () => count;
   return increment;
-}
+};
 ```
 
 In action:
@@ -628,3 +617,4 @@ undefined
 
 </hidden-block>
 
+### Deconstruction and Spreading

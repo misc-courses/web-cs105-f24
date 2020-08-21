@@ -3,10 +3,8 @@ path: "/lectures/lecture3-dom"
 title: "Lecture 3 - JS and the DOM"
 name: "Lecture 3 - DOM"
 date: "2019-09-17"
-published: true
+published: false
 ---
-
-
 
 ## The Document Object Model (DOM)
 
@@ -15,19 +13,20 @@ The DOM is a tree data structure representing the nested structure of the
 document. The boxes (HTML tags in our context) are nodes in the tree. [The DOM
 properties and methods (the API) provide programmatic access to the tree to
 access or change the document's structure, style or
-content.](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) 
+content.](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
 
 More specifically JavaScript [can](https://www.w3schools.com/js/js_htmldom.asp):
-* Change all the HTML elements in the page
-* Change all the HTML attributes in the page
-* Change all the CSS styles in the page
-* Remove existing HTML elements and attributes
-* Add new HTML elements and attributes
-* React to all existing HTML events in the page
-* Create new HTML events in the page
+
+- Change all the HTML elements in the page
+- Change all the HTML attributes in the page
+- Change all the CSS styles in the page
+- Remove existing HTML elements and attributes
+- Add new HTML elements and attributes
+- React to all existing HTML events in the page
+- Create new HTML events in the page
 
 The root of this tree is Document. It's child is the `html` tag, whose children
-are the `head` and `body` (thus `head` and `body` are *siblings*), etc. all the
+are the `head` and `body` (thus `head` and `body` are _siblings_), etc. all the
 way down the leaf nodes containing text (or childless HTML elements). We can
 [programmatically
 navigate](http://eloquentjavascript.net/13_dom.html#h_ShZPVipWw/) the DOM
@@ -42,6 +41,7 @@ review the [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node),
 interfaces.
 
 Some examples:
+
 ```
 > document
 ```
@@ -61,16 +61,14 @@ Alternately we can explore via the "tree" API, e.g.
 > document.lastChild.lastChild // navigate to the body element
 ```
 
-<!-- 
+<!--
 
 Show a preview of this process
-1. Open up course home-page 
+1. Open up course home-page
 1. Open inspector
 1. Look at `document`, `document.body` and `document.body.children`
 
  -->
-
-
 
 It is more likely however, that we will find relevant elements based on their
 type (e.g. `<h2>`), id, CSS class, etc. We can do so with the
@@ -91,13 +89,11 @@ We can also modify these elements via JavaScript:
 > document.querySelector("h2").innerHTML = "Class canceled today!"
 ```
 
-*Note that in this example, we switched from `querySelectorAll` to `querySelector`. The first returns a list, so we would have to iterate through to find the one we wanted or to change all of them. `querySelector` on the other hand, returns the first instance found on the page, which may or may not be unique.*
-
+_Note that in this example, we switched from `querySelectorAll` to `querySelector`. The first returns a list, so we would have to iterate through to find the one we wanted or to change all of them. `querySelector` on the other hand, returns the first instance found on the page, which may or may not be unique._
 
 Or in a more complex example, let's add some text to the sidebar menu. We do so by
 creating a DOM node and inserting into the tree (with `appendChild` or other
-related methods like `insertBefore`, `replaceChild`, etc.). 
-
+related methods like `insertBefore`, `replaceChild`, etc.).
 
 ```
 > const elem = document.querySelector(".sidebar");
@@ -105,22 +101,19 @@ related methods like `insertBefore`, `replaceChild`, etc.).
 > elem.appendChild(annc);
 ```
 
-
 We can restyle elements using similar tricks:
 
 ```
 > document.querySelector(".sidebar").style.background = "red";
 ```
 
-
-
-JavaScript uses an event listener model for handling interaction.  If you want
+JavaScript uses an event listener model for handling interaction. If you want
 an element to respond to an event, e.g. a "click" you add an event handler to
 the element. The handler is a function you would like to be invoked when the
 event happens (i.e. a callback). We can do this generally with `addEventListener`,
 but there are also older more specific functions for registering event
 handlers, e.g. `onclick`, `onkeydown`, etc. that are widely used (we will use
-`onclick` extensively with React). 
+`onclick` extensively with React).
 
 ```
 > elem.onclick = (evt => alert("An emergency!"));
@@ -146,9 +139,8 @@ specifically the CSS
 [background](https://developer.mozilla.org/en-US/docs/Web/CSS/background)
 property, and the color components numeric value.
 
-
-
 To do so, we will need to:
+
 1. Obtain the DOM elements for the corresponding HTML elements (the swatch
    `<div>`, slider `<input>`s, value `<span>`s) with `getElementById`
 1. Create a callback function that updates the swatch background color and the
@@ -160,8 +152,7 @@ To do so, we will need to:
    committed by the user, i.e. they release the mouse, not for all changes to
    an input).
 
-
-<!-- 
+<!--
 Obtain the DOM elements
 
     const colorBox = document.getElementById('color-swatch');
@@ -186,12 +177,9 @@ Bind the `oninput` methods of the sliders to the callback
     sliders.forEach((slider) => slider.oninput = update);
 
 Call the `update()` function to make the sliders and the swatch agree initially.
-    update(); 
-    
+    update();
+
     -->
-
-
-
 
 Knowing that we can create HTML elements dynamically, let's DRY up our solution
 by creating the picker dynamically. Doing so is the focus of today's [practical

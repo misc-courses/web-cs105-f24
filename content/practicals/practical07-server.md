@@ -5,12 +5,11 @@ dueDate: "2019-10-18 5p"
 path: "/practicals/practical07"
 template: "assignment"
 name: "Practical 7"
-published: true
+published: false
 ---
 
-
-
 #### Goals
+
 - Implement a simple Node+express server
 - Practice combining create-react-app (CRA) with server-side code
 - Learn how to test a server API
@@ -21,26 +20,27 @@ published: true
 
 1. Install the package dependencies by running `npm install`. Note that there are three `package.json` files in the skeleton. One in the root (or "top-level") directory, as well as one in the client directory and one in the server directory. You should run `npm install` in all three locations. You can do so by changing directories or by using the "prefix" option for `npm`, e.g. from the root directory
 
-    ```
-    npm install
-    npm install --prefix client
-    npm install --prefix server
-    ```
+   ```
+   npm install
+   npm install --prefix client
+   npm install --prefix server
+   ```
 
-    *We will do most of our work inside of the `server` directory, so when we add files or install new packages, make sure you do it in this directory (or with that prefix) unless otherwise noted.*
+   _We will do most of our work inside of the `server` directory, so when we add files or install new packages, make sure you do it in this directory (or with that prefix) unless otherwise noted._
 
-    **Windows Users:** There appears to be an [error](https://stackoverflow.com/q/50653324) using the `prefix` argument on Windows. Instead of using `prefix` you will need to manually change to the client and server directories.
+   **Windows Users:** There appears to be an [error](https://stackoverflow.com/q/50653324) using the `prefix` argument on Windows. Instead of using `prefix` you will need to manually change to the client and server directories.
 
 ## Overview
+
 We are going to use `express` to create a series of routes that implement the Film Explorer API.
 
-Note that we have moved the `films.json` file into the server. Our server will use "in memory" data storage. In other words, when the server is started, it will read in the contents of `films.json`, and store it in a `Map` with the `id` as the key and the film object as the value. Changes (i.e., ratings), will be made to this local copy of the data providing the appearance of persistence, but if the server is restarted, the server will return to the original copy of the data. For proper persistence, we will require some form of database, which we will discuss in a few weeks. 
+Note that we have moved the `films.json` file into the server. Our server will use "in memory" data storage. In other words, when the server is started, it will read in the contents of `films.json`, and store it in a `Map` with the `id` as the key and the film object as the value. Changes (i.e., ratings), will be made to this local copy of the data providing the appearance of persistence, but if the server is restarted, the server will return to the original copy of the data. For proper persistence, we will require some form of database, which we will discuss in a few weeks.
 
 ## Serving films with Express
 
 To make testing and development easier, we will create our routes in a dedicated file. We have called this file `routes.js`. This file has a basic skelton in place. The `express` module has been imported with `const express = require('express');` and an `express` instance called `app` has been created. You will also see that we have a `Map` object called `films`, which will be our in memory data store. Finally, at the bottom of the file, we are exporting both `app` and `films` so that they can be used in other files.
 
-Now we can create the route that fetches all of the films (put this *before* the exports):
+Now we can create the route that fetches all of the films (put this _before_ the exports):
 
 ```JavaScript
     app.get('/api/films', (request, response) => {
@@ -48,14 +48,13 @@ Now we can create the route that fetches all of the films (put this *before* the
     });
 ```
 
-*Why the different module syntax? Node's module support, based on the CommonJS standard (CJS), preceded the module syntax in ES6. ES6 module syntax (ESM) is coming to Node (but is only partially implemented). We can use the Babel transpiler to convert ESM to CJS, but that is one more piece of infrastructure we need to setup. For simplicity, we will stick to `require` and `module.exports` for Node-based servers.*
+_Why the different module syntax? Node's module support, based on the CommonJS standard (CJS), preceded the module syntax in ES6. ES6 module syntax (ESM) is coming to Node (but is only partially implemented). We can use the Babel transpiler to convert ESM to CJS, but that is one more piece of infrastructure we need to setup. For simplicity, we will stick to `require` and `module.exports` for Node-based servers._
 
 ### Loading the film collection
 
 Reading in the collection of films will take a moment, and we don't want to start the server until the data is prepared. The main server code will be placed in `index.js`. If you open that file, you will see that we have imported `app` and `films`, and provided the code to start a server directly from the `express` instance (note that this has the same effect as the approach [in the notes](../lectures/lecture11-servers) that used the `http` module explicitly).
 
-
-To read in `films.json`, we  will use the `fs` (file system), `path`, and `util` modules, so add these imports as well:
+To read in `films.json`, we will use the `fs` (file system), `path`, and `util` modules, so add these imports as well:
 
 ```JavaScript
 const fs = require('fs');
@@ -63,7 +62,7 @@ const path = require('path');
 const util = require('util');
 ```
 
-To read in the file, we will use the [`fs.readFile`](https://nodejs.org/dist/latest-v10.x/docs/api/fs.html#fs_fs_readfile_path_options_callback) function. If you read the documentation, you will see that `readFile` is an "old-school" asynchronous function. It uses a callback instead of returning a promise. We will use `util.promisify` to create a new `readFile` function that returns a promise. 
+To read in the file, we will use the [`fs.readFile`](https://nodejs.org/dist/latest-v10.x/docs/api/fs.html#fs_fs_readfile_path_options_callback) function. If you read the documentation, you will see that `readFile` is an "old-school" asynchronous function. It uses a callback instead of returning a promise. We will use `util.promisify` to create a new `readFile` function that returns a promise.
 
 ```JavaScript
 const readFile = util.promisify(fs.readFile);
@@ -75,9 +74,9 @@ Now we can read in the file:
 readFile(path.join(__dirname, 'films.json'))
   .then((contents)=>{
     // Parse the data
-  
+
     // Load it into the films map
-  
+
     // Start the server
     const server = app.listen(process.env.PORT || 3001);
     console.log('Listening on port %d', server.address().port);
@@ -89,7 +88,7 @@ readFile(path.join(__dirname, 'films.json'))
 
 1. Parse `contents` into a JavaScript Array using `JSON.parse()`.
 2. Populate the the films Map by iterating over the array. Recall that adding items to a Map is done with the `set(key, value)` function. In this case, the `key` will be the `id` of the film and the value will be the film itself.
-3. Move the code that starts the server into the `then` clause so that it doesn't happen until after the data is loaded. 
+3. Move the code that starts the server into the `then` clause so that it doesn't happen until after the data is loaded.
 
 ### Test the server
 
@@ -115,17 +114,17 @@ Test this is working by checking some ids (e.g., <http://localhost:3001/api/film
 
 ### Updating the ratings
 
-Our final route will be a PUT request to `'/api/films/:id'`. This accepts a film with changes (presumably a rating), and uses it to update the local copy. 
+Our final route will be a PUT request to `'/api/films/:id'`. This accepts a film with changes (presumably a rating), and uses it to update the local copy.
 
-To make our lives easier, we will install a piece of middleware to help us parse request bodies (i.e. request bodies encoded as `'Content-type': 'application/json'`). 
+To make our lives easier, we will install a piece of middleware to help us parse request bodies (i.e. request bodies encoded as `'Content-type': 'application/json'`).
 
 1. Install the middleware package: `npm install --save body-parser` (if you are in server directory), or `npm install --save body-parser --prefix server` (if you are in the root directory). Don't forget the `--save` option to tell `npm` to record the dependency in the `package.json` file (so that when someone else installs your application they have all the dependencies). When you update the `package.json` file you will need to restart the application.
 
 1. Require the package in `routes.js`: `const bodyParser = require('body-parser');`
 
-1. Load the middleware into `app` before any of your routes (the order matters, Express executes routes and middleware in the order in which they are declared): 
+1. Load the middleware into `app` before any of your routes (the order matters, Express executes routes and middleware in the order in which they are declared):
 
-    `app.use(bodyParser.json());`
+   `app.use(bodyParser.json());`
 
 1. Now, you can add the final route:
 
@@ -145,15 +144,15 @@ There are several ways to test your server, both "informally" and "formally".
 
 ### "Informal" Testing with `curl` or the browser
 
-As we showed above, some quick test can be done using `curl` or the browser. However, while `curl` does have the capability of issuing any kind of HTTP request, it quickly ceases to be the quick and easy choice when you are issuing PUT and POST requests. 
+As we showed above, some quick test can be done using `curl` or the browser. However, while `curl` does have the capability of issuing any kind of HTTP request, it quickly ceases to be the quick and easy choice when you are issuing PUT and POST requests.
 
 ### "Informal" Testing with the Client Application
 
-An obvious approach is to launch the client and see if all of its functionality is present. 
+An obvious approach is to launch the client and see if all of its functionality is present.
 
-We have previously shown you how to set the proxy for a CRA development server so the application can interact with a different server. You will see that in the included Film Explorer client, we have already done this for you. We have also modified the `package.json` scripts in the root directory, so when you type `npm start`, it will launch both the CRA server and the Node server concurrently. Try this, you should have persistent ratings. 
+We have previously shown you how to set the proxy for a CRA development server so the application can interact with a different server. You will see that in the included Film Explorer client, we have already done this for you. We have also modified the `package.json` scripts in the root directory, so when you type `npm start`, it will launch both the CRA server and the Node server concurrently. Try this, you should have persistent ratings.
 
-Of course, this only works in some situations (such as this one where you are handed a fully formed client). In general, this can be problematic as you greatly increase the potential source of errors, so when something does go wrong, it will be difficult to track down what it was. 
+Of course, this only works in some situations (such as this one where you are handed a fully formed client). In general, this can be problematic as you greatly increase the potential source of errors, so when something does go wrong, it will be difficult to track down what it was.
 
 ### "Formal" Unit/Integration Testing with Jest
 
@@ -167,11 +166,9 @@ If you look in `routes.test.js`, you will find the start of a collection of test
 
 Add the final test to check if the parameterized GET route functions properly. You can run the server tests with `npm test` (in the server directory) or `npm test --prefix server` (from the root directory):
 
-
-
 ## Deploy with Heroku
 
-Our deployed application should not use the development server provided by `create-react-app`. Instead, we would like our new server to take over and serve not just the api, but the static files that make up the site as well. 
+Our deployed application should not use the development server provided by `create-react-app`. Instead, we would like our new server to take over and serve not just the api, but the static files that make up the site as well.
 
 Our process will export our client into a `build` folder. We just need to tell the server where to find it and to use it as a source for routes it otherwise doesn't handle explicitly. We will do this with a piece of middleware and a new route.
 
@@ -189,7 +186,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 ```
 
-This block checks if we are in a production environment. If we are, we st the `build` directory of the client as the source of static files, and then we add a path connecting the root path ("/") to the base file of our exported client (`index.html`). Add this before your other routes. You also need to import the `path` module: `const path = require('path');`. 
+This block checks if we are in a production environment. If we are, we st the `build` directory of the client as the source of static files, and then we add a path connecting the root path ("/") to the base file of our exported client (`index.html`). Add this before your other routes. You also need to import the `path` module: `const path = require('path');`.
 
 You are now ready to deploy your application to Heroku. When [getting started](getting_started.html), you should have signed up for a Heroku account and installed the command line tool.
 
@@ -199,7 +196,7 @@ Create your application via
 heroku app:create
 ```
 
-then push your application to Heroku to deploy your new color picker 
+then push your application to Heroku to deploy your new color picker
 
 ```
 git push heroku master
@@ -213,19 +210,17 @@ heroku open
 
 The README file of the starter code includes more details of the changes to the repository that were made to support those simple commands.
 
-
 ## Finishing Up
 
-1. Add and commit your changes to Github. *Make sure to add and commit the new files you created.*
+1. Add and commit your changes to Github. _Make sure to add and commit the new files you created._
 1. Submit your repository to Gradescope
 
 ## Grading
 
-Points | Requirement
------- | --------
-&#x2713;/&#x2717; | Unparameterized GET request works
-&#x2713;/&#x2717; | Parameterized GET request works
-&#x2713;/&#x2717; | PUT request works
-&#x2713;/&#x2717; | Test for parameterized GET
-&#x2713;/&#x2717; | Passes all ESLint checks (in both client and server)
-
+| Points            | Requirement                                          |
+| ----------------- | ---------------------------------------------------- |
+| &#x2713;/&#x2717; | Unparameterized GET request works                    |
+| &#x2713;/&#x2717; | Parameterized GET request works                      |
+| &#x2713;/&#x2717; | PUT request works                                    |
+| &#x2713;/&#x2717; | Test for parameterized GET                           |
+| &#x2713;/&#x2717; | Passes all ESLint checks (in both client and server) |

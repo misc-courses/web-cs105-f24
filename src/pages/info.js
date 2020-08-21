@@ -310,6 +310,29 @@ export default function Info() {
           possible. All discussions will remain confidential.
         </p>
       </div>
+
+      <div>
+        <h3>Loaner Laptops</h3>
+        <p>
+          If you ever find yourself temporarily in need of a laptop, the
+          Computer Science department has 10 rotating Dell laptops available to
+          our students. These come pre-installed with software for most of the
+          courses in the major. They are available to be loaned out short-term
+          or long-term based on your need (as determined by you). Feel free to
+          ask me ahead of time if you think you need one for just a class
+          period, or you can send an e-mail to rlichenstein@middlebury.edu
+          directly.
+        </p>
+        <p>
+          The college also provides laptops to those who need them where “need”
+          is based on Student Financial Services calculations. If you anticipate
+          needing a laptop for the whole term, we encourage you to inquire with
+          Student Financial Services and the library first due to our smaller
+          pool of equipment. However, our department commits to meeting the
+          needs of every student, so do not be afraid to reach out if you
+          believe you need one of our laptops for any length of time.
+        </p>
+      </div>
     </Layout>
   );
 }

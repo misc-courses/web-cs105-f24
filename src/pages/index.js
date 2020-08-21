@@ -2,8 +2,11 @@ import Head from "next/head";
 
 import styles from "../styles/Home.module.css";
 import Layout from "../components/Layout";
+import Calendar from "../components/Calendar";
+import calendarData from "../../content/calendar.json";
 
 export default function Home() {
+  console.log(calendarData);
   return (
     <Layout currentPage={{ path: "/", title: "Home" }} modified={"2020-08-19"}>
       <Head>
@@ -34,6 +37,7 @@ export default function Home() {
           <div>
             <h2>Schedule</h2>
             <em>This is a living schedule and subject to change</em>
+            <Calendar data={calendarData} />
           </div>
         </main>
       </div>

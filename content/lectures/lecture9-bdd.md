@@ -3,28 +3,28 @@ path: "/lectures/lecture9-bdd"
 title: "Lecture 9 - BDD"
 name: "Lecture 9 - BDD"
 date: "2019-10-08"
-published: true
+published: false
 ---
 
 ## Motivating Behavioral Driven Design (BDD)
 
-
 <!-- Adapted from David Patterson and Armando Fox under CC-BY-SA-NC -->
 
-
 Why do SW projects fail? Failing projects:
-* Don't do what customers want
-* Or are late
-* Or over budget 
-* Or are hard to maintain and evolve
-* Or all of the above
+
+- Don't do what customers want
+- Or are late
+- Or over budget
+- Or are hard to maintain and evolve
+- Or all of the above
 
 How do Agile processes help us avoid those problems? Recall that in an Agile process you:
-* Work closely and continuously with stakeholders to develop requirements, tests
-* Maintain working prototype while deploying new features every iteration.
+
+- Work closely and continuously with stakeholders to develop requirements, tests
+- Maintain working prototype while deploying new features every iteration.
   Iterations are typically 1 or 2 weeks instead of Waterfall's 5 major phases,
-  each months long. 
-* Check with stakeholders on what’s next, to validate building right thing
+  each months long.
+- Check with stakeholders on what’s next, to validate building right thing
 
 Behavioral Driven Design (BDD) asks questions about behavior of an application
 before and during development to reduce miscommunication. BDD is really about
@@ -33,22 +33,23 @@ the Agile Manifesto).
 
 > Individuals and interactions over processes and tools
 
-We translate those conversations into *user stories*, lightweight descriptions
+We translate those conversations into _user stories_, lightweight descriptions
 of how the application will be used. Those user stores can be translated into
-*scenarios* that in turn become automated *acceptance tests*. Recall that an
+_scenarios_ that in turn become automated _acceptance tests_. Recall that an
 acceptance test verifies that the SW satisfies the specifications/requirements.
 
 These stories, scenarios and tests describe the behavior of an application
-*not* its implementation. In contrast, TDD and unit tests describe the
-implementation. 
+_not_ its implementation. In contrast, TDD and unit tests describe the
+implementation.
 
 ## User Stories
 
-A *user story* describes something that the user wants, written:
-* as 1-3 sentences, 
-* in plain language,
-* in collaboration with the user,
-* often on a 3x5 index card.
+A _user story_ describes something that the user wants, written:
+
+- as 1-3 sentences,
+- in plain language,
+- in collaboration with the user,
+- often on a 3x5 index card.
 
 User stories are often written in the Connextra format:
 
@@ -59,21 +60,22 @@ so that [some result or benefit]."
 Why 3x5 cards? Non-threatening to all stakeholders, easy to (re)organize, easy to rewrite as we learn more during development.
 
 An example for our Film Explorer:
+
 ```
 As a user
 I want to click on a film
 so that I get more information.
 ```
 
-User stories will play an important role in our Agile approaches. We will maintain a prioritized list (the "product backlog") of user stories to implement (with possibly 10s-100s of user stories). 
+User stories will play an important role in our Agile approaches. We will maintain a prioritized list (the "product backlog") of user stories to implement (with possibly 10s-100s of user stories).
 
 ### S.M.A.R.T. user stories
 
-* Specific 
-* Measurable
-* Achievable
-* Relevant
-* Time-bound
+- Specific
+- Measurable
+- Achievable
+- Relevant
+- Time-bound
 
 The combination of specific and measurable could be translated to "testable".
 We aim to achieve (implement) each user story in one development iteration
@@ -98,17 +100,15 @@ so that I can see if I will like the film
 Compared before, our user story is more specific and relevant to the
 stakeholder.
 
-
 <!-- 1. Hand out 3x5 cards
 1. Have students write two user stories for the Film Explorer application (write large)
 1. Query for examples (and tape to board to demonstrate use on a Kanban-style board) -->
-
 
 ### Testable User Stories
 
 Although we made our user story more specific, still more detail is needed to
 actually construct acceptance tests. To do so we can translate the story into a
-series of testable *scenarios*. A common format is (implemented in the Cucumber
+series of testable _scenarios_. A common format is (implemented in the Cucumber
 [Gherkin language](https://docs.cucumber.io/gherkin/)):
 
 "Given [a context],<br/>
@@ -118,7 +118,7 @@ Then [an outcome should occur]."
 Refining our previous story as testable scenarios in this format:
 
 ```
-Given a film summary is shown, 
+Given a film summary is shown,
 when I click on the title,
 then the detail view is shown with the plot overview and poster image,
 ```
@@ -138,9 +138,9 @@ that they can be understood by customer, but are sufficiently formalized to be
 executed automatically. A Cucumber test is composed of:
 
 1. `Given` steps represent state of world before event, the preconditions
-1. `When` steps represent event, e.g. simulate user pushing a button 
+1. `When` steps represent event, e.g. simulate user pushing a button
 1. `Then` steps represent expected postconditions, the test expectations
-with `And` and `But` extending any previous step.
+   with `And` and `But` extending any previous step.
 
 For example:
 
@@ -154,7 +154,7 @@ The steps are mapped to functions that implement clicking, etc. with
 arguments extracted with regular expressions. In this example, based on
 [cucumber boilerplate](https://github.com/webdriverio/cucumber-boilerplate),
 the quoted expressions with the URL, title, CSS selector, etc. are the
-arguments. 
+arguments.
 
 Note that you don't have to use Cucumber to implement "Given-When-Then"-style
 tests. For simplicity, we will use code (and the Enzyme library) instead of
@@ -186,10 +186,11 @@ like a movie storyboard, but non-linear.
 
 I think you will find Lo-Fi mockups have some real advantages compared to
 jumping directly to HTML:
-* Lo-Fi mockups are less intimidating to nontechnical stakeholders
-* Lo-Fi mockups are less likely to confuse nontechnical stakeholder (it looks like a webpage, but doesn't work like a webpage)
-* The customer is more likely to suggest changes to UI if there isn't code behind it (i.e. they perceive minimal cost to making a change)
-* The customer is more likely to focus on interaction rather than colors, fonts, etc.
+
+- Lo-Fi mockups are less intimidating to nontechnical stakeholders
+- Lo-Fi mockups are less likely to confuse nontechnical stakeholder (it looks like a webpage, but doesn't work like a webpage)
+- The customer is more likely to suggest changes to UI if there isn't code behind it (i.e. they perceive minimal cost to making a change)
+- The customer is more likely to focus on interaction rather than colors, fonts, etc.
 
 In your projects, you will likely be the customer, but even so, I think you
 will find that above advantages still hold, especially the last two...
@@ -200,5 +201,3 @@ mockups will make it harder to get frequent feedback, and potentially make that
 feedback expensive (what if you invested all that time only to get it
 wrong...). Make getting it wrong cheap so that you can quickly iterate to find
 the right solution.
-
-

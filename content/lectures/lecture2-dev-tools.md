@@ -3,7 +3,7 @@ path: "/lectures/lecture2-devtools"
 title: "Lecture 2 - Development Tools"
 name: "Lecture 2 - Tools"
 date: "2019-09-12"
-published: true
+published: false
 ---
 
 # Top down: Packaging, testing, linting
@@ -25,8 +25,8 @@ the project.
 
 A quick set of [definitions](https://docs.npmjs.com/getting-started/packages#quick-summary):
 
-* A package is a file or directory that is described by a `package.json` file. 
-* A module is any file or directory that can be loaded by Node.js' `require()`.
+- A package is a file or directory that is described by a `package.json` file.
+- A module is any file or directory that can be loaded by Node.js' `require()`.
 
 A package need not be a module (although many are). Modules are JavaScript code
 designed to be incorporated into other JavaScript code (like Python's
@@ -34,10 +34,11 @@ designed to be incorporated into other JavaScript code (like Python's
 application.
 
 The `package.json` contains a variety of information about the package, including:
-* Metadata, e.g. name, version, author, etc.
-* Dependencies (in both production and development)
-* Scripts for common tasks like running tests
-and much more...
+
+- Metadata, e.g. name, version, author, etc.
+- Dependencies (in both production and development)
+- Scripts for common tasks like running tests
+  and much more...
 
 ### Package lifecycle
 
@@ -61,9 +62,10 @@ easier to share with others.
 You can specify two kinds of dependencies, those packages needed to "run" your
 package ("dependencies"), and those packages needed to develop your package but
 not run it ("devDependencies"). Examples of the latter include:
-* Transpilers for translating ES6 to ES5 (and other tasks)
-* Test frameworks
-* Linters
+
+- Transpilers for translating ES6 to ES5 (and other tasks)
+- Test frameworks
+- Linters
 
 ### An example `package.json`
 
@@ -103,16 +105,16 @@ you ever debug it?"
 
 Testing does not supplant debugging (although it hopefully reduces the amount
 and difficulty of debugging), instead its role to help us build confidence that
-our code performs the specified task, *and* continues to do so even as further
+our code performs the specified task, _and_ continues to do so even as further
 develop/refactor our code. A key role for testing, and particularly automated
-testing, is to identify *regressions* in which previously working code breaks.
+testing, is to identify _regressions_ in which previously working code breaks.
 
 There many levels/kinds of testing:
 
-* Unit testing: Tests for isolated "units", e.g. a single function or object
-* Integration testing: Tests of combinations of units (i.e. integration of
+- Unit testing: Tests for isolated "units", e.g. a single function or object
+- Integration testing: Tests of combinations of units (i.e. integration of
   multiple units)
-* System (or end-to-end) testing: Testing the entire application (typically to
+- System (or end-to-end) testing: Testing the entire application (typically to
   ensure compliance with the specifications, i.e. "acceptance" testing)
 
 As you might imagine these definitions are quite fuzzy with many synonyms...
@@ -131,14 +133,14 @@ to think through our design, and particularly any interfaces, before we start
 coding (a key reason why TDD can be effective), and implement in short
 "cycles".
 
-
 The TDD process:
-1. Determine one thing the code *should* do (i.e. the specification)
+
+1. Determine one thing the code _should_ do (i.e. the specification)
 1. Implement that specification in a test, which should fail as you haven't yet
    implemented that functionality
 1. Write the simplest code that satisfies the test
 1. Refactor code and tests to DRY it up, etc.
-1. Repeat with the next *one thing* the code should do
+1. Repeat with the next _one thing_ the code should do
 
 That is we should be executing an iterative cycle of "fail-success-refactor"
 (or "red-green-refactor") in which we aim to always have working code.
@@ -153,7 +155,7 @@ as both "black boxes" (i.e. just test the functionality without regard to the
 implementation), and "white boxes", in which we take the implementation into
 account (i.e. aim to test specific execution paths). This middle ground is
 hopefully more complete, with fewer tests, than "black box", but less biased by
-the implementation than "white box". 
+the implementation than "white box".
 
 ### Anatomy of an automated unit test
 
@@ -168,7 +170,7 @@ about the results of executing that code
 (["matchers"](https://facebook.github.io/jest/docs/en/using-matchers.html) in
 Jest terminology).
 
-<!-- 
+<!--
 
 Briefly highlight Node-style `require` to import modules (a module may export a
 function, an object, etc.)
@@ -195,25 +197,25 @@ tests for different inputs. In each test we see the
    inputs before implementing the code.
 
 ```javascript
-const fib = require('./fibonacci'); // Import fib function from module
+const fib = require("./fibonacci"); // Import fib function from module
 
-describe('Computes Fibonacci numbers', () => {
-  test('Computes first two numbers correctly', () => {
+describe("Computes Fibonacci numbers", () => {
+  test("Computes first two numbers correctly", () => {
     expect(fib(0)).toBe(0);
     expect(fib(1)).toBe(1);
   });
 
-  test('Computes arbitrary Fibonacci numbers', () => {
+  test("Computes arbitrary Fibonacci numbers", () => {
     expect(fib(2)).toBe(1);
     expect(fib(3)).toBe(2);
     expect(fib(6)).toBe(8);
   });
 
-  test('Returns zero for negative inputs', () => {
+  test("Returns zero for negative inputs", () => {
     expect(fib(-1)).toBe(0);
   });
 
-  test('Rounds up for non-integer argument', () => {
+  test("Rounds up for non-integer argument", () => {
     expect(fib(5.8)).toBe(8);
   });
 });
@@ -223,15 +225,14 @@ Example [repository](https://github.com/csci312-f19/example-test-fibonacci).
 
 ### Unit test should be F.I.R.S.T.
 
-* **F**ast: Tests need to be fast since you will run them frequently
-* **I**ndependent: No test should depend on another so any subset can run in any
+- **F**ast: Tests need to be fast since you will run them frequently
+- **I**ndependent: No test should depend on another so any subset can run in any
   order
-* **R**epeatable: Test should produce the same results every time, i.e. be
+- **R**epeatable: Test should produce the same results every time, i.e. be
   deterministic
-* **S**elf-checking: Test can automatically detect if passed, i.e. no manual
+- **S**elf-checking: Test can automatically detect if passed, i.e. no manual
   inspection
-* **T**imely: Test and code developed currently (or in TDD, test developed first)
-
+- **T**imely: Test and code developed currently (or in TDD, test developed first)
 
 Consider the following function to check if today is a user's birthday (using
 the [Moment](https://momentjs.com) library). As an aside, working with
@@ -239,17 +240,17 @@ dates/time is one those surprisingly complex tasks that you should always use
 an established library for, it is just too easy to get the corner cases wrong.
 
 ```javascript
-const moment = require('moment');
+const moment = require("moment");
 
 const isBirthDay = function (birthday) {
-  return moment().isSame(birthday, 'day');
+  return moment().isSame(birthday, "day");
 };
 ```
 
 How would you test this function? It will be hard to achieve deterministic
 results since we depend on the current day. We need to isolate this function
 from the environment to implement tests. We can do so with a "mock" function
-that allows us to control the return value.  If we [Google "moment mock date
+that allows us to control the return value. If we [Google "moment mock date
 jest"](https://stackoverflow.com/questions/29719631/how-do-i-set-a-mock-date-in-jest/42787232),
 we learn that Moment uses the `Date.now` function to obtain the current date
 and time. Let's replace `Date.now` with a mock function that always returns the
@@ -257,25 +258,25 @@ same time. Note that we save the original Date module so we can restore it (and
 ensure our tests are independent).
 
 ```javascript
-const isBirthday = require('./birthday');
+const isBirthday = require("./birthday");
 
-describe('Checks if today is birthdate', () => {
+describe("Checks if today is birthdate", () => {
   let _Date;
   beforeAll(() => {
     _Date = Date; // Save original date module
   });
 
   afterAll(() => {
-      Date = _Date; // Reset Date
+    Date = _Date; // Reset Date
   });
 
   beforeEach(() => {
     // Set a fixed date
-    Date.now = jest.fn(() => new Date('01 Jan 2018').valueOf());
+    Date.now = jest.fn(() => new Date("01 Jan 2018").valueOf());
   });
 
-  test('Correctly asserts birthday', () => {
-    expect(isBirthday('2018-01-01')).toBe(true);
+  test("Correctly asserts birthday", () => {
+    expect(isBirthday("2018-01-01")).toBe(true);
   });
 });
 ```
@@ -288,14 +289,13 @@ Example [repository](hhttps://github.com/csci312-f19/example-test-birthday).
 
 ### Seams
 
-*Seams* are places where you can change an application's behavior without
+_Seams_ are places where you can change an application's behavior without
 changing the source code. Above we exploited a seam at `Date.now` to change the
 behavior of `moment` and isolate it from the environment. Depending on the
 language/framework there will be different ways of creating or exploiting seams
 (some languages will be tricker than others, e.g. C++). Without any seams you
 will have a difficult time creating FIRST tests. Thus writing testable code
 means creating seams.
-
 
 ### How do I know if my test suite is sufficient?
 
@@ -306,13 +306,13 @@ is limited measure of test quality. A high quality test suite will likely have
 high coverage but a high coverage test suite does not guarantee high quality.
 
 Perhaps a better way to answer this questions from [Martin
-Fowler](https://martinfowler.com/bliki/TestCoverage.html). 
+Fowler](https://martinfowler.com/bliki/TestCoverage.html).
 
 > You are doing enough testing if the following is true:
-> * You rarely get bugs that escape into production, and
-> * You are rarely hesitant to change some code for fear it will cause
+>
+> - You rarely get bugs that escape into production, and
+> - You are rarely hesitant to change some code for fear it will cause
 >   production bugs.
-
 
 A key use for code coverage can be to help you find the portions of the code
 base that are not being tested. Fowler includes the following quote from Brian
@@ -320,7 +320,6 @@ Marick:
 
 > If a part of your test suite is weak in a way that coverage can detect, it's
 > likely also weak in a way coverage can't detect.
-
 
 A related question is how do I know that my tests themselves are correct?
 Hopefully you can express your expectations simply enough that is clear to you
@@ -335,6 +334,7 @@ reduce the amount of debugging needed (and a function/method shouldn't be much
 longer than that anyway). But debugging will happen.
 
 To minimize the time to solution take a "scientific" approach to debugging ([source][esaas]):
+
 1. What did you expect to happen (be as specific as possible)?
 1. What actually happened (again as specific as possible)?
 1. Develop a hypothesis that could explain the discrepancy
@@ -342,8 +342,8 @@ To minimize the time to solution take a "scientific" approach to debugging ([sou
 
 The [ESaaS][esaas] RASP method for steps 1-3 above:
 
-1. **R**read the error message (*really* read it).
-1. **A**sk a colleague an *informed* question, not just "Why doesn't it work?".
+1. **R**read the error message (_really_ read it).
+1. **A**sk a colleague an _informed_ question, not just "Why doesn't it work?".
 1. **S**earch using keywords from error, specific SW versions, etc..
 1. **P**ost on StackOverflow, Canvas, etc. Everyone is busy, you will get
    better answers if you provide a [Minimal, Complete and
@@ -374,10 +374,11 @@ hard-to-detect bugs.
 [Linters][lint] are static analysis tools that help us identify "programming errors,
 bugs, stylistic errors, and suspicious constructs". In this context the linter
 has several benefits:
-* Identify potentially problematic code that is not obvious to a language
-novice or "slipped through the cracks". In a sense it is like having an expert
-programmer "pair" with you.
-* Enforce a common style across a team to increase readability.
+
+- Identify potentially problematic code that is not obvious to a language
+  novice or "slipped through the cracks". In a sense it is like having an expert
+  programmer "pair" with you.
+- Enforce a common style across a team to increase readability.
 
 In a sense the linter automates some of the "style" checking that often occurs
 in code review (when another developer reviews your code) or when I grade CS150
@@ -396,4 +397,5 @@ specific code sections. Again doing so is OK and in our practical exercise
 today we will learn how.
 
 [lint]: https://en.wikipedia.org/wiki/Lint_(software)
+
 [esaas]: http://www.saasbook.info "Fox and Patterson, \"Engineering Software as a Service: An Agile Approach Using Cloud Computing\""

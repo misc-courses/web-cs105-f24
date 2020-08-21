@@ -3,7 +3,7 @@ title: Tools
 path: "/resources/tools"
 name: "Tools"
 date: "2019-08-28"
-published: true
+published: false
 ---
 
 Tools play a strong role in making us efficient developers. They can help us in all sorts of subtle ways. Almost every developer I've ever met had **VIEWS** about the tools that they (and others use). There is no one size fits all solution. Some like the handle/hide all of the details approach taken by IDEs like Eclipse, while others swear that vim and a shell is the One True Way.

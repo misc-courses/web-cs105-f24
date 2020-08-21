@@ -3,6 +3,13 @@ import path from "path";
 import matter from "gray-matter";
 import remark from "remark";
 import html from "remark-html";
+// import remark2rehype from "remark-rehype";
+// import prism from "rehype-prism";
+import unified from "unified";
+import parse from "remark-parse";
+import remark2rehype from "remark-rehype";
+import highlightCode from "rehype-prism";
+import stringify from "rehype-stringify";
 
 export function getOrderedPageList(directory) {
   // Get file names under the directory
@@ -49,7 +56,18 @@ export function getAllPageIds(directory) {
   });
 }
 
-export async function getPageData(directory, id) {
+/**
+ * Read in the content file and convert the Markdown to HTML.
+ * This includes the remark-prism plugin to make code blocks look better.
+ *
+ * I got guidance from
+ * https://unifiedjs.com/learn/guide/using-unified/
+ * https://developer.aliyun.com/mirror/npm/package/rehype-prism
+ *
+ * @param {*} directory
+ * @param {*} id
+ */
+export function getPageData(directory, id) {
   const fullPath = path.join(directory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -57,9 +75,13 @@ export async function getPageData(directory, id) {
   const matterResult = matter(fileContents);
 
   // convert the markdown to html
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
+  const processedContent = unified()
+    .use(parse)
+    .use(remark2rehype)
+    .use(highlightCode)
+    .use(stringify)
+    .processSync(matterResult.content);
+
   const contentHtml = processedContent.toString();
 
   return {

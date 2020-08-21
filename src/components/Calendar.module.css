@@ -1,0 +1,26 @@
+.calendar {
+  margin-top: 1rem;
+}
+
+.weekBlock {
+  width: 100%;
+  display: flex;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 2rem 2rem 2rem 1rem;
+}
+
+.weekHeader {
+  width: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.entries {
+  list-style-type: none;
+}
+
+.entries li p {
+  display: inline;
+}

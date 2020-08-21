@@ -5,15 +5,14 @@ dueDate: "2019-10-07 5p"
 path: "/assignments/assignment03"
 template: "assignment"
 name: "Assignment 3"
-published: true
+published: false
 ---
-
 
 #### Goals
 
-* Get more practice implementing React components, including incorporating PropTypes
-* Advance your understanding of the division of responsibilities and state between components
-* Incorporate styling with CSS-in-JS (with Styled Components)
+- Get more practice implementing React components, including incorporating PropTypes
+- Advance your understanding of the division of responsibilities and state between components
+- Incorporate styling with CSS-in-JS (with Styled Components)
 
 ## Prerequisites
 
@@ -21,11 +20,11 @@ published: true
 2. Update the author information in the `package.json` file
 3. Install the package dependencies with `npm install`
 
-    When you install the dependencies you may get warnings like below. These can safely be ignored.
+   When you install the dependencies you may get warnings like below. These can safely be ignored.
 
-    ```
-    npm WARN ts-pnp@1.0.0 requires a peer of typescript@* but none is installed. You must install peer dependencies yourself.
-    ```
+   ```
+   npm WARN ts-pnp@1.0.0 requires a peer of typescript@* but none is installed. You must install peer dependencies yourself.
+   ```
 
 Once you have the dependencies installed you can start the development server with `npm start`. Practice good Git practices by creating a working branch for your features.
 
@@ -37,7 +36,7 @@ This assignment, the next part of creating Simplepedia, starts where assignment 
 
 ### Part 1: Update skeleton to fit your new understanding of React.js
 
-The first part of this assignment is to update the solution code to use styled components and PropTypes as discussed in class. Remove the rules from the CSS files *and* the HTML `id`s as you go. To use these modules you will need to install them into your application as dependencies (not just development dependencies) via:
+The first part of this assignment is to update the solution code to use styled components and PropTypes as discussed in class. Remove the rules from the CSS files _and_ the HTML `id`s as you go. To use these modules you will need to install them into your application as dependencies (not just development dependencies) via:
 
 ```
 npm install --save styled-components prop-types react-immutable-proptypes
@@ -45,7 +44,7 @@ npm install --save styled-components prop-types react-immutable-proptypes
 
 Other than the above, you should not need to modify your application dependencies in any way.
 
-When you get to adding PropTypes for the collection, you will want to specify that the collection is an `Immutable.map`. The above command adds a [special PropTypes library](https://github.com/HurricaneJames/react-immutable-proptypes) that knows about Immutable. 
+When you get to adding PropTypes for the collection, you will want to specify that the collection is an `Immutable.map`. The above command adds a [special PropTypes library](https://github.com/HurricaneJames/react-immutable-proptypes) that knows about Immutable.
 
 Be as specific as you can. While you can certainly get away with "it's an object", it is better to specify its shape (i.e., what fields we should expect in the object).
 
@@ -59,7 +58,7 @@ Your component should use an `<input>` of type "text" to allow the user to enter
 
 There is one form validation required. If the title is not set, you should not let the user save the article by disabling the "Save" button. UX best practices are to also provide a message explaining the validation error (as close in time and space to the error as possible), however for simplicity in this assignment you will just disable the "Save" button. To help the user, provide meaningful initial placeholder text in both input elements.
 
-Add a "New Article" button to the main interface like shown below. When the user clicks this button, the interface should switch to the editing component (i.e. the user should *not* see `IndexBar` or `Article`). When the user finishes the new article (either by using "Save" or "Cancel"), the primary interface should be restored. You do not need to restore the article that was previously displayed if the user clicks "Cancel" when creating a new article. If the user saves the new article, the newly created article should be displayed. 
+Add a "New Article" button to the main interface like shown below. When the user clicks this button, the interface should switch to the editing component (i.e. the user should _not_ see `IndexBar` or `Article`). When the user finishes the new article (either by using "Save" or "Cancel"), the primary interface should be restored. You do not need to restore the article that was previously displayed if the user clicks "Cancel" when creating a new article. If the user saves the new article, the newly created article should be displayed.
 
 Of course, we would like `IndexBar` to be consistent with the current article (i.e., display the correct section). There are a couple of ways to ensure this. I would like you to share `currentArticle` with `IndexBar` as a new prop. Unfortunately, you can't just use the first character of the title to determine the section, because then we couldn't switch sections. Instead, I would like you to add an [effect hook](https://reactjs.org/docs/hooks-effect.html). In `App.js`, we have an example of an effect hook:
 
@@ -69,19 +68,15 @@ useEffect(() => {
   }, []);
 ```
 
-The basic concept is that we register a function to be called under certain circumstances (when state or prop values change). The `useEffect()` function takes two arguments, the first is the function to run and the second is the list of variables to watch. In the example above, we passed an empty list, so it only runs once. You will want to watch for changes to the current article, changing the section if appropriate. This will mean that the section will change when the article changes, but can then be changed independently.   
-
+The basic concept is that we register a function to be called under certain circumstances (when state or prop values change). The `useEffect()` function takes two arguments, the first is the function to run and the second is the list of variables to watch. In the example above, we passed an empty list, so it only runs once. You will want to watch for changes to the current article, changing the section if appropriate. This will mean that the section will change when the article changes, but can then be changed independently.
 
 It is possible for the user to create a new article with the same title as a current article. We will ignore that problem in this assignment as we will fix it in the next assignment when we introduce a server (which will validate that the title is unique).
 
 ![Simplepedia](./images/assignment03-newarticle.png)
 
-
-
-
 ### Part 3: Allow editing
 
-Once you can successfully add new articles, you will adapt the interface to allow editing of articles. Add an "Edit Article" button to the article to request the current article be edited. The interface should then switch to your new `Editor` component, but the current title and article body should already be filled in. To do so add an optional second prop to `Editor` named `article`. When creating a new article, this prop should be set to `undefined`, when editing an article, this prop should be the article Object to be edited. 
+Once you can successfully add new articles, you will adapt the interface to allow editing of articles. Add an "Edit Article" button to the article to request the current article be edited. The interface should then switch to your new `Editor` component, but the current title and article body should already be filled in. To do so add an optional second prop to `Editor` named `article`. When creating a new article, this prop should be set to `undefined`, when editing an article, this prop should be the article Object to be edited.
 
 On "Save", the date should be updated and the changes saved (and the newly edited article displayed). On "Cancel", the changes should be discard leaving the article unmodified and the previous article view should be restored (displaying the original, unedited, article).
 
@@ -93,15 +88,14 @@ Submit your assignment by pushing your changes to the GitHub classroom via `git 
 
 ### Grading
 
-Points | Criteria
------- | --------
-5	| Styled components and PropTypes
-5   | Editor-related display and controls
-6	| Successfully add new articles
-6	| Successfully edit existing articles
-3   | IndexBar updates properly
-5   | Code organization, design, comments, style
-
+| Points | Criteria                                   |
+| ------ | ------------------------------------------ |
+| 5      | Styled components and PropTypes            |
+| 5      | Editor-related display and controls        |
+| 6      | Successfully add new articles              |
+| 6      | Successfully edit existing articles        |
+| 3      | IndexBar updates properly                  |
+| 5      | Code organization, design, comments, style |
 
 ### FAQ
 

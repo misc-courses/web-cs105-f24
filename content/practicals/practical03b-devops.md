@@ -27,7 +27,7 @@ version](https://afternoon-woodland-20082.herokuapp.com/) of the final result.
 1. Click through to the GitHub [classroom assignment](https://classroom.github.com/a/DXJJG4XQ) to create your private repository. Then clone that newly created
    repository to your local computer as you have done previously.
 1. Install the package dependencies by running `npm install` inside the root
-   directory of the newly cloned repository. 
+   directory of the newly cloned repository.
 1. Before making any changes, verify that the current tests pass by running
    `npm test`. CRA starts a test watcher that automatically reruns the tests
    after you modify a file. In this case we only need to run the tests once. If Jest does not run the tests because the files haven't changed you can manually trigger the tests by pressing <kbd>a</kbd>. Press <kbd>q</kbd> or <kbd>Ctrl + c</kbd> to exit the test watcher.
@@ -37,12 +37,11 @@ version](https://afternoon-woodland-20082.herokuapp.com/) of the final result.
    more about this kind of behavioral testing for React applications soon. In
    the meantime, we will just use these tests to experiment with Continuous
    Integration (CI).
+
 1. Travis CI should start testing your application automatically (it detects the `.travis.yml` file). When [getting started](getting_started.html), you should have
-   signed up for a Travis CI account. 
-   
+   signed up for a Travis CI account.
 
 Note that you may need to click on your name in the upper right hand corner to see the repositories, then "Sync Account" so that Travis is aware of your newly created repository. Even after syncing the list of repositories doesn't always update and so you need to use the search function to show the repository (search for "react"). If you do not have a Travis CI account setup or can't see your repository check in with the instructors.
- 
 
 ## Enhancing the color picker with controllable number
 
@@ -76,10 +75,10 @@ failures. Replace the following section of the current tests in `App.test.js` (a
 
 ```javascript
 // The three numeric values should be updated
-const values = colorPicker.find('span');
+const values = colorPicker.find("span");
 expect(values).toHaveLength(3);
 values.forEach((value) => {
-  expect(value.text()).toBe('100');
+  expect(value.text()).toBe("100");
 });
 ```
 
@@ -91,19 +90,22 @@ const values = colorPicker.find('input[type="number"]');
 expect(values).toHaveLength(3);
 values.forEach((value) => {
   // Use jest-enzyme matcher to check prop to numeric input element
-  expect(value).toHaveProp('value', 100);
+  expect(value).toHaveProp("value", 100);
   // Change the value via the numeric input
-  value.simulate('change', { target: { value: '50' } });
+  value.simulate("change", { target: { value: "50" } });
 });
 
 // The color box background should be set to numeric values
-expect(colorPicker.find(ColorSwatch)).toHaveStyleRule('background', 'rgb(50,50,50)');
+expect(colorPicker.find(ColorSwatch)).toHaveStyleRule(
+  "background",
+  "rgb(50,50,50)"
+);
 ```
 
 We will learn more about how these tests work later in the course. For context, the new test code finds the newly added `<input>`s, asserts that their values were
 updated by the sliders and then changes the color via the newly added numeric
 inputs. If the numeric inputs are implemented correctly in your React component,
-those changes should update the color swatch (the final expectation). 
+those changes should update the color swatch (the final expectation).
 
 Once the tests pass, you are ready to integrate and ultimately deploy your
 changes.
@@ -129,8 +131,7 @@ Travis CI. Make sure all checks have passed before merging the changes into the
 Clean up your local repository after the merge. Return to the `master` branch
 on your local computer, pull the changes from GitHub pruning deleting remote
 tracking references. Then delete your local branch. To avoid mistakes when deleting
-branches, add the `--dry-run` option to the `--prune` option, e.g. `git pull
---prune --dry-run` to double check before actually pruning anything. The
+branches, add the `--dry-run` option to the `--prune` option, e.g. `git pull --prune --dry-run` to double check before actually pruning anything. The
 command sequence is:
 
 ```
@@ -151,7 +152,7 @@ Create your application via
 heroku create --buildpack https://github.com/mars/create-react-app-buildpack.git
 ```
 
-then push your application to Heroku to deploy your new color picker 
+then push your application to Heroku to deploy your new color picker
 
 ```
 git push heroku master
@@ -169,13 +170,9 @@ You have now successfully completed an integration and deployment cycle!
 
 Your GitHub repository should already be "up-to-date" as a result of the pull request. If you have made any subsequent changes, push your completed practical to GitHub via `git push --all origin`. Then submit your repository to Gradescope as described [here](../resources/gradescope).
 
-
-
 ## Grading
 
-Points | Requirement
------- | --------
-&#x2713;/&#x2717; | Changed `<span>` to input
-&#x2713;/&#x2717; | Passes all ESLint checks 
-
-
+| Points            | Requirement               |
+| ----------------- | ------------------------- |
+| &#x2713;/&#x2717; | Changed `<span>` to input |
+| &#x2713;/&#x2717; | Passes all ESLint checks  |

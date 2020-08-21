@@ -5,7 +5,7 @@ dueDate: "2019-09-30 5p"
 path: "/assignments/assignment02"
 template: "assignment"
 name: "Assignment 2"
-published: true
+published: false
 ---
 
 #### Goals

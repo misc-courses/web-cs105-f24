@@ -3,7 +3,7 @@ path: "/resources/links"
 title: "Useful Links"
 name: "Useful Links"
 date: "2019-08-28"
-published: true
+published: false
 ---
 
 This is a collection of external resources that you will find useful over the course of the semester.

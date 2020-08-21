@@ -1,0 +1,79 @@
+[
+  {
+    "week": "09/06 - 09/12",
+    "entries": [
+      {
+        "text": "[Introduction](/lectures/lecture0-intro)"
+      }
+    ]
+  },
+  {
+    "week": "09/13 - 09/19",
+    "entries": []
+  },
+  {
+    "week": "09/20 - 09/26",
+    "entries": []
+  },
+  {
+    "week": "09/27 - 10/03",
+    "entries": []
+  },
+  {
+    "week": "10/04 - 10/10",
+    "entries": [{ "date": "10/06", "text": "Project proposals due" }]
+  },
+  {
+    "week": "10/11 - 10/17",
+    "entries": [{ "date": "10/13", "text": "Sprint 0 planning" }]
+  },
+  {
+    "week": "10/18 - 10/24",
+    "entries": [
+      { "date": "10/20", "text": "Sprint 0 deliverables due" },
+      { "date": "10/22", "text": "Sprint 1 planning" }
+    ]
+  },
+  {
+    "week": "10/25 - 10/31",
+    "entries": []
+  },
+  {
+    "week": "11/01 - 11/07",
+    "entries": [
+      {
+        "date": "11/03",
+        "text": "Sprint 1 demos, retrospective | Sprint 1 deliverables due"
+      },
+      { "date": "11/05", "text": "Sprint 2 planning" }
+    ]
+  },
+  {
+    "week": "11/08 - 11/14",
+    "entries": []
+  },
+  {
+    "week": "11/15 - 11/21",
+    "entries": [
+      {
+        "date": "11/17",
+        "text": "Sprint 2 demos, retrospective | Sprint 2 deliverables due"
+      },
+      { "date": "11/19", "text": "Sprint 3 planning" }
+    ]
+  },
+  {
+    "week": "11/22 - 11/28",
+    "entries": [{ "text": "**Thanksgiving Break**" }]
+  },
+  {
+    "week": "11/29 - 12/05",
+    "entries": []
+  },
+  {
+    "week": "12/06 - 12/12",
+    "entries": [
+      { "text": "**Finals week** | Presentations and interviews TBD" }
+    ]
+  }
+]

@@ -5,6 +5,7 @@
   top: 0;
   border-bottom: 1px solid #eee;
   background-color: #fff;
+  z-index: 2;
 }
 
 .container {

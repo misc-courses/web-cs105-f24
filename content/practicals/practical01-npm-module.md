@@ -5,9 +5,8 @@ dueDate: "2019-09-13 5p"
 path: "/practicals/practical01"
 template: "assignment"
 name: "Practical 1"
-published: true
+published: false
 ---
-
 
 #### Goals
 
@@ -31,7 +30,7 @@ Make sure you complete the steps on the [getting_started](/resources/getting_sta
 ## Creating the module
 
 Create a new package by first creating the package directory and then running
-`npm init` *inside* the new directory, i.e.
+`npm init` _inside_ the new directory, i.e.
 
 ```
 mkdir birthday-practical
@@ -42,13 +41,13 @@ npm init
 The `npm init` command will create the `package.json` file by asking you a
 series of questions. Hit <kbd>Enter</kbd> to accept the default for each question. If your directory is a Git repository (not the case here)
 `npm` will automatically pull information from your Git repository to create
-the `package.json` file. 
+the `package.json` file.
 
 The `package.json` a file can be edited like any other. Open it in your editor (e.g. VSCode)
 and add the `"private": true` property like shown below to prevent
 [accidentally publishing](https://docs.npmjs.com/files/package.json#private)
 this package to npm. After your manual editing your initial `package.json` file
-should look something like the following. 
+should look something like the following.
 
 ```json
 {
@@ -68,8 +67,8 @@ should look something like the following.
 ## Setting up unit testing
 
 We want to add automated unit tests for our functions. Unit testing typically
-requires 1) a *test runner* to automatically run all the tests and report the
-results, and 2) an *assertion library* for implementing expectations about the
+requires 1) a _test runner_ to automatically run all the tests and report the
+results, and 2) an _assertion library_ for implementing expectations about the
 behavior of the code under test. We will use the
 [Jest](https://facebook.github.io/jest/) unit testing package, which provides
 both. Jest is one of many possible unit testing libraries; it is not
@@ -128,15 +127,15 @@ moment library to make it available in our file (analogous to `import` in Python
 function for use by others:
 
 ```javascript
-const moment = require('moment');
+const moment = require("moment");
 
 const howOld = function howOld(birthday) {
-  return moment().diff(birthday, 'years');
+  return moment().diff(birthday, "years");
 };
 
 module.exports = {
-  howOld
-}
+  howOld,
+};
 ```
 
 ## Creating unit tests
@@ -146,10 +145,10 @@ with `test.js` extension; Jest looks automatically for `*.test.js` files),
 import the functions from `index.js`, and add your first unit test with the code below. Then run your test suite with `npm test`. Hopefully every thing is "green"!
 
 ```javascript
-const birthday = require('./index');
+const birthday = require("./index");
 
-describe('Determines age based on birthday', () => {
-  test('Returns 0 if birthday is today', () => {
+describe("Determines age based on birthday", () => {
+  test("Returns 0 if birthday is today", () => {
     expect(birthday.howOld(Date.now())).toBe(0);
   });
 });
@@ -180,13 +179,13 @@ different directions. Often the tests in a single `describe` all share common
 [setup and tear down
 functionality](https://facebook.github.io/jest/docs/en/setup-teardown.html),
 that is they all need the same work to be performed before the test is run and
-after the test is complete. 
+after the test is complete.
 
 In this case, to make our tests "FIRST", we need to isolate our function from
 the environment. Use the approach from class to fix the date:
 
 ```javascript
-describe('Determines age based on birthday', () => {
+describe("Determines age based on birthday", () => {
   let _Date;
   beforeAll(() => {
     // Save original date module
@@ -195,16 +194,16 @@ describe('Determines age based on birthday', () => {
 
   afterAll(() => {
     // Reset Date
-    Date = _Date; 
+    Date = _Date;
   });
 
   beforeEach(() => {
     // Set a fixed date
-    Date.now = jest.fn(() => new Date('01 Jan 2018').valueOf());
-  }); 
+    Date.now = jest.fn(() => new Date("01 Jan 2018").valueOf());
+  });
 
-  test('Returns 0 if birthday is today', () => {
-    expect(birthday.howOld(new Date('01 Jan 2018'))).toBe(0);
+  test("Returns 0 if birthday is today", () => {
+    expect(birthday.howOld(new Date("01 Jan 2018"))).toBe(0);
   });
 });
 ```
@@ -231,8 +230,6 @@ For context, [Instanbul](https://istanbul.js.org) is the
 underlying tool used by Jest to compute coverage.
 
 </hidden-block>
-
-
 
 ## Running a linter
 
@@ -347,17 +344,17 @@ eliminate all of the linter errors and warnings.
 ## Your first Git
 
 Now that you have implemented your package, we want to turn the package into a
-Git repository. 
+Git repository.
 
-Git is a distributed version control system (VCS). Git, and its "killer app" GitHub, will play a key role in our workflow. At its simplest, a VCS enables us to "checkpoint" our work (a *commit* in Git terminology), creating a distinct version of our codebase that that we can return to. The opportunity to track and undo changes makes it easier to find new bugs (by reviewing differences to a prior working version), maintain a clean code base (we don't need to keep commented out code around in case we need it again), confidently make large changes knowing we can always recover a working version, and much more. For these reasons and more solo developers will use a VCS (and so should you!), but it is even more useful in a team environment.
+Git is a distributed version control system (VCS). Git, and its "killer app" GitHub, will play a key role in our workflow. At its simplest, a VCS enables us to "checkpoint" our work (a _commit_ in Git terminology), creating a distinct version of our codebase that that we can return to. The opportunity to track and undo changes makes it easier to find new bugs (by reviewing differences to a prior working version), maintain a clean code base (we don't need to keep commented out code around in case we need it again), confidently make large changes knowing we can always recover a working version, and much more. For these reasons and more solo developers will use a VCS (and so should you!), but it is even more useful in a team environment.
 
 How will you know if you and another developer modify the same file (in potentially incompatible ways)? How do you ensure you don't end up with a teammate's half-working modifications? We will use the VCS to prevent these problems.
 
-The "distributed" in "distributed VCS" means that no central repository is required. Each Git repository contains the entire history of the project and thus each developer can work independently, making commits (checkpoints) without interfering with anyone else. Only when you *push* or *pull* those changes to another copy of the repository do your changes become visible to anyone else. Further we will use branches to segregate our changes. A branch is just a parallel version of the codebase. This allows you to experiment, while leaving the *master* branch untouched until your new feature is ready to be *merged* back into the master.
+The "distributed" in "distributed VCS" means that no central repository is required. Each Git repository contains the entire history of the project and thus each developer can work independently, making commits (checkpoints) without interfering with anyone else. Only when you _push_ or _pull_ those changes to another copy of the repository do your changes become visible to anyone else. Further we will use branches to segregate our changes. A branch is just a parallel version of the codebase. This allows you to experiment, while leaving the _master_ branch untouched until your new feature is ready to be _merged_ back into the master.
 
 Git does not require a central repository. However, teams still tend to use a central repository to facilitate their work (we will use GitHub in this role). There isn't anything technically special about the shared repository other than that the team decides to share their changes via that central repository rather than directly with each other.
 
-We will use Git and GitHub (in concert with Gradescope) to submit our work. Keep in mind the "distributed" in distributed VCS. Until you have pushed your changes to GitHub (and submitted your repository to Gradescope) your work is *not* turned in.
+We will use Git and GitHub (in concert with Gradescope) to submit our work. Keep in mind the "distributed" in distributed VCS. Until you have pushed your changes to GitHub (and submitted your repository to Gradescope) your work is _not_ turned in.
 
 To get ready to do so in this practical:
 
@@ -377,10 +374,9 @@ We are now ready to commit our changes:
 
 1. Start by running `git status` in the terminal in the assignment directory to
    see how your modified files are reported. (The `node_modules` and `coverage` directories should **not** be listed -- if they are, go back to the last step.)
-1. Then add the modified files to stage them for the commit, i.e. `git add
-   index.js`. The staging area now contains the files whose changes will be
+1. Then add the modified files to stage them for the commit, i.e. `git add index.js`. The staging area now contains the files whose changes will be
    committed. You can use `git add .` to stage all the files at once. (Note that `git add .` can be dangerous -- use `git status` first to make sure there is nothing that you don't want in the repository before you use it.)
-1. Run `git status` again to see the how staged files are reported.  
+1. Run `git status` again to see the how staged files are reported.
 1. Commit your changes with `git commit -m "Your pithy commit message"` (replace "Your pithy commit message" with a pithy but informative commit message, quotes are required). You can also skip the `-m` option. If you do so, `git` will open a text editor for you to write your commit message (and commit when you exit the text editor).
 
 You are now ready to submit your practical assignment.
@@ -405,14 +401,12 @@ instructor know if that works for you).
 
 ## Grading
 
-Points | Requirement
------- | --------
-&#x2713;/&#x2717; | Create npm package
-&#x2713;/&#x2717; | Implemented `howOld`
-&#x2713;/&#x2717; | Implemented tests with 100% coverage
-&#x2713;/&#x2717; | Passes all ESLint checks 
-
-
+| Points            | Requirement                          |
+| ----------------- | ------------------------------------ |
+| &#x2713;/&#x2717; | Create npm package                   |
+| &#x2713;/&#x2717; | Implemented `howOld`                 |
+| &#x2713;/&#x2717; | Implemented tests with 100% coverage |
+| &#x2713;/&#x2717; | Passes all ESLint checks             |
 
 [esaas]: http://cs169.sass-class.org "Adapted from Armando Fox and David Patterson, UC Berkeley"
 [lint]: https://en.wikipedia.org/wiki/Lint_(software)

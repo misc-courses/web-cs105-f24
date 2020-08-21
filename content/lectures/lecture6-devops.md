@@ -3,7 +3,7 @@ path: "/lectures/lecture6-devops"
 title: "Lecture 6 - DevOps"
 name: "Lecture 6 - DevOps"
 date: "2019-09-26"
-published: true
+published: false
 ---
 
 ## Deployment: Closing the loop
@@ -12,10 +12,11 @@ Programs that are never deployed (for whatever relevant definition of deployed)
 have not solved their motivating problem. Thus we need to get to deployment!
 
 To do so we must first answer several questions:
-* Are we ready? Is our application in a working state?
+
+- Are we ready? Is our application in a working state?
   Do we have the necessary resources, e.g. webservers, databases, etc. to
   actually deploy our application?
-* How do we actually deploy our application to its production setting?
+- How do we actually deploy our application to its production setting?
 
 We will be at our most efficient when we minimize the "delta" between the
 current "version" of the application and the next "version" of the application.
@@ -24,7 +25,7 @@ will be fast and predictable. Bugs will hopefully be identified sooner, in a
 smaller subset of the codebase (you only changed a small part of the system),
 while the changes are still fresh in your mind.
 
-To do so we will practice *Continuous Integration* (CI), that is merging small
+To do so we will practice _Continuous Integration_ (CI), that is merging small
 changes frequently instead of merging a large change at the end of the
 development cycle.
 
@@ -42,17 +43,17 @@ scary process, routine.
 [Key practices of Continuous
 Integration:](https://martinfowler.com/articles/continuousIntegration.html#PracticesOfContinuousIntegration):
 
-* Maintain a single source repository
-* Automate the Build (and the Build becomes a proper noun)
-* Make your build self-testing
-* Everyone commits to the mainline every day
-* Every commit should build the mainline on an integration machine
-* Fix broken builds immediately
-* Keep the build fast
-* Test in a clone of the production environment
-* Make it easy for anyone to get the latest executable
-* Everyone can see what's happening
-* Automate deployment
+- Maintain a single source repository
+- Automate the Build (and the Build becomes a proper noun)
+- Make your build self-testing
+- Everyone commits to the mainline every day
+- Every commit should build the mainline on an integration machine
+- Fix broken builds immediately
+- Keep the build fast
+- Test in a clone of the production environment
+- Make it easy for anyone to get the latest executable
+- Everyone can see what's happening
+- Automate deployment
 
 We will use a combination of convention and tooling to support our CI workflow.
 First convention: we will treat the master branch as the deployable branch. We
@@ -60,18 +61,21 @@ want to then to keep it "green", that is make sure all commits build and all
 tests pass. We will develop new features on "feature branches" to segregate those changes until they are complete and ready to be integrated into the master branch (i.e. all tests pass, etc.).
 
 A quick summary of our workflow:
+
 1. Create a feature branch, e.g. `git checkout -b my-feature` (combining branch
    creation with `-b` and checkout)
 1. Edit, add, commit ... (with tests!)
 1. Make sure all tests pass
 
 If you are working alone you can "integrate" your new feature back into the master branch with:
+
 1. `git checkout master`
 1. `git merge my-feature`
 
 But we are rarely working alone. On a team we need to make sure we stay in sync
 and create opportunities to get a second pair of eyes on our code (i.e. create
-opportunities for code review). 
+opportunities for code review).
+
 1. `git pull origin master` to fetch changes in upstream master branch and
    merge them into your feature branch (note that this doesn't update your
    local master branch). Resolve any conflicts and make sure tests pass.
@@ -80,11 +84,11 @@ opportunities for code review).
    Depending on the review, revise before merge or withdraw request.
 1. After a successful code review merge your pull request on GitHub and update your local repository (see the [practical](practial-deploy-cra.html) for more detail):
 
-    ```
-    git checkout master
-    git pull --prune
-    git branch -d my-feature
-    ```
+   ```
+   git checkout master
+   git pull --prune
+   git branch -d my-feature
+   ```
 
 How do the tools support this workflow? We will use [Travis
 CI](https://travis-ci.com/) to automate the build and testing. We add a YAML
@@ -97,15 +101,16 @@ the eventual production environment.
 
 When we enable a repository in Travis, the service monitors the repository for
 commits and pull requests. For the latter, Travis will build and test the code
-that *would be* created by the pull request, ensuring it is "safe" to merge.
+that _would be_ created by the pull request, ensuring it is "safe" to merge.
 Travis will notify the authors and update the pull request with the results of
 the build so that "everyone can see what is happening".
 
 There are two related
 [concepts](https://martinfowler.com/bliki/ContinuousDelivery.html):
-* *Continuous Deployment*: Every change automatically gets put into production,
+
+- _Continuous Deployment_: Every change automatically gets put into production,
   and thus there are many production deployments each day.
-* *Continuous Delivery*: An extension of CI in which SW is deployable
+- _Continuous Delivery_: An extension of CI in which SW is deployable
   throughout its lifecycle, the team prioritizes keeping SW deployable, and it
   is possible to automatically deploy SW on demand.
 
@@ -118,22 +123,21 @@ mitigate risk companies will often first deploy for a small subset of users.
 
 ### DevOps (with Heroku)
 
-What is DevOps? Like Agile, DevOps is not *a* process or approach but instead a
+What is DevOps? Like Agile, DevOps is not _a_ process or approach but instead a
 set of values (or a culture or philosophy). There is no one definition, but
 generally its core principles
 [are](https://landing.google.com/sre/book/chapters/introduction.html):
 
-* Involvement of the operations function in each phase of a system’s design and
-development, 
-* Heavy reliance on automation versus human effort, 
-* The application of engineering practices and tools to operations tasks
+- Involvement of the operations function in each phase of a system’s design and
+  development,
+- Heavy reliance on automation versus human effort,
+- The application of engineering practices and tools to operations tasks
 
 In furtherance of the first principle, in some settings there is a single team
 that is responsible for the entire application lifecycle from development to
 testing to deployment. The role of automation is to improve efficiency, reduce
 the chance for human error and provide always up-to-date documentation of the
 workflow.
-
 
 The cloud has made large-scale HW widely available with minimal barrier to
 entry. Providers like AWS offer Infrastructure-as-a-Service, that is you can
@@ -175,7 +179,7 @@ in our Git repository. Here we use a specific
 ["buildpack"](https://devcenter.heroku.com/articles/buildpacks), customized to
 deploy CRA apps. "Buildpacks are responsible for transforming deployed code
 into a slug, which can then be executed on a dyno." The `push` actually deploys
-your application! 
+your application!
 
 In a more complex application, we may allocate additional resources, like a
-database, in between creating the application and deploying it. 
+database, in between creating the application and deploying it.

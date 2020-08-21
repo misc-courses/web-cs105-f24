@@ -52,6 +52,11 @@
   color: #526375;
 }
 
+.sidebarItem a {
+  text-decoration: none;
+  color: #526375;
+}
+
 .groupHeader {
   margin: 0px;
 }

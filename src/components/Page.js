@@ -10,13 +10,6 @@ export default function Page({ pageData }) {
       </Head>
       <article>
         <h2>{pageData.title}</h2>
-        {/* {pageData.title}
-        <br />
-        {pageData.id}
-        <br /> */}
-        {/* <Date dateString={pageData.date} />
-        <br />
-        {pageData.dueDate ? <Date dateString={pageData.dueDate} /> : ""} */}
 
         <div dangerouslySetInnerHTML={{ __html: pageData.contentHtml }} />
       </article>
