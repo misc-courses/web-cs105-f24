@@ -9,12 +9,12 @@ export default function Home() {
   return (
     <Layout currentPage={{ path: "/", title: "Home" }} modified={"2020-08-19"}>
       <Head>
-        <title>CS312 Software Development</title>
+        <title>CSXXX - Classname</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
         <main className={styles.main}>
-          <h1 className={styles.title}>CS312 - Software Development</h1>
+          <h1 className={styles.title}>CSXXX - Classname</h1>
 
           <div>
             <h2>Important Links</h2>
@@ -25,12 +25,6 @@ export default function Home() {
               <a href="http://piazza.com/middlebury/fall2020/cs312/home">
                 Piazza
               </a>
-
-              <a href="https://classroom.github.com/classrooms/70154792-cs-312-fall-2020">
-                Class GitHub
-              </a>
-
-              <a href="https://www.gradescope.com/courses/60802">Gradescope</a>
             </div>
           </div>
           <div>
