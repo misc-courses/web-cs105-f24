@@ -3,7 +3,7 @@ path: "/lectures/lecture1-js"
 title: "Lecture 1 - JavaScript"
 name: "Lecture 1 - JS"
 date: "2020-09-10"
-published: true
+published: false
 ---
 
 # Introduction to JavaScript
@@ -618,5 +618,3 @@ undefined
 </hidden-block>
 
 ### Deconstruction and Spreading
-
-

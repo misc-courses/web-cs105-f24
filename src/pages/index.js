@@ -26,7 +26,7 @@ export default function Home() {
                 Piazza
               </a>
 
-              <a href="https://classroom.github.com/classrooms/54724585-cs-312-fall-2019">
+              <a href="https://classroom.github.com/classrooms/70154792-cs-312-fall-2020">
                 Class GitHub
               </a>
 

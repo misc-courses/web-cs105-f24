@@ -2,8 +2,8 @@
 path: "/resources/links"
 title: "Useful Links"
 name: "Useful Links"
-date: "2019-08-28"
-published: false
+date: "2020-08-28"
+published: true
 ---
 
 This is a collection of external resources that you will find useful over the course of the semester.
@@ -26,6 +26,9 @@ This is a collection of external resources that you will find useful over the co
 [React.js](https://reactjs.org/docs/hello-world.html)
 : React documentation (starting with Hello World tutorial).
 
+[Next.js](https://nextjs.org/)
+: Next.js documentation
+
 [Node.js](https://nodejs.org/en/)
 : Node.js home (with links to documentation).
 
@@ -40,3 +43,11 @@ This is a collection of external resources that you will find useful over the co
 
 [SQLite](http://www.sqlite.org)
 : SQLite home
+
+### Tools
+
+[VSCode](https://code.visualstudio.com/)
+
+[GitKraken](https://www.gitkraken.com/)
+
+[Postman](https://www.postman.com/)

@@ -1,7 +1,7 @@
 ---
 title: "Getting Started"
 name: "Getting Started"
-date: "2020-08-28"
+date: "2020-08-21"
 published: true
 ---
 
@@ -18,7 +18,7 @@ address).
 _A note to Windows users_, most of the core tools we are using should be
 available for Windows. Some of the ancillary tools, e.g. NVM, may not. Our
 various workflows and exercises will have been developed and tested on OSX and
-Linux, but not on windows. If you would like to work in a more tested environment, you could make use of [VirtualBox](http://www.cs.middlebury.edu/~pjohnson/guides/linux/) or the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Linux distribution up and running on your machine.
+Linux, but not on windows. If you would like to work in a more tested environment, you could make use of [VirtualBox](https://mediawiki.middlebury.edu/CS/Linux_Guide) or the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Linux distribution up and running on your machine.
 
 A note to OSX users, many of these tools can be installed via
 [Homebrew](https://brew.sh). If you are a current Homebrew user, keep an eye
@@ -32,6 +32,10 @@ All of the modern browsers should work fine, however to ensure a common,
 multi-platform, environment we will standardize on [Firefox](https://www.mozilla.org/en-US/firefox/). You are welcome to use any browser you are comfortable with, but this is the one that I will use to check your work.
 
 I also encourage you to install the [Rect Development Tools extension](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/) in Firefox, which will allow you to inspect your React component hierarchies (including state and props).
+
+### Editor
+
+You will need a good programmers editor. There are a number of them out there, but I am going to suggest [VSCode](https://code.visualstudio.com/), which has a good combination of features, a lot of useful plugins, and runs on practically everything. We will also be using its [Live Share capabilities](https://docs.microsoft.com/en-us/visualstudio/liveshare/use/vscode), so even if you decide you like some other editor better for doing assignments, please make sure you have VSCode installed.
 
 ### Git and GitHub
 
@@ -65,7 +69,7 @@ I also encourage you to install the [Rect Development Tools extension](https://a
    associated with your account.** Note that you can have multiple e-mail
    addresses associated with your account, e.g. you can add and should add your
    Middlebury e-mail address to an existing GitHub account. Once you have your
-   account, [submit your GitHub username to the instructor(s) via this online form](https://docs.google.com/forms/d/e/1FAIpQLScW6H8wXlQ8oKrzEXSZ7OBZqf1kvsBl3M6Vu0A8EzT1WeLLPQ/viewform?usp=sf_link).
+   account, [submit your GitHub username to the instructor(s) via this online form](https://docs.google.com/forms/d/e/1FAIpQLSdhrZpp5sVSgOgXIKtiveH22iES6rDWN_Rv6N5U7l418P3L4g/viewform?usp=sf_link).
 1. GitHub offers both SSH and HTTPS-based interfaces to your repository. GitHub recommends the HTTPS-based interface, but you can use either. SSH requires you to set up a public-key. See GitHub's [help page](https://help.github.com/en/articles/which-remote-url-should-i-use) for more information on these two options.
 
 1. Request an [education discount](https://education.github.com) for your
@@ -75,62 +79,17 @@ I also encourage you to install the [Rect Development Tools extension](https://a
 
 ### Node.js
 
-Node.js is a stand-alone JavaScript engine that can be used to execute
+[Node.js](https://nodejs.org/en/) is a stand-alone JavaScript engine that can be used to execute
 JavaScript outside the browser, either locally on your computer or on a
-"backend" server (i.e. "full-stack" JavaScript). We will be using the "long term support" (LTS) version which is 10.16.3. It will be important that you get this version and not use an older version you may happen to have (which may be missing features) or the latest, cutting edge version (which may have changed some features, and has certainly added some).
+"backend" server (i.e. "full-stack" JavaScript). We will be using the "long term support" (LTS) version which is 12.18.3. It will be important that you get this version and not use an older version you may happen to have (which may be missing features) or the latest, cutting edge version (which may have changed some features, and has certainly added some).
 
-Windows users should install Node.js directly from <https://nodejs.org>. If you do not have Administrator privileges on the computer (e.g. it is a library laptop) you can still install Node by following the updated instructions in this StackOverflow [post](https://stackoverflow.com/a/37029090). In short, download the [Zip file](https://nodejs.org/en/download/) containing the Windows binaries and unpack those programs for use on your computer.
-
-While OSX and Linux users can similarly install Node.js directly from <https://nodejs.org> we don't recommend that approach. Node.js moves quickly and so it is helpful to have a
-tool to manage different versions. I use [Node Version
-Manager](https://github.com/creationix/nvm) on OSX/Linux and encourage you to
-as well. `nvm` is a tool for downloading and installing different versions of
-Node.js (and associated tools) and a shell script for setting up your path to
-use a specific version. Note that you will need to install NVM and Node.js,
-even if you are using basin. Because Node.js moves so quickly it is
-better for you to install it yourself so you have control over the version.
-
-1. [Install `nvm`](https://github.com/creationix/nvm#installation).
-1. Install the current Node.js long term support release, `lts/dubnium`. We will
-   standardize on this version this semester.
-
-   ```
-   nvm install lts/dubnium
-   ```
-
-   If you get a `nvm: command not found` error, try opening a new terminal
-   then running the install command. If that doesn't fix that error, there are
-   additional debugging instructions for both Linux and OSX on the NVM
-   installation [site](https://github.com/creationix/nvm#installation).
-
-   If you get an error like the following on the College's Linux machines:
-
-   ```
-   Version '' (with LTS filter 'dubnium') not found - try `nvm ls-remote --lts=dubnium` to browse available versions.
-   ```
-
-   set an unencrypted mirror before trying to install Node.js:
-
-   ```
-   export NVM_NODEJS_ORG_MIRROR="http://nodejs.org/dist"
-   ```
-
-1. _Every time_ you start a new shell, you will use `nvm` to select a specific version of Node.js, e.g.
-
-   ```
-   nvm use lts/dubnium
-   ```
-
-   to set the version once, you can create a [`.nvmrc`
-   file](https://github.com/creationix/nvm#nvmrc) in the top-level directory
-   where you are working on your class assignments that specifies the Node.js
-   version. Then you only need to run `nvm use`.
+There are [many ways](https://nodejs.org/en/download/package-manager/) to install Node, but the best way is to use a tool that will allow you to easily migrate between versions. The recommended approach is to use [nvm](https://github.com/nvm-sh/nvm) on OSX or Linux and [chocolatey](https://chocolatey.org/) on Windows. <https://nodejs.dev/> has the short version of the commands you need to run to install node (and the OSX and Linux instructions also include the commands for installing nvm at the same time.)
 
 The default setup for NVM is to invoke the `nvm.sh` setup script whenever a new
 shell starts. Doing so takes a few seconds, and depending on how often you
-create a new shell that delay might be annoying. If you find yourself bothered
+create a new shell that delay might be annoying. **If** you find yourself bothered
 by the delay, and are comfortable at the command line, you can modify your
-`.bashrc` (or `.bash_profile`) with the following:
+`.bashrc` (or `.bash_profile`) with the following (test the default setup first -- I no longer need the following):
 
 <div markdown="1" id="nvm-startup" class="collapse">
 

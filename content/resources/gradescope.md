@@ -1,8 +1,8 @@
 ---
 title: "Working with Gradescope"
 name: "Gradescope"
-date: "2020-08-19"
-published: false
+date: "2020-08-24"
+published: true
 ---
 
 Alongside GitHub classroom, we will be using the online platform [Gradescope](https://gradescope.com) for grading your programming assignments and practical exercises. Gradescope helps us to provide fast and accurate feedback on your work. Programming assignments and practical exercises will be submitted through Gradescope alongside GitHub classroom, and assignment and exam grades will be returned through Gradescope. As soon as grades are posted, you will be notified immediately so that you can log in and see your feedback. You may also submit regrade requests if you feel we have made a mistake. Your Gradescope login is your Middlebury email, and your password can be changed [here](https://gradescope.com/reset_password). The same link can be used if you need to set your password for the first time.
