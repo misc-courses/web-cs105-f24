@@ -1,8 +1,11 @@
 import Head from "next/head";
 import Layout from "./Layout";
 import Date from "./date";
+import { markdownToReact } from "../lib/markdown-utils";
 
 export default function Page({ pageData }) {
+  const htmlContents = markdownToReact(pageData.content);
+
   return (
     <Layout currentPage={pageData} modified={pageData.date}>
       <Head>
@@ -11,7 +14,7 @@ export default function Page({ pageData }) {
       <article>
         <h2>{pageData.title}</h2>
 
-        <div dangerouslySetInnerHTML={{ __html: pageData.contentHtml }} />
+        {htmlContents}
       </article>
     </Layout>
   );

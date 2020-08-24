@@ -19,6 +19,8 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "rehype-prism": "^0.1.1",
+    "rehype-raw": "^4.0.2",
+    "rehype-react": "^6.1.0",
     "rehype-stringify": "^8.0.0",
     "remark": "^12.0.1",
     "remark-html": "^12.0.0",

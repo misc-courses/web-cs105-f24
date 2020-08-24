@@ -1,7 +1,7 @@
 import path from "path";
 
 import Page from "../../components/Page";
-import { getAllPageIds, getPageData } from "../../lib/markdown-utils";
+import { getAllPageIds, getPageData } from "../../lib/file-utils";
 
 const resourcesDirectory = path.join(process.cwd(), "content", "resources");
 

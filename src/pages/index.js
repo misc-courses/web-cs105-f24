@@ -6,7 +6,6 @@ import Calendar from "../components/Calendar";
 import calendarData from "../../content/calendar.json";
 
 export default function Home() {
-  console.log(calendarData);
   return (
     <Layout currentPage={{ path: "/", title: "Home" }} modified={"2020-08-19"}>
       <Head>
