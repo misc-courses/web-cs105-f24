@@ -16,11 +16,11 @@ export default function Info({ pageData }) {
       modified={"2020-08-19"}
     >
       <Head>
-        <title>CS312 Course Information</title>
+        <title>CSXXX - Course Information</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className={styles.title}>CS312 - Course Information</h1>
+      <h1 className={styles.title}>CSXXX - Course Information</h1>
 
       <table className={styles.infoTable}>
         <tbody>

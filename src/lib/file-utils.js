@@ -35,13 +35,14 @@ export function getOrderedPageList(directory) {
   });
 }
 
-export function getAllPageIds(directory) {
-  const fileNames = fs.readdirSync(directory);
+export function getAllPageIds(directory, category) {
+  const fileNames = fs.readdirSync(path.join(directory, category));
 
   return fileNames.map((fileName) => {
     return {
       params: {
-        id: fileName.replace(/\.md$/, ""),
+        category: category,
+        page: fileName.replace(/\.md$/, ""),
       },
     };
   });

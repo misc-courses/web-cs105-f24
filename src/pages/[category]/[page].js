@@ -3,7 +3,14 @@ import path from "path";
 import Page from "../../components/Page";
 import { getAllPageIds, getPageData } from "../../lib/file-utils";
 
-const resourcesDirectory = path.join(process.cwd(), "content", "lectures");
+const contentDirectory = path.join(process.cwd(), "content");
+const categories = [
+  "assignments",
+  "lectures",
+  "practicals",
+  "project",
+  "resources",
+];
 
 export default function Resource({ pageData }) {
   return <Page pageData={pageData} />;
@@ -13,7 +20,13 @@ export default function Resource({ pageData }) {
  * Specifies which dynamic routes should be pre-rendered
  */
 export async function getStaticPaths() {
-  const paths = getAllPageIds(resourcesDirectory);
+  const paths = [];
+  categories.forEach((category) => {
+    const subpaths = getAllPageIds(contentDirectory, category);
+
+    paths.push(...subpaths);
+  });
+
   return {
     paths,
     fallback: false,
@@ -26,8 +39,12 @@ export async function getStaticPaths() {
  * @param {*} param0
  */
 export async function getStaticProps({ params }) {
-  const pageData = await getPageData(resourcesDirectory, params.id);
-  pageData.path = path.join("/lectures", params.id);
+  console.log(params);
+  const pageData = await getPageData(
+    path.join(contentDirectory, params.category),
+    params.page
+  );
+  pageData.path = path.join("/", params.category, params.page);
   return {
     props: { pageData },
   };
