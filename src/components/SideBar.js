@@ -92,7 +92,7 @@ function Sidebar({ unhide, currentPage }) {
   });
 
   return (
-    <div className={styles.sidebar}>
+    <div className={`${styles.sidebar} ${unhide ? styles.open : ''}`}>
       <ul>{items}</ul>
     </div>
   );
@@ -111,26 +111,3 @@ Sidebar.defaultProps = {
 };
 
 export default Sidebar;
-
-{
-  /* <li>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-        </li>
-        <li>
-          <h4>Resources</h4>
-          <ul>
-            <li>
-              <Link href="/resources/tools">
-                <a>Tools</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/resources/getting-started">
-                <a>Getting Started</a>
-              </Link>
-            </li>
-          </ul>
-        </li> */
-}
