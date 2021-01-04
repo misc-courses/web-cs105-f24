@@ -5,6 +5,7 @@ import remark2rehype from "remark-rehype";
 import highlightCode from "rehype-prism";
 import stringify from "rehype-stringify";
 import raw from "rehype-raw";
+import slug from "rehype-slug";
 import rehype2react from "rehype-react";
 
 import Collapsable from "../components/Collapsable";
@@ -26,6 +27,7 @@ export function markdownToHtml(contents) {
     .use(markdown)
     .use(remark2rehype, { allowDangerousHtml: true })
     .use(raw)
+    .use(slug)
     .use(highlightCode)
     .use(stringify)
     .processSync(contents);
@@ -57,6 +59,7 @@ export function markdownToReact(contents) {
     .use(remark2rehype, { allowDangerousHtml: true }) // create the AST
     .use(raw) // pick up the raw HTML blocks and convert them into the AST as well
     .use(highlightCode) // use Prism to highlight the code
+    .use(slug) // add ids for anchor links to headers
     .use(rehype2react, {
       createElement: React.createElement,
       components: { "hidden-block": Collapsable },

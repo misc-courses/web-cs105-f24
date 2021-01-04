@@ -1,16 +1,42 @@
-import React from "react";
-import remark from "remark";
-import remark2react from "remark-react";
-import styles from "./Calendar.module.css";
+import React from 'react';
+import remark from 'remark';
+import remark2react from 'remark-react';
+import styles from './Calendar.module.css';
+
+const collapseText = (text) =>
+  typeof text === 'string' ? text : text.join('  \n');
+
+const itemToHTML = (item) => {
+  const key = collapseText(item.text);
+  const contents = (
+    <ul>
+      {item.fragments.map((fragment, index) => (
+        <li key={key + index}>{fragment}</li>
+      ))}
+    </ul>
+  );
+
+  return (
+    <li key={key} className={styles.entry}>
+      {item.date && <strong>{item.date}</strong>} {contents}
+    </li>
+  );
+};
 
 function Week({ weekData }) {
   const dated = [];
   const undated = [];
 
   weekData.entries.forEach((item) => {
-    item.html = remark()
-      .use(remark2react, { fragment: React.Fragment })
-      .processSync(item.text).result;
+    // make sure we have a list of text items
+    const entries = typeof item.text === 'string' ? [item.text] : item.text;
+    item.fragments = entries.map(
+      (fragment) =>
+        remark()
+          .use(remark2react, { fragment: React.Fragment })
+          .processSync(fragment).result
+    );
+
     if (item.date) {
       dated.push(item);
     } else {
@@ -25,19 +51,10 @@ function Week({ weekData }) {
       <div className={styles.weekHeader}>
         <strong>{weekData.week}</strong>
       </div>
-      <div>
-        <ul className={styles.entries}>
-          {dated.map((item) => (
-            <li key={item.text}>
-              <strong>{item.date}</strong> {item.html}
-            </li>
-          ))}
-        </ul>
-        <ul className={styles.entries}>
-          {undated.map((item) => (
-            <li key={item.text}>{item.html}</li>
-          ))}
-        </ul>
+      <div className={styles.entries}>
+        <ul>{undated.map(itemToHTML)}</ul>
+        {dated.length > 0 && undated.length > 0 ? <hr /> : <></>}
+        <ul>{dated.map(itemToHTML)}</ul>
       </div>
     </div>
   );

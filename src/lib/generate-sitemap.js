@@ -2,13 +2,7 @@ const path = require("path");
 const matter = require("gray-matter");
 const fs = require("fs");
 
-const contentDirectories = [
-  "lectures",
-  "assignments",
-  "practicals",
-  "project",
-  "resources",
-];
+const contentDirectory = path.join(process.cwd(), "content");
 
 const sitemapLocation = path.join(process.cwd(), "content", "sitemap.json");
 
@@ -39,6 +33,8 @@ function getOrderedPageList(directory) {
   return allPageData.sort((a, b) => {
     if (a.date > b.date) {
       return 1;
+    } else if (a.date === b.date) {
+      return a.name.localeCompare(b.name);
     } else {
       return -1;
     }
@@ -53,17 +49,11 @@ const makeDirectory = (name, children) => ({
   children,
 });
 
-const makeName = (name) => {
-  const loc = name.indexOf("-");
-  return capitalize(loc === -1 ? name : name.slice(0, loc));
-};
 function generateSitemap() {
-  const paths = contentDirectories.map((section) => {
-    const contents = getOrderedPageList(
-      path.join(process.cwd(), "content", section)
-    ).map((sp) => sp.id);
-    return { section, contents };
-  });
+  const fileNames = fs.readdirSync(contentDirectory);
+  const contentDirectories = fileNames.filter((name) =>
+    fs.lstatSync(path.join(contentDirectory, name)).isDirectory()
+  );
 
   const sitemap = [];
 

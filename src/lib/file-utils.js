@@ -1,17 +1,17 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
 export function getOrderedPageList(directory) {
   // Get file names under the directory
   const fileNames = fs.readdirSync(directory);
   let allPageData = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, "");
+    const id = fileName.replace(/\.md$/, '');
 
     // Read markdown file as string
     const fullPath = path.join(directory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
@@ -36,13 +36,23 @@ export function getOrderedPageList(directory) {
 }
 
 export function getAllPageIds(directory, category) {
-  const fileNames = fs.readdirSync(path.join(directory, category));
+  let fileNames = fs.readdirSync(path.join(directory, category));
+  fileNames = fileNames.filter((fileName) => {
+    const fileContents = fs.readFileSync(
+      path.join(directory, category, fileName),
+      'utf8'
+    );
+
+    // Use gray-matter to parse the post metadata section
+    const matterResult = matter(fileContents);
+    return matterResult.data.published;
+  });
 
   return fileNames.map((fileName) => {
     return {
       params: {
         category: category,
-        page: fileName.replace(/\.md$/, ""),
+        page: fileName.replace(/\.md$/, ''),
       },
     };
   });
@@ -56,7 +66,7 @@ export function getAllPageIds(directory, category) {
  */
 export function getPageData(directory, id) {
   const fullPath = path.join(directory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   // get the metadata
   const matterResult = matter(fileContents);
