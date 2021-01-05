@@ -1,11 +1,13 @@
 import React from "react";
 import unified from "unified";
 import markdown from "remark-parse";
+import math from 'remark-math';
 import remark2rehype from "remark-rehype";
 import highlightCode from "rehype-prism";
 import stringify from "rehype-stringify";
 import raw from "rehype-raw";
 import slug from "rehype-slug";
+import katex from 'rehype-katex';
 import rehype2react from "rehype-react";
 
 import Collapsable from "../components/Collapsable";
@@ -55,8 +57,12 @@ export function markdownToHtml(contents) {
 export function markdownToReact(contents) {
   // convert the markdown to a React component
   const processedContent = unified()
+    
+    
     .use(markdown) // read the markdown
+    .use(math) // capture latex escapes
     .use(remark2rehype, { allowDangerousHtml: true }) // create the AST
+    .use(katex) // render the math
     .use(raw) // pick up the raw HTML blocks and convert them into the AST as well
     .use(highlightCode) // use Prism to highlight the code
     .use(slug) // add ids for anchor links to headers
@@ -64,6 +70,8 @@ export function markdownToReact(contents) {
       createElement: React.createElement,
       components: { "hidden-block": Collapsable },
     }) // convert to a React component, replaces custom tags with React components
+     
+     
     .processSync(contents);
 
   return processedContent.result;

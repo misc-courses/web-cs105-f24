@@ -8,9 +8,12 @@
     "start": "next start",
     "export": "npm run build ; next export",
     "deploy": "rsync -avh out/ basin:public_html/classes/cs312-f20",
-    "sitemap:build": "node src/lib/generate-sitemap.js"
+    "sitemap:build": "node src/lib/generate-sitemap.js",
+    "dev:watch": "next-remote-watch .content"
   },
   "dependencies": {
+    "@mdx-js/loader": "^1.6.22",
+    "@next/mdx": "^10.0.4",
     "date-fns": "^2.16.1",
     "gray-matter": "^4.0.2",
     "next": "10.0.4",
@@ -18,15 +21,21 @@
     "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "rehype-katex": "^4.0.0",
     "rehype-prism": "^0.1.1",
     "rehype-raw": "^5.0.0",
     "rehype-react": "^6.1.0",
+    "rehype-slug": "^4.0.1",
     "rehype-stringify": "^8.0.0",
     "remark": "^13.0.0",
     "remark-html": "^13.0.1",
+    "remark-math": "^4.0.0",
     "remark-parse": "^9.0.0",
     "remark-react": "^8.0.0",
     "remark-rehype": "^8.0.0",
     "unified": "^9.2.0"
+  },
+  "devDependencies": {
+    "next-remote-watch": "^0.3.0"
   }
 }

@@ -16,7 +16,7 @@ const Layout = ({ currentPage, modified, children }) => {
       <div className={styles.mainPage}>
         <main>{children}</main>
         <footer className={styles.footer}>
-          © Christopher Andrews / Michael Linderman {new Date().getFullYear()},
+          © Christopher Andrews {new Date().getFullYear()},
           Last updated {modified}
         </footer>
       </div>
