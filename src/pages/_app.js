@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import "../../node_modules/prismjs/themes/prism-twilight.css";
+import "prismjs/themes/prism-tomorrow.css";
 
 import React from "react";
 
