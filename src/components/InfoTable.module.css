@@ -1,0 +1,10 @@
+.infoTable {
+  border-collapse: collapse;
+}
+
+.infoTable th,
+.infoTable td {
+  border: none;
+  padding: 0rem;
+  padding-right: 1rem;
+}

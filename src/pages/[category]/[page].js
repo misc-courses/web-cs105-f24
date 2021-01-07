@@ -7,7 +7,18 @@ import { getAllPageIds, getPageData } from "../../lib/file-utils";
 const contentDirectory = path.join(process.cwd(), "content");
 
 export default function Resource({ pageData }) {
-  return <Page pageData={pageData} />;
+  const isProduction = process.env.NODE_ENV === "production";
+
+  if (pageData.published || !isProduction){
+    return <Page pageData={pageData} />;
+  }else{
+    return <div>
+      <h2>Unpublished</h2>
+      <p>I'm sorry, that page has not yet been released.</p>
+    </div>
+  }
+
+  
 }
 
 /**

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import PropTypes from "prop-types";
-
+import config from '../../site.config';
 import styles from "./Header.module.css";
 
 const Header = ({ onMenu }) => (
@@ -25,7 +25,7 @@ const Header = ({ onMenu }) => (
       </div>
 
       <Link href="/">
-        <h1 className={styles.mainTitle}>CS 312 - Software Development</h1>
+        <h1 className={styles.mainTitle}>{config.name}</h1>
       </Link>
     </div>
   </header>

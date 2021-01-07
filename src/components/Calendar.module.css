@@ -26,10 +26,6 @@
   margin-bottom: 1rem;
 }
 
-.entry p {
-  display: inline;
-}
-
 .calendar hr {
   border: none;
   border-top: 1px dashed rgb(184, 184, 184);

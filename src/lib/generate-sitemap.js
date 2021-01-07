@@ -1,21 +1,25 @@
-const path = require("path");
-const matter = require("gray-matter");
-const fs = require("fs");
+const path = require('path');
+const matter = require('gray-matter');
+const fs = require('fs');
 
-const contentDirectory = path.join(process.cwd(), "content");
+const config = require('../..//site.config');
 
-const sitemapLocation = path.join(process.cwd(), "content", "sitemap.json");
+
+const contentDirectory = path.join(process.cwd(), 'content');
+const pagesDirectory = path.join(process.cwd(), 'src', 'content');
+
+const sitemapLocation = path.join(process.cwd(), 'content', 'sitemap.json');
 
 function getOrderedPageList(directory) {
   // Get file names under the directory
   const fileNames = fs.readdirSync(directory);
   let allPageData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, "");
+    // Remove '.md' from file name to get id
+    const id = fileName.replace(/\.md$/, '');
 
     // Read markdown file as string
     const fullPath = path.join(directory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
@@ -27,7 +31,7 @@ function getOrderedPageList(directory) {
     };
   });
 
-  allPageData = allPageData.filter((page) => page.published);
+  // allPageData = allPageData.filter((page) => page.published);
 
   // Sort posts by date
   return allPageData.sort((a, b) => {
@@ -41,31 +45,26 @@ function getOrderedPageList(directory) {
   });
 }
 
-const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
-const makeNode = (name, path) => ({ name, type: "node", path });
+const makeNode = (name, path, published) => ({ name, type: 'node', path, published });
 const makeDirectory = (name, children) => ({
   name,
-  type: "directory",
+  type: 'directory',
   children,
 });
 
 function generateSitemap() {
-  const fileNames = fs.readdirSync(contentDirectory);
-  const contentDirectories = fileNames.filter((name) =>
-    fs.lstatSync(path.join(contentDirectory, name)).isDirectory()
-  );
-
   const sitemap = [];
+  const {content} = config;
 
-  sitemap.push(makeNode("Home", "/"));
-  sitemap.push(makeNode("Course info", "/info"));
-
-  contentDirectories.forEach((section) => {
-    const contents = getOrderedPageList(
-      path.join(process.cwd(), "content", section)
-    ).map((sp) => makeNode(sp.name, path.join("/", section, sp.id)));
+  Object.entries(content).forEach(([route, name])=>{
+    const filePath = path.join(contentDirectory, route);
+    if (fs.existsSync(filePath) && fs.lstatSync(filePath).isDirectory()){
+      const contents = getOrderedPageList(filePath).map((sp) => makeNode(sp.name, path.join('/', route, sp.id), sp.published));
     if (contents.length > 0) {
-      sitemap.push(makeDirectory(capitalize(section), contents));
+      sitemap.push(makeDirectory(name, contents));
+    }
+    }else{
+      sitemap.push(makeNode(name, route ==='index' ? '/':`/${route}`, true));
     }
   });
 

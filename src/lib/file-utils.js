@@ -37,16 +37,16 @@ export function getOrderedPageList(directory) {
 
 export function getAllPageIds(directory, category) {
   let fileNames = fs.readdirSync(path.join(directory, category));
-  fileNames = fileNames.filter((fileName) => {
-    const fileContents = fs.readFileSync(
-      path.join(directory, category, fileName),
-      'utf8'
-    );
+  // fileNames = fileNames.filter((fileName) => {
+  //   const fileContents = fs.readFileSync(
+  //     path.join(directory, category, fileName),
+  //     'utf8'
+  //   );
 
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
-    return matterResult.data.published;
-  });
+  //   // Use gray-matter to parse the post metadata section
+  //   const matterResult = matter(fileContents);
+  //   return matterResult.data.published;
+  // });
 
   return fileNames.map((fileName) => {
     return {
@@ -70,6 +70,8 @@ export function getPageData(directory, id) {
 
   // get the metadata
   const matterResult = matter(fileContents);
+  const stats = fs.statSync(fullPath);
+  matterResult.data.mtime = stats.mtime.toISOString();
 
   return {
     id,

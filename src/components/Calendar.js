@@ -1,6 +1,4 @@
-import React from 'react';
-import remark from 'remark';
-import remark2react from 'remark-react';
+import MarkdownFragment from './MarkdownFragment';
 import styles from './Calendar.module.css';
 
 const collapseText = (text) =>
@@ -31,10 +29,7 @@ function Week({ weekData }) {
     // make sure we have a list of text items
     const entries = typeof item.text === 'string' ? [item.text] : item.text;
     item.fragments = entries.map(
-      (fragment) =>
-        remark()
-          .use(remark2react, { fragment: React.Fragment })
-          .processSync(fragment).result
+      (fragment) => <MarkdownFragment text={fragment} />
     );
 
     if (item.date) {

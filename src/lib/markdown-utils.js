@@ -4,7 +4,6 @@ import markdown from "remark-parse";
 import math from 'remark-math';
 import remark2rehype from "remark-rehype";
 import highlightCode from "rehype-prism";
-import stringify from "rehype-stringify";
 import raw from "rehype-raw";
 import slug from "rehype-slug";
 import katex from 'rehype-katex';
@@ -12,32 +11,7 @@ import rehype2react from "rehype-react";
 
 import Collapsable from "../components/Collapsable";
 
-/**
- * [Obsolete] Convert the Markdown to HTML.
- * This includes the remark-prism plugin to make code blocks look better.
- *
- * I got guidance from
- * https://unifiedjs.com/learn/guide/using-unified/
- * https://developer.aliyun.com/mirror/npm/package/rehype-prism
- *
- * @param {*} directory
- * @param {*} id
- */
-export function markdownToHtml(contents) {
-  // convert the markdown to html
-  const processedContent = unified()
-    .use(markdown)
-    .use(remark2rehype, { allowDangerousHtml: true })
-    .use(raw)
-    .use(slug)
-    .use(highlightCode)
-    .use(stringify)
-    .processSync(contents);
 
-  const contentHtml = processedContent.toString();
-
-  return contentHtml;
-}
 
 /**
  * Convert the Markdown to React. This avoids setting the html directly by creating a React element.
@@ -68,7 +42,7 @@ export function markdownToReact(contents) {
     .use(slug) // add ids for anchor links to headers
     .use(rehype2react, {
       createElement: React.createElement,
-      components: { "hidden-block": Collapsable },
+      components: { "hiddenBlock": Collapsable },
     }) // convert to a React component, replaces custom tags with React components
      
      

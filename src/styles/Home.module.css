@@ -47,14 +47,3 @@
   align-items: flex-start;
   margin: 1rem 1rem;
 }
-
-.infoTable {
-  border-collapse: collapse;
-}
-
-.infoTable th,
-.infoTable td {
-  border: none;
-  padding: 0rem;
-  padding-right: 1rem;
-}

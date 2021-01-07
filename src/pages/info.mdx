@@ -1,8 +1,24 @@
----
-title: "CS 312 - Course Information"
-date: "2020-08-28"
-name: "Course info"
----
+import InfoTable from '../components/InfoTable';
+import config from '../../site.config';
+import styles from '../styles/Home.module.css';
+
+export const metadata = {
+  title: 'test',
+};
+
+export const details = [
+  ['Professor', config.professor],
+  ['Office', config.office],
+  ['Email', config.email],
+  ['Office hours', config.officeHours],
+  ['Website', config.website],
+  ['Class meetings', config.meetingTimes],
+  ['Discussion forum', config.piazza],
+];
+
+<h1>{config.shortName} - Course Information</h1>
+
+<InfoTable data={details} />
 
 ## Course Objectives
 
