@@ -14,6 +14,6 @@ module.exports = {
     'info': 'Course Info',
     'lectures': 'Lectures',
     'assignments': 'Assignments',
-    'resources': 'Resources',
+    'resources': 'Resources'
   }
 }

@@ -6,7 +6,7 @@ const config = require('../..//site.config');
 
 
 const contentDirectory = path.join(process.cwd(), 'content');
-const pagesDirectory = path.join(process.cwd(), 'src', 'content');
+
 
 const sitemapLocation = path.join(process.cwd(), 'content', 'sitemap.json');
 
@@ -46,6 +46,7 @@ function getOrderedPageList(directory) {
 }
 
 const makeNode = (name, path, published) => ({ name, type: 'node', path, published });
+
 const makeDirectory = (name, children) => ({
   name,
   type: 'directory',

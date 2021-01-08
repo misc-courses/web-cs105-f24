@@ -2,79 +2,57 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-export function getOrderedPageList(directory) {
-  // Get file names under the directory
-  const fileNames = fs.readdirSync(directory);
-  let allPageData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, '');
+import sitemap from '../../content/sitemap.json';
 
-    // Read markdown file as string
-    const fullPath = path.join(directory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+const contentDirectory = path.join(process.cwd(), "content");
 
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
 
-    // Combine the data with the id
-    return {
-      id,
-      ...matterResult.data,
-    };
-  });
+/**
+ * Returns all paths found in the sitemap
+ * 
+ * This is used in getStaticPaths to enumerate valid paths
+ */
+export function getAllPaths(){
+  const extractPaths = (contents)=>{
+    const paths = [];
 
-  allPageData = allPageData.filter((page) => page.published);
+    contents.forEach((p)=>{
+      if (p.type === 'directory'){
+        paths.push(...extractPaths(p.children));
+      }else if (p.path !== '/'){
+        paths.push(p.path);
+      }
+    })
 
-  // Sort posts by date
-  return allPageData.sort((a, b) => {
-    if (a.date > b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
+    return paths;
+  }
+
+  return extractPaths(sitemap);
+
 }
 
-export function getAllPageIds(directory, category) {
-  let fileNames = fs.readdirSync(path.join(directory, category));
-  // fileNames = fileNames.filter((fileName) => {
-  //   const fileContents = fs.readFileSync(
-  //     path.join(directory, category, fileName),
-  //     'utf8'
-  //   );
 
-  //   // Use gray-matter to parse the post metadata section
-  //   const matterResult = matter(fileContents);
-  //   return matterResult.data.published;
-  // });
-
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        category: category,
-        page: fileName.replace(/\.md$/, ''),
-      },
-    };
-  });
-}
 
 /**
  * Read in the content file.
  *
- * @param {*} directory
- * @param {*} id
+ * @param {[string]} routeData - a list of path elements to the resource
  */
-export function getPageData(directory, id) {
-  const fullPath = path.join(directory, `${id}.md`);
+export function getPageData(routeData) {
+  let fullPath = path.join(contentDirectory, ...routeData) + '.md';
+  if (! fs.existsSync(fullPath)){
+    fullPath += 'x';
+  }
+
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   // get the metadata
   const matterResult = matter(fileContents);
   const stats = fs.statSync(fullPath);
   matterResult.data.mtime = stats.mtime.toISOString();
+  matterResult.data.path = path.join('/', ...routeData);
 
   return {
-    id,
     content: matterResult.content,
     ...matterResult.data,
   };
