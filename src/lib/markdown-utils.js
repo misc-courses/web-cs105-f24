@@ -24,6 +24,10 @@ import Collapsable from "../components/Collapsable";
  *
  * Note that because of the way rehype-raw works, there needs to be a space before markdown blocks
  * inside of html tags, otherwise it is seen as html.
+ * 
+ * A thought about Collapsable -- the truth is that the detail and summary tags
+ * do essentially the same thing. I am leaving it in, however, as an example
+ * of how to integrate React components into the markdown 
  *
  * @param {*} directory
  * @param {*} id
@@ -42,10 +46,8 @@ export function markdownToReact(contents) {
     .use(slug) // add ids for anchor links to headers
     .use(rehype2react, {
       createElement: React.createElement,
-      components: { "hiddenBlock": Collapsable },
+      components: { "hidden": Collapsable },
     }) // convert to a React component, replaces custom tags with React components
-     
-     
     .processSync(contents);
 
   return processedContent.result;

@@ -9,7 +9,7 @@
     "export": "npm run build ; next export",
     "deploy": "rsync -avh out/ basin:public_html/classes/cs312-f20",
     "sitemap:build": "node src/lib/generate-sitemap.js",
-    "dev:watch": "next-remote-watch .content"
+    "dev:watch": "next-remote-watch .content/*/*"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.6.22",

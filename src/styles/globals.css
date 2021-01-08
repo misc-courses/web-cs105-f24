@@ -271,3 +271,7 @@ tt:after {
 .katex-html {
   display: none;
 }
+
+summary {
+  font-weight: 600;
+}

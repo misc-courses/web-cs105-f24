@@ -15,6 +15,5 @@ module.exports = {
     'lectures': 'Lectures',
     'assignments': 'Assignments',
     'resources': 'Resources',
-  
   }
 }

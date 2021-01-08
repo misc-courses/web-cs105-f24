@@ -17,6 +17,7 @@
   list-style-type: none;
   margin: 0px;
   padding: 0px;
+  border-left: 1px solid lightgrey;
 }
 
 @media (max-width: 800px) {
@@ -63,4 +64,8 @@
 
 .sidebarGroup {
   padding: 0px;
+}
+
+.selected {
+  font-weight: 700;
 }

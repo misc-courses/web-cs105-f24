@@ -16,16 +16,16 @@ $$
 L = \frac{1}{2} \rho v^2 S C_L
 $$
 
-<ul>
-<li>one</li>
-<li>two</li>
-</ul>
+I'm changing the thing... and it is not really watching
 
-<hidden-block message="Click to see">
+<hidden message="Click to see">
 
 _Boo_
 
-</hidden-block>
+</hidden>
+
+<details>
+<summary>View the code</summary>
 
 ```javascript
 import Link from 'next/link';
@@ -54,3 +54,5 @@ function Home() {
 
 export default Home;
 ```
+
+</details>

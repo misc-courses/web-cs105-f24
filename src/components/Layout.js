@@ -10,7 +10,7 @@ import styles from "./Layout.module.css";
 import {useRouter} from 'next/router';
 import config from '../../site.config';
 
-const Layout = ({ currentPage, modified, children }) => {
+const Layout = ({children }) => {
   // this is only relevant when the sidebar is hidden
   const [showSidebar, setShowSidebar] = useState(false);
   const router = useRouter();
@@ -24,7 +24,7 @@ const Layout = ({ currentPage, modified, children }) => {
 
       </Head>
       <Header onMenu={() => setShowSidebar(!showSidebar)} />
-      <Sidebar currentPage={currentPage} unhide={showSidebar} />
+      <Sidebar unhide={showSidebar} />
       <div className={styles.mainPage}>
         <main>{children}</main>
         <footer className={styles.footer}>
