@@ -1,30 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is my template for course websites.
 
-## Getting Started
+## Configuration
 
-First, run the development server:
+The file `site.config.js` is used to personalize the website. It should be obvious what values belong in there.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Also remember to set the deployment location for the deploy script.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Content
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+The site is designed to require minimal interaction with the `pages` directory. The actual interesting content is markdown files in the `content` directory. The only essential file in there is the `info-body.mdx` file, which provide the course logistics.
 
-## Learn More
+It is also important to update the `content` field in the configuration. This determines the content and the ordering of the items in the sidebar menu. note that only the top level directory needs to be specified -- inner files will be auto-discovered.
 
-To learn more about Next.js, take a look at the following resources:
+## Future
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The site is currently configured to allow `.mdx` files in the `pages` directory. I thought about putting all of my content in there as `.mdx` files, but decided I liked the flexibility of my custom pipeline (and the ability to add metadata that other tools could read). it is possible that this should be reexamined in the future. Also, it is possible that the MDX runtime function will someday be as useful as my current custom setup. This is something to look at again.
