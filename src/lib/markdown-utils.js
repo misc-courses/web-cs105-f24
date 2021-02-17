@@ -1,6 +1,7 @@
 import React from "react";
 import unified from "unified";
 import markdown from "remark-parse";
+import gfm from 'remark-gfm';
 import math from 'remark-math';
 import remark2rehype from "remark-rehype";
 import highlightCode from "rehype-prism";
@@ -38,6 +39,7 @@ export function markdownToReact(contents) {
     
     
     .use(markdown) // read the markdown
+    .use(gfm) // add git-flavored syntax (and make tables work)
     .use(math) // capture latex escapes
     .use(remark2rehype, { allowDangerousHtml: true }) // create the AST
     .use(katex) // render the math

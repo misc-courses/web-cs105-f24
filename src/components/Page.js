@@ -10,7 +10,7 @@ export default function Page({ pageData }) {
 
       {!pageData.published && <DraftFlag />}
       <article>
-        <h2>{pageData.title}</h2>
+        <h1>{pageData.title}</h1>
 
         {htmlContents}
         <hr/>

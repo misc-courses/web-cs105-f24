@@ -1,4 +1,4 @@
-
+import Link from 'next/link';
 import styles from "../styles/Home.module.css";
 import Calendar from "../components/Calendar";
 import calendarData from "../../content/calendar.json";
@@ -13,7 +13,7 @@ export default function Home() {
         <h2>Important Links</h2>
 
         <div className={styles.linkBox}>
-          <a href="course-info">Course Information</a>
+          <Link href="info"><a>Course Information</a></Link>
 
           <a href={config.piazza}>
             Piazza

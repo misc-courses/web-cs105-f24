@@ -2,34 +2,44 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-import sitemap from '../../content/sitemap.json';
 
 const contentDirectory = path.join(process.cwd(), "content");
 
 
 /**
- * Returns all paths found in the sitemap
+ * Returns all paths found in the content directory
+ * Note that this allows for infinite recursion, which the sidebar doesn't 
+ * support currently.
  * 
  * This is used in getStaticPaths to enumerate valid paths
  */
-export function getAllPaths(){
-  const extractPaths = (contents)=>{
-    const paths = [];
 
-    contents.forEach((p)=>{
-      if (p.type === 'directory'){
-        paths.push(...extractPaths(p.children));
-      }else if (p.path !== '/'){
-        paths.push(p.path);
-      }
-    })
+export function getAllPaths(){
+  const extractPaths = (directory) => {
+    const paths = [];
+    const entries = fs.readdirSync(path.join(contentDirectory, directory));
+
+    const directories = entries.filter((name) =>
+      fs.lstatSync(path.join(contentDirectory, directory, name)).isDirectory()
+    );
+
+    directories.forEach((dir)=>{
+      paths.push(...extractPaths(path.join(directory,dir)));
+    });
+
+    const files = entries.filter((name)=>name.endsWith('.md'));
+
+    files.forEach((name)=>{
+      paths.push(path.join(directory, name.replace(/\.md$/, "")));
+    });
 
     return paths;
+
   }
 
-  return extractPaths(sitemap);
-
+  return extractPaths('/');
 }
+
 
 
 

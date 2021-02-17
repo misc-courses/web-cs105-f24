@@ -90,12 +90,9 @@ Directory.propTypes = {
 function Sidebar({ unhide }) {
   const router = useRouter();
   
-  let currentPage = router.route;
-  let currentDirectory = '/';
-  if (currentPage === '/[category]/[page]'){
-    currentPage = router.query.page;
-   currentDirectory = router.query.category;
-  }
+  const currentPath = router.asPath;
+  const currentDirectory = currentPath.slice(1, currentPath.indexOf('/',1)).toLocaleLowerCase();
+
 
   const items = contents.map((item) => {
     if (item.type === "directory") {
@@ -105,7 +102,7 @@ function Sidebar({ unhide }) {
           <Directory
             name={item.name}
             children={item.children}
-            currentPage={currentPage}
+            currentPage={currentPath}
           />
           :
           <Directory
@@ -122,7 +119,7 @@ function Sidebar({ unhide }) {
             name={item.name}
             path={item.path}
             published={item.published}
-            currentPage={currentPage}
+            currentPage={currentPath}
           />
         </li>
       );
