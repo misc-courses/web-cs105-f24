@@ -8,7 +8,7 @@ module.exports = {
   officeHours: 'TBD',
   website: '<http://go.middlebury.edu/cs312>',
   meetingTimes: 'TBD',
-  piazza: '[Piazza](http://piazza.com/middlebury/fall2020/cs312/home)',
+  links: [{name:'Piazza', link:'http://piazza.com/middlebury/fall2020/cs312/home'}],
   content: {
     'index':'Home',
     'info': 'Course Info',

@@ -5,6 +5,9 @@ import calendarData from "../../content/calendar.json";
 import config from '../../site.config';
 
 export default function Home() {
+  const links = config.links.map((entry) => 
+  <li key={entry.name}><a href={entry.link}>{entry.name}</a></li>);
+
   return (
     <> 
       <h1 className={styles.title}>{config.name}</h1>
@@ -13,11 +16,10 @@ export default function Home() {
         <h2>Important Links</h2>
 
         <div className={styles.linkBox}>
-          <Link href="info"><a>Course Information</a></Link>
-
-          <a href={config.piazza}>
-            Piazza
-          </a>
+          <ul>
+            <li><Link href="info"><a>Course Information</a></Link></li>
+            {links}
+            </ul>
         </div>
       </div>
 
