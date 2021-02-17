@@ -1,4 +1,4 @@
-This is my template for course websites.
+This is my template for course websites. New course sites can be created with `npx create-next-app -e https://github.com/ChristopherPAndrews/next-course-starter`
 
 ## Configuration
 
