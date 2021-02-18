@@ -1,6 +1,7 @@
 module.exports = {
   name: 'CS XXX Classname',
   shortName: 'CS XXX',
+  folder: 'csxxx-fwsyy',
   author: 'Christopher Andrews',
   professor: 'Christopher Andrews',
   office: '215 75 Shannon Street',
