@@ -5,17 +5,33 @@
 .weekBlock {
   width: 100%;
   display: flex;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  padding: 2rem 2rem 1rem 1rem;
+  border: 1px solid black;
+ 
+  padding: 0rem ;
+}
+
+.weekBlockCurrent{
+  background-color:rgb(220, 236, 245);
 }
 
 .weekHeader {
-  width: 5rem;
+  width: 7rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  padding: 1em;
   flex-shrink: 0;
+  background-color: #888;
+  color:white;
+  font-size: small;
+}
+
+.weekHeaderCurrent{
+  background-color:rgb(73, 113, 136);
+}
+
+.weekNumber {
+  font-weight: bold;
+  font-size: xxx-large;
 }
 
 .entries ul {

@@ -45,7 +45,7 @@ function getOrderedPageList(directory) {
   });
 }
 
-const makeNode = (name, path, published) => ({ name, type: 'node', path, published });
+const makeNode = (name, path, published, due) => ({ name, type: 'node', path, published, due });
 
 const makeDirectory = (name, children) => ({
   name,
@@ -60,7 +60,7 @@ function generateSitemap() {
   Object.entries(content).forEach(([route, name])=>{
     const filePath = path.join(contentDirectory, route);
     if (fs.existsSync(filePath) && fs.lstatSync(filePath).isDirectory()){
-      const contents = getOrderedPageList(filePath).map((sp) => makeNode(sp.name, path.join('/', route, sp.id), sp.published));
+      const contents = getOrderedPageList(filePath).map((sp) => makeNode(sp.name, path.join('/', route, sp.id), sp.published, sp.due));
     if (contents.length > 0) {
       sitemap.push(makeDirectory(name, contents));
     }

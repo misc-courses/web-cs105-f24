@@ -1,5 +1,11 @@
+import {parse, format} from "date-fns/fp";
+import {compareAsc, isToday, differenceInCalendarDays} from "date-fns";
 import MarkdownFragment from './MarkdownFragment';
 import styles from './Calendar.module.css';
+
+
+
+const displayDate = format("iiii, MMM d");
 
 const collapseText = (text) =>
   typeof text === 'string' ? text : text.join('  \n');
@@ -13,17 +19,32 @@ const itemToHTML = (item) => {
       ))}
     </ul>
   );
+  let label = "";
+  if (item.date){
+    if (isToday(item.date)){
+      label = <strong>Today</strong>
+    }else{
+      label = <strong>{displayDate(item.date)}</strong>
+    }
+
+  }
 
   return (
     <li key={key} className={styles.entry}>
-      {item.date && <strong>{item.date}</strong>} {contents}
+      {label} {contents}
     </li>
   );
 };
 
-function Week({ weekData }) {
+function Week({ weekData, number }) {
   const dated = [];
   const undated = [];
+
+  const weekStart = new Date(weekData.week);
+  const difference = differenceInCalendarDays(new Date(), weekStart);
+  const thisWeek = difference > 0 && difference < 7;
+
+  const findDate = parse(weekStart, "iii"); // partial function for parsing days of the week
 
   weekData.entries.forEach((item) => {
     // make sure we have a list of text items
@@ -32,19 +53,25 @@ function Week({ weekData }) {
       (fragment) => <MarkdownFragment text={fragment} />
     );
 
-    if (item.date) {
+    if (item.day) {
+      item.date = findDate(item.day);
       dated.push(item);
     } else {
       undated.push(item);
     }
   });
 
-  dated.sort((a, b) => a.date.localeCompare(b.date));
+  dated.sort((a, b) => compareAsc(a.date, b.date));
+
+  const weekStyle = thisWeek ? `${styles.weekBlock} ${styles.weekBlockCurrent}` : styles.weekBlock;
+  const weekHeaderStyle = thisWeek ? `${styles.weekHeader} ${styles.weekHeaderCurrent}` : styles.weekHeader;
+
 
   return (
-    <div className={styles.weekBlock}>
-      <div className={styles.weekHeader}>
-        <strong>{weekData.week}</strong>
+    <div className={weekStyle}>
+      <div className={weekHeaderStyle}>
+        <div>Week</div>
+    <div className={styles.weekNumber}>{number}</div>
       </div>
       <div className={styles.entries}>
         <ul>{undated.map(itemToHTML)}</ul>
@@ -56,7 +83,7 @@ function Week({ weekData }) {
 }
 
 export default function Calendar({ data }) {
-  const weeks = data.map((week) => <Week key={week.week} weekData={week} />);
+  const weeks = data.map((week, index) => <Week key={week.week} weekData={week} number={index+1}/>);
 
   return <div className={styles.calendar}>{weeks}</div>;
 }

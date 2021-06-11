@@ -26,7 +26,7 @@ export default function Home() {
       <div>
         <h2>Schedule</h2>
         <em>This is a living schedule and subject to change</em>
-        <Calendar data={calendarData} />
+        <Calendar data={calendarData.weeks} />
       </div>
 
     </>

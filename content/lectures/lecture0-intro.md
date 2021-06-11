@@ -16,7 +16,7 @@ $$
 L = \frac{1}{2} \rho v^2 S C_L
 $$
 
-I'm changing the thing... and it is not really watching
+I'm changing the thing... and it is not really watching, but that's okay
 
 <hidden message="Click to see">
 
