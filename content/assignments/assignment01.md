@@ -1,9 +1,9 @@
 ---
 title: "CS XXX - Assignment One"
 date: "2019-09-12"
-due: "2019-09-20T17:00:00"
+due: "2021-06-15"
 name: "Assignment 1"
-published: false
+published: true
 ---
 
 #### Goals

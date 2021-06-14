@@ -6,14 +6,16 @@
         {
           "day": "tue",
           "text": [
-            "[Development tools](./lectures/lecture02-dev-tools) (cont'd)  ",
-            "[npm practical](./practicals/practical01-npm)  "
+            "[Attendance form](https://docs.google.com/forms/d/e/1FAIpQLSdSzP9xf-MIFw7yglTstXkCyAlJKyamtadGqTR1GLVKesVseA/viewform?usp=sf_link)  ",
+            "[Introduction](./lectures/lecture00-intro) [[slides](./lectures/lecture00-intro.pdf)]  "
           ]
         },
         {
           "day": "thu",
           "text": [
-            "[React, Design Patterns(MVC)](./lectures/lecture03-react) [[slides](./lectures/lecture03f20-react.pdf)]  "
+            "[Attendance form](https://docs.google.com/forms/d/e/1FAIpQLSfvsyqPjbTrMjylhrAVezDObVcvg2gQnjgp1VpK2sp3zG8-WQ/viewform?usp=sf_link)  ",
+            "[JavaScript](./lectures/lecture01-javascript) [[slides](./lectures/lecture01f20-js.pdf)],    ",
+            "[Development tools](./lectures/lecture02-dev-tools) [[slides](./lectures/lecture02f20-testing.pdf)]  "
           ]
         }
       ]
@@ -25,16 +27,14 @@
         {
           "day": "tue",
           "text": [
-            "[Attendance form](https://docs.google.com/forms/d/e/1FAIpQLSdSzP9xf-MIFw7yglTstXkCyAlJKyamtadGqTR1GLVKesVseA/viewform?usp=sf_link)  ",
-            "[Introduction](./lectures/lecture00-intro) [[slides](./lectures/lecture00-intro.pdf)]  "
+            "[Development tools](./lectures/lecture02-dev-tools) (cont'd)  ",
+            "[npm practical](./practicals/practical01-npm)  "
           ]
         },
         {
           "day": "thu",
           "text": [
-            "[Attendance form](https://docs.google.com/forms/d/e/1FAIpQLSfvsyqPjbTrMjylhrAVezDObVcvg2gQnjgp1VpK2sp3zG8-WQ/viewform?usp=sf_link)  ",
-            "[JavaScript](./lectures/lecture01-javascript) [[slides](./lectures/lecture01f20-js.pdf)],    ",
-            "[Development tools](./lectures/lecture02-dev-tools) [[slides](./lectures/lecture02f20-testing.pdf)]  "
+            "[React, Design Patterns(MVC)](./lectures/lecture03-react) [[slides](./lectures/lecture03f20-react.pdf)]  "
           ]
         },
         {"day":"fri",
@@ -48,14 +48,14 @@
         {
           "day": "tue",
           "text": [
-            "[Development tools](./lectures/lecture02-dev-tools) (cont'd)  ",
-            "[npm practical](./practicals/practical01-npm)  "
+            "[React and Next](./lectures/lecture04-react2) [[slides](./lectures/lecture04f20-more-react.pdf)] [[color picker example](https://github.com/csci312-common/color-picker-next)]  "
           ]
         },
         {
           "day": "thu",
           "text": [
-            "[React, Design Patterns(MVC)](./lectures/lecture03-react) [[slides](./lectures/lecture03f20-react.pdf)]  "
+            "[DevOps](./lectures/lecture05-devops) [slides](./lectures/lecture05f20-devops.pdf)",
+            "[Deployment practical](./practicals/practical02-devops)  "
           ]
         }
       ]
@@ -66,14 +66,14 @@
         {
           "day": "tue",
           "text": [
-            "[Development tools](./lectures/lecture02-dev-tools) (cont'd)  ",
-            "[npm practical](./practicals/practical01-npm)  "
+            "[React Composition and design](./lectures/lecture06-react3) [[slides](./lectures/lecture06f20-react-design.pdf)]"
           ]
         },
         {
           "day": "thu",
           "text": [
-            "[React, Design Patterns(MVC)](./lectures/lecture03-react) [[slides](./lectures/lecture03f20-react.pdf)]  "
+            "[Fetch practical](./practicals/practical03-fetch) ",
+            "[REST APIs](./lectures/lecture7-rest) [[slides](./lectures/lecture07f20-rest.pdf)]"
           ]
         }
       ]
