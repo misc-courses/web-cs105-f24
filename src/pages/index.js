@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import Link from 'next/link';
 import styles from "../styles/Home.module.css";
 import Calendar from "../components/Calendar";
+import Upcoming from "../components/Upcoming";
 import data from "../../content/calendar.json";
 import config from '../../site.config';
 import fileList from "../../content/sitemap.json";
@@ -46,7 +47,11 @@ export default function Home() {
       <div>
         <h2>Schedule</h2>
         <em>This is a living schedule and subject to change</em>
-        {calendarData && <Calendar data={calendarData} />}
+        <div className={styles.calendarBox}>
+          {assignments && <Upcoming assignments={assignments} />}
+          {calendarData && <Calendar data={calendarData} />}
+        </div>
+        
       </div>
 
     </>

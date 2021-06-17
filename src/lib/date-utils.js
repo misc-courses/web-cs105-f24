@@ -1,11 +1,11 @@
 import {format, parse} from "date-fns/fp";
-import {differenceInCalendarDays, compareDesc, isEqual, parseISO, compareAsc} from "date-fns";
+import {differenceInCalendarDays, compareDesc, isSameDay, parseISO, compareAsc} from "date-fns";
 
 export const displayDate = format("iiii, MMM d");
 
 export function inWeek(event, weekStart){
     const difference = differenceInCalendarDays(event, weekStart);
-    return difference > 0 && difference < 7;
+    return difference >= 0 && difference < 7;
 }
 
 
@@ -62,7 +62,7 @@ function processWeek(weekData, assignments){
         let day;
         // try to find a matching day
         for (let i = 0; i < week.dated.length; i++){
-            if (isEqual(week.dated[i].date, assignment.dueDate)){
+            if (isSameDay(week.dated[i].date, assignment.dueDate)){
                 day = week.dated[i];
             break;
             }

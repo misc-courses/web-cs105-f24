@@ -47,3 +47,19 @@
   align-items: flex-start;
   margin: 1rem 1rem;
 }
+
+
+.calendarBox{
+  display:flex;
+  flex-direction: row-reverse;
+
+}
+
+
+@media (max-width:900px){
+  .calendarBox{
+    display:flex;
+    flex-direction: column;
+  
+  }
+}
