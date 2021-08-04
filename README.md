@@ -28,3 +28,8 @@ Open questions:
 - Do I always include class meeting times?
 - Do I automatically include due dates?
 - What do I do about undated announcements?
+
+
+## Warnings
+
+I tried to update all packages and it broke everything. The transition to ESM is not a smooth one with Next.js. The unified/remark libraries are making the transition to ESM (and unified has some breaking changes with the way it is imported). The technique of using the next transpiler that converts them back to old school requires is not working. It worked for the fragments, but something in the full parser chokes and send the transpiler a null file path, which it dies on. For now, I've dropped back to pre-ESM versions of the libraries.
