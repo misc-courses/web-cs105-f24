@@ -12,20 +12,28 @@ export function inWeek(event, weekStart){
 
 
 export function findAssignments(files) {
-    const tmp = [];
-  
-    files.forEach((entry)=>{
-      if (entry.type === "node" && entry.published && entry.due){
-        entry.dueDate = parseISO(entry.due);
-        tmp.push(entry);
-      }else if (entry.type === "directory"){
-        tmp.push(...findAssignments(entry.children));
-      }
-    });
+  const tmp = [];
 
-    tmp.sort((a,b) => compareDesc(a.dueDate, b.dueDate));
-    return tmp;
-  }
+  files.forEach((entry)=>{
+    if (entry.type === "node" && entry.published && entry.due){
+      const dates = Array.isArray(entry.due) ? entry.due : [entry.due];
+
+      dates.forEach((date, index)=>{
+        if (entry.deliverables){
+          tmp.push({...entry, name: entry.deliverables[index], dueDate:parseISO(date)});
+        }else{
+          tmp.push({...entry, dueDate:parseISO(date)});
+        }
+        
+      });
+    }else if (entry.type === "directory"){
+      tmp.push(...findAssignments(entry.children));
+    }
+  });
+
+  tmp.sort((a,b) => compareDesc(a.dueDate, b.dueDate));
+  return tmp;
+}
 
 
 function processWeek(weekData, assignments){

@@ -40,7 +40,7 @@ const DirectoryIcon = ({open})=>{
   }
 }
 
-const Directory = ({ name, children, currentPage }) => {
+const Directory = ({ name, items, currentPage }) => {
   const [open, setOpen] = useState(false);
   const isProduction = process.env.NODE_ENV === "production";
 
@@ -51,10 +51,10 @@ const Directory = ({ name, children, currentPage }) => {
   },[currentPage]);
 
   if (isProduction){
-    children = children.filter((child)=>child.published);
+    items = items.filter((child)=>child.published);
   }
 
-  const files = children.map((child) => (
+  const files = items.map((child) => (
     <li key={`${child.path}`} className={styles.sidebarSubItem}>
       <SideLink 
         name={child.name}
@@ -83,7 +83,7 @@ const Directory = ({ name, children, currentPage }) => {
 
 Directory.propTypes = {
   name: PropTypes.string.isRequired,
-  children: PropTypes.array.isRequired,
+  items: PropTypes.array.isRequired,
   currentPage: PropTypes.string,
 };
 
@@ -94,20 +94,20 @@ function Sidebar({ unhide }) {
   const currentDirectory = currentPath.slice(1, currentPath.indexOf('/',1)).toLocaleLowerCase();
 
 
-  const items = contents.map((item) => {
+  const entries = contents.map((item) => {
     if (item.type === "directory") {
       return (
         <li key={item.name} className={styles.sidebarItem}>
           {item.name.toLocaleLowerCase() === currentDirectory ? 
           <Directory
             name={item.name}
-            children={item.children}
+            items={item.children}
             currentPage={currentPath}
           />
           :
           <Directory
             name={item.name}
-            children={item.children}
+            items={item.children}
           />
         }
         </li>
@@ -128,7 +128,7 @@ function Sidebar({ unhide }) {
 
   return (
     <div className={`${styles.sidebar} ${unhide ? styles.open : ''}`}>
-      <ul>{items}</ul>
+      <ul>{entries}</ul>
     </div>
   );
 }

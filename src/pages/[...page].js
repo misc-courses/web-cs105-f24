@@ -11,7 +11,7 @@ export default function Resource({ pageData }) {
   }else{
     return <div>
       <h2>Unpublished</h2>
-      <p>I'm sorry, that page has not yet been released.</p>
+      <p>I&apos;m sorry, that page has not yet been released.</p>
     </div>
   }
 

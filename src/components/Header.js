@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/link-passhref */
 import Link from "next/link";
 import PropTypes from "prop-types";
 import config from '../../site.config';

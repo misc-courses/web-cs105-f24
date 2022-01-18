@@ -12,7 +12,10 @@ export default function Upcoming({ assignments }) {
         return difference >= 0 && difference < 11;
     });
     
-
+    upcoming.sort((d1, d2) =>{
+        return differenceInCalendarDays(d1.dueDate, d2.dueDate);
+    });
+    
     const assignmentList = upcoming.map((assign)=>(
         <li key={assign.name}><Link href={`.${assign.path}`}><a>{assign.name}</a></Link> - Due {formatRelative(assign.dueDate, new Date())}</li>
     ));

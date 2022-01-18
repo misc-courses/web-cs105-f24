@@ -1,5 +1,6 @@
 .calendar {
   margin-top: 1rem;
+  min-width: 250px;
 }
 
 .weekBlock {
@@ -36,6 +37,7 @@
 
 .entries ul {
   list-style-type: none;
+  margin-right: 1.45rem;
 }
 
 .entry {
@@ -47,4 +49,12 @@
   border-top: 1px dashed rgb(184, 184, 184);
   margin-left: 1rem;
   width: 30rem;
+}
+
+
+@media (max-width: 375px){
+
+  .weekHeader{
+    visibility: collapse;
+  }
 }
