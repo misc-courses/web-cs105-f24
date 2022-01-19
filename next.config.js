@@ -1,16 +1,10 @@
 
-// const withTM = require('next-transpile-modules')([
-//   'rehype-prism',
-//   'remark',
-//   'unified',
-//   'micromark-util-combine-extensions',
-//   'micromark-util-symbol',
-//   'micromark-util-resolve-all',
-//   'micromark-util-html-tag-name'])
+
 
 const remarkMath = import('remark-math')
 const rehypeKatex = import('rehype-katex')
-const rehypePrism = require('next-transpile-modules')(["rehype-prism"]);
+const rehypePrism = import('@mapbox/rehype-prism')
+
 
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
@@ -27,7 +21,7 @@ const isProduction = process.env.NODE_ENV === "production";
 
 
 
-module.exports = //withTM(
+module.exports = 
     withMDX({
     pageExtensions:['js','jsx','mdx','md'],
     basePath: isProduction ? `/~candrews/classes/${config.folder}` : '',
@@ -35,4 +29,4 @@ module.exports = //withTM(
       ? `https://www.cs.middlebury.edu/~candrews/classes/${config.folder}`
       : '',
   })
-//);
+
