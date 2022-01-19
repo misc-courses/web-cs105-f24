@@ -16,6 +16,11 @@ $$
 L = \frac{1}{2} \rho v^2 S C_L
 $$
 
+  | column 1 | column 2 |
+  | -------- | -------- |
+  | first    | row      |
+
+
 I'm changing the thing... and it is not really watching, but that's okay
 
 <hidden message="Click to see">
@@ -25,7 +30,10 @@ _Boo_
 </hidden>
 
 <details>
-<summary>View the code</summary>
+<summary>View the hidden thing</summary>
+Hidden thing
+
+</details>
 
 ```javascript
 import Link from 'next/link';
@@ -55,4 +63,3 @@ function Home() {
 export default Home;
 ```
 
-</details>

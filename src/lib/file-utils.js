@@ -63,7 +63,7 @@ export function getPageData(routeData) {
   matterResult.data.path = path.join('/', ...routeData);
 
   return {
-    content: matterResult.content,
+    markdown: matterResult.content,
     ...matterResult.data,
   };
 }

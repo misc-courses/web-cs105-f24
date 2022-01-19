@@ -1,6 +1,5 @@
-import React from 'react';
-import remark from 'remark';
-import remark2react from 'remark-react';
+import { Remark } from 'react-remark';
+
 
 
 function InlineFragment({children}){
@@ -9,9 +8,11 @@ function InlineFragment({children}){
 
 
 export default function MarkdownFragment({text}){
-  return remark()
-        .use(remark2react, { fragment: React.Fragment, remarkReactComponents:{
-            p: InlineFragment
-        } })
-        .processSync(text).result;
+  return(<Remark rehypeReactOptions={{
+    components:{
+    p: InlineFragment
+  }
+  }}>{text}</Remark>)
+
 }
+

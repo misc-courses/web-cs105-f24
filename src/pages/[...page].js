@@ -1,13 +1,12 @@
 import Page from "../components/Page";
 import { getAllPaths, getPageData } from "../lib/file-utils";
 
-
-
 export default function Resource({ pageData }) {
   const isProduction = process.env.NODE_ENV === "production";
 
   if (pageData.published || !isProduction){
     return <Page pageData={pageData} />;
+
   }else{
     return <div>
       <h2>Unpublished</h2>

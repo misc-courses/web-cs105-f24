@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import "prismjs/themes/prism-tomorrow.css";
+import "../styles/prism-tomorrow.css";
 import Layout from '../components/Layout';
 import Collapsable from '../components/Collapsable';
 import {MDXProvider} from '@mdx-js/react';

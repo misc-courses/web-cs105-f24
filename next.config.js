@@ -8,8 +8,8 @@
 //   'micromark-util-resolve-all',
 //   'micromark-util-html-tag-name'])
 
-const remarkMath = require('remark-math')
-const rehypeKatex = require('rehype-katex')
+const remarkMath = import('remark-math')
+const rehypeKatex = import('rehype-katex')
 const rehypePrism = require('next-transpile-modules')(["rehype-prism"]);
 
 const withMDX = require('@next/mdx')({
