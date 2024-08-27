@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   name: 'CS XXX Classname',
   shortName: 'CS XXX',
   folder: 'csxxx-fwsyy',
@@ -18,3 +18,5 @@ module.exports = {
     'resources': 'Resources'
   }
 }
+
+export default config;

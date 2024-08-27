@@ -1,19 +1,17 @@
-const path = require('path');
-const matter = require('gray-matter');
-const fs = require('fs');
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
-const config = require('../..//site.config');
+import config from "../../site.config.mjs";
 
+const contentDirectory = path.join(process.cwd(), "content");
 
-const contentDirectory = path.join(process.cwd(), 'content');
+const sitemapLocation = path.join(process.cwd(), "content", "sitemap.json");
 
-
-const sitemapLocation = path.join(process.cwd(), 'content', 'sitemap.json');
-
-function getMetadata(filePath){
-  const fileContents = fs.readFileSync(filePath, 'utf8');
+function getMetadata(filePath) {
+  const fileContents = fs.readFileSync(filePath, "utf8");
   // Use gray-matter to parse the post metadata section
-  return matter(fileContents).data;    
+  return matter(fileContents).data;
 }
 
 function getOrderedPageList(directory) {
@@ -21,7 +19,7 @@ function getOrderedPageList(directory) {
   const fileNames = fs.readdirSync(directory);
   let allPageData = fileNames.map((fileName) => {
     // Remove '.md' from file name to get id
-    const id = fileName.replace(/\.md$/, '');
+    const id = fileName.replace(/\.md$/, "");
 
     const metadata = getMetadata(path.join(directory, fileName));
 
@@ -46,31 +44,38 @@ function getOrderedPageList(directory) {
   });
 }
 
-const makeNode = (name, path, metadata) => ({ ...metadata, name, type: 'node', path });
+const makeNode = (name, path, metadata) => ({
+  ...metadata,
+  name,
+  type: "node",
+  path,
+});
 
 const makeDirectory = (name, children) => ({
   name,
-  type: 'directory',
+  type: "directory",
   children,
 });
 
 function generateSitemap() {
   const sitemap = [];
-  const {content} = config;
+  const { content } = config;
 
-  Object.entries(content).forEach(([route, name])=>{
+  Object.entries(content).forEach(([route, name]) => {
     const filePath = path.join(contentDirectory, route);
-    if (fs.existsSync(filePath) && fs.lstatSync(filePath).isDirectory()){
-      const contents = getOrderedPageList(filePath).map((sp) => makeNode(sp.name, path.join('/', route, sp.id), sp));
+    if (fs.existsSync(filePath) && fs.lstatSync(filePath).isDirectory()) {
+      const contents = getOrderedPageList(filePath).map((sp) =>
+        makeNode(sp.name, path.join("/", route, sp.id), sp),
+      );
       if (contents.length > 0) {
         sitemap.push(makeDirectory(name, contents));
       }
-    } else if (fs.existsSync(`${filePath}.md`)){
+    } else if (fs.existsSync(`${filePath}.md`)) {
       const metadata = getMetadata(`${filePath}.md`);
       sitemap.push(makeNode(name, `/${route}`, metadata));
-    } else{
+    } else {
       // handle endpoints in the pages directory
-      sitemap.push(makeNode(name, `/${route}`, {published:true}));
+      sitemap.push(makeNode(name, `/${route}`, { published: true }));
     }
   });
 

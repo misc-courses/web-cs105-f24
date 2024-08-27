@@ -113,7 +113,7 @@ Directory.propTypes = {
   currentPage: PropTypes.string,
 };
 
-function Sidebar({ unhide }) {
+function Sidebar({ unhide = False }) {
   const router = useRouter();
 
   const currentPath = router.asPath;
@@ -159,10 +159,6 @@ function Sidebar({ unhide }) {
 
 Sidebar.propTypes = {
   unhide: PropTypes.bool,
-};
-
-Sidebar.defaultProps = {
-  unhide: false,
 };
 
 export default Sidebar;
