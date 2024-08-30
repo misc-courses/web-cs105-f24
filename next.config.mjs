@@ -12,6 +12,7 @@ const isProduction = process.env.NODE_ENV === "production";
 
 
 const nextConfig = {
+  output: 'export',
   // Configure `pageExtensions` to include markdown and MDX files
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   // Other Next.js config below

@@ -1,7 +1,6 @@
-/* eslint-disable @next/next/link-passhref */
 import Link from "next/link";
 import PropTypes from "prop-types";
-import config from '../../site.config';
+import config from "../../site.config";
 import styles from "./Header.module.css";
 
 const Header = ({ onMenu }) => (
