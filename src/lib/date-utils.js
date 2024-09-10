@@ -27,9 +27,14 @@ export function findAssignments(files) {
             ...entry,
             name: entry.deliverables[index],
             dueDate: parseISO(date),
+            assignedDate: parseISO(entry.date),
           });
         } else {
-          tmp.push({ ...entry, dueDate: parseISO(date) });
+          tmp.push({
+            ...entry,
+            dueDate: parseISO(date),
+            assignedDate: parseISO(entry.date),
+          });
         }
       });
     } else if (entry.type === "directory") {
@@ -39,6 +44,42 @@ export function findAssignments(files) {
 
   tmp.sort((a, b) => compareDesc(a.dueDate, b.dueDate));
   return tmp;
+}
+
+function addAssignmentsToWeek(week, assignments, type) {
+  const currentAssignments = assignments.filter((assignment) =>
+    inWeek(assignment[type], week.startDate),
+  );
+
+  while (currentAssignments.length > 0) {
+    const assignment = currentAssignments.pop();
+    const assignmentText =
+      type === "dueDate"
+        ? `**Due** [${assignment.name}](.${assignment.path})`
+        : `**Assigned** [${assignment.name}](.${assignment.path})`;
+
+    let day;
+
+    // try to find a matching day
+    for (let i = 0; i < week.dated.length; i++) {
+      if (isSameDay(week.dated[i].date, assignment[type])) {
+        day = week.dated[i];
+        break;
+      }
+    }
+
+    // if not, add a new entry into dated
+    if (!day) {
+      day = {
+        date: assignment[type],
+        entries: [],
+      };
+      week.dated.push(day);
+    }
+
+    // add the assignment
+    day.entries.push(assignmentText);
+  }
 }
 
 function processWeek(weekData, assignments) {
@@ -69,35 +110,8 @@ function processWeek(weekData, assignments) {
     }
   });
 
-  const currentAssignments = assignments.filter((assignment) =>
-    inWeek(assignment.dueDate, week.startDate)
-  );
-
-  while (currentAssignments.length > 0) {
-    const assignment = currentAssignments.pop();
-    const assignmentText = `**Due** [${assignment.name}](.${assignment.path})`;
-
-    let day;
-    // try to find a matching day
-    for (let i = 0; i < week.dated.length; i++) {
-      if (isSameDay(week.dated[i].date, assignment.dueDate)) {
-        day = week.dated[i];
-        break;
-      }
-    }
-
-    // if not, add a new entry into dated
-    if (!day) {
-      day = {
-        date: assignment.dueDate,
-        entries: [],
-      };
-      week.dated.push(day);
-    }
-
-    // add the assignment
-    day.entries.push(assignmentText);
-  }
+  addAssignmentsToWeek(week, assignments, "assignedDate");
+  addAssignmentsToWeek(week, assignments, "dueDate");
 
   week.dated.sort((a, b) => compareAsc(a.date, b.date));
 
