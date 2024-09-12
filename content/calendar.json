@@ -1,83 +1,234 @@
 {
-  "weeks":[
+  "weeks": [
     {
-      "week": "2021-05-31",
+      "week": "2024-09-09",
       "entries": [
+        { "text": ["**Unit: Algorithmic Thinking** "] },
         {
-          "day": "tue",
+          "day": "mon",
           "text": [
-            "[Attendance form](https://docs.google.com/forms/d/e/1FAIpQLSdSzP9xf-MIFw7yglTstXkCyAlJKyamtadGqTR1GLVKesVseA/viewform?usp=sf_link)  ",
-            "[Introduction](./lectures/lecture00-intro) [[slides](./lectures/lecture00-intro.pdf)]  "
+            "Course mechanics",
+            "Algorithms",
+            "[Attendance form](https://docs.google.com/forms/d/e/1FAIpQLSdrkuH8RpdiW2Ptmmd-KJEkKLr-M-jhtc32NHk1QA-3MSvXNg/viewform?usp=sf_link)"
           ]
         },
         {
-          "day": "thu",
+          "day": "wed",
+          "text": ["Spatial programming"]
+        },
+        {
+          "day": "fri",
+          "text": ["Abstractions"]
+        }
+      ]
+    },
+    {
+      "week": "2024-09-16",
+      "entries": [
+        {
+          "day": "mon",
+          "text": []
+        },
+        {
+          "day": "wed",
+          "text": ["Conditions"]
+        },
+        {
+          "day": "fri",
           "text": [
-            "[Attendance form](https://docs.google.com/forms/d/e/1FAIpQLSfvsyqPjbTrMjylhrAVezDObVcvg2gQnjgp1VpK2sp3zG8-WQ/viewform?usp=sf_link)  ",
-            "[JavaScript](./lectures/lecture01-javascript) [[slides](./lectures/lecture01f20-js.pdf)],    ",
-            "[Development tools](./lectures/lecture02-dev-tools) [[slides](./lectures/lecture02f20-testing.pdf)]  "
+            "**Discussion** How Algorithms Shape Our Lives",
+            "**Watch** [How Algorithms Shape our World](https://www.ted.com/talks/kevin_slavin_how_algorithms_shape_our_world)",
+            "**Watch** [Inside OKCupid](https://www.youtube.com/watch?v=m9PiPlRuy6E#action=share)",
+            "**Read** [Hello World Ch 1](https://middlebury.instructure.com/courses/15553/files/folder/Readings?preview=2868976)"
           ]
         }
       ]
     },
     {
-      "week": "2021-06-07",
-      "entries": [
-        {"text":"Global announcement"},
-        {
-          "day": "tue",
-          "text": [
-            "[Development tools](./lectures/lecture02-dev-tools) (cont'd)  ",
-            "[npm practical](./practicals/practical01-npm)  "
-          ]
-        },
-        {
-          "day": "thu",
-          "text": [
-            "[React, Design Patterns(MVC)](./lectures/lecture03-react) [[slides](./lectures/lecture03f20-react.pdf)]  "
-          ]
-        },
-        {"day":"fri",
-        "text":"Nothing much today"
-      }
-      ]
-    },
-    {
-      "week": "2021-06-14",
+      "week": "2024-09-23",
       "entries": [
         {
-          "day": "tue",
-          "text": [
-            "[React and Next](./lectures/lecture04-react2) [[slides](./lectures/lecture04f20-more-react.pdf)] [[color picker example](https://github.com/csci312-common/color-picker-next)]  "
-          ]
+          "day": "mon",
+          "text": []
         },
         {
-          "day": "thu",
-          "text": [
-            "[DevOps](./lectures/lecture05-devops) [slides](./lectures/lecture05f20-devops.pdf)",
-            "[Deployment practical](./practicals/practical02-devops)  "
-          ]
+          "day": "wed",
+          "text": []
+        },
+        {
+          "day": "fri",
+          "text": []
         }
       ]
     },
     {
-      "week": "2021-06-21",
+      "week": "2024-09-30",
       "entries": [
         {
-          "day": "tue",
-          "text": [
-            "[React Composition and design](./lectures/lecture06-react3) [[slides](./lectures/lecture06f20-react-design.pdf)]"
-          ]
+          "day": "mon",
+          "text": []
         },
         {
-          "day": "thu",
-          "text": [
-            "[Fetch practical](./practicals/practical03-fetch) ",
-            "[REST APIs](./lectures/lecture7-rest) [[slides](./lectures/lecture07f20-rest.pdf)]"
-          ]
+          "day": "wed",
+          "text": []
+        },
+        {
+          "day": "fri",
+          "text": []
+        }
+      ]
+    },
+    {
+      "week": "2024-10-07",
+      "entries": [
+        { "text": "**Unit: Dealing with Data**" },
+        {
+          "day": "mon",
+          "text": []
+        },
+        {
+          "day": "wed",
+          "text": []
+        },
+        {
+          "day": "fri",
+          "text": ["**No class** Fall Break"]
+        }
+      ]
+    },
+    {
+      "week": "2024-10-14",
+      "entries": [
+        {
+          "day": "mon",
+          "text": []
+        },
+        {
+          "day": "wed",
+          "text": []
+        },
+        {
+          "day": "fri",
+          "text": []
+        }
+      ]
+    },
+    {
+      "week": "2024-10-21",
+      "entries": [
+        {
+          "day": "mon",
+          "text": []
+        },
+        {
+          "day": "wed",
+          "text": []
+        },
+        {
+          "day": "fri",
+          "text": []
+        }
+      ]
+    },
+    {
+      "week": "2024-10-28",
+      "entries": [
+        {
+          "day": "mon",
+          "text": []
+        },
+        {
+          "day": "wed",
+          "text": []
+        },
+        {
+          "day": "fri",
+          "text": []
+        }
+      ]
+    },
+    {
+      "week": "2024-11-04",
+      "entries": [
+        {
+          "day": "mon",
+          "text": []
+        },
+        {
+          "day": "wed",
+          "text": []
+        },
+        {
+          "day": "fri",
+          "text": []
+        }
+      ]
+    },
+    {
+      "week": "2024-11-11",
+      "entries": [
+        { "text": "**Unit: Multimedia computation**" },
+        {
+          "day": "mon",
+          "text": []
+        },
+        {
+          "day": "wed",
+          "text": []
+        },
+        {
+          "day": "fri",
+          "text": []
+        }
+      ]
+    },
+    {
+      "week": "2024-11-18",
+      "entries": [
+        { "text": "**Unit: Modeling and Simulation**" },
+        {
+          "day": "mon",
+          "text": []
+        },
+        {
+          "day": "wed",
+          "text": []
+        },
+        {
+          "day": "fri",
+          "text": []
+        }
+      ]
+    },
+    {
+      "week": "2024-11-25",
+      "entries": [{ "text": "**No class - Thanksgiving break**" }]
+    },
+    {
+      "week": "2024-12-02",
+      "entries": [
+        {
+          "day": "mon",
+          "text": ["Project work time"]
+        },
+        {
+          "day": "wed",
+          "text": ["Project work time"]
+        },
+        {
+          "day": "fri",
+          "text": ["Project work time"]
+        }
+      ]
+    },
+    {
+      "week": "2024-12-09",
+      "entries": [
+        {
+          "day": "mon",
+          "text": ["**Last Day of class**", "Project show and tell"]
         }
       ]
     }
-    
   ]
 }
