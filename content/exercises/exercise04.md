@@ -1,9 +1,9 @@
 ---
 title: "CS 105 - Exercise Four"
-date: "2022-02-23"
-due: "2022-02-28T23:59"
+date: "2024-09-18"
+due: "2024-09-23T11:15"
 name: "Exercise 04"
-published: false
+published: true
 ---
 
 #### Goals
@@ -18,7 +18,7 @@ There is no starter code for this exercise, so go ahead and visit <https://snap.
 
 ## Objective
 
-Our goal is to make some (simplistic) generative art. The results will largely just be a random collection of colored lines, but hopefully you will find it somewhat aesthetically interesting (my son thought it looked pretty cool, but he was nine when I declared this, so take that as you will).
+Our goal is to make some (simplistic) generative art. The results will largely just be a random collection of colored lines, but hopefully you will find it somewhat aesthetically interesting (my son thought it looked pretty cool, but he was nine at the time, so take that as you will).
 
 ## Composing a predicate
 
@@ -157,9 +157,9 @@ If you look at the color picker than comes up when you click the color swatch on
 
 ## Submitting
 
-Share the project using the instructions from [exercise 1](exercise01).
+Save the exercise using the instructions in the [Submission Guidelines](../resources/submissions).
 
-Visit the [exercise page](https://middlebury.instructure.com/courses/10245/assignments/166218) on Canvas to submit the URL.
+Visit the [exercise page](https://middlebury.instructure.com/courses/15553/assignments/289625) on Canvas to submit your work.
 
 # Challenge
 
@@ -167,4 +167,4 @@ _Challenges are a completely optional way to get some more practice. There is a 
 
 Limit the range of hues. The result tends to be more aesthetic if you keep the range of hue down to around 20. This is a good practice for using conditionals.
 
-Once this is working , **share** the project and submit it on [Canvas](https://middlebury.instructure.com/courses/10245/assignments/166219).
+Once this is working , **share** the project and submit it on [Canvas](https://middlebury.instructure.com/courses/15553/assignments/289626).

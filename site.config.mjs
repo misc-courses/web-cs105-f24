@@ -8,8 +8,9 @@ const config = {
   email:'candrews@middlebury.edu',
   officeHours: 'MW 4:00p - 5:00p, Th 2:00p - 4:00p',
   website: '<http://go.middlebury.edu/cs105>',
-  meetingTimes: '11:15a-12:105p MWF',
-  links: [{'name':'Canvas','link':'https://middlebury.instructure.com/courses/15553'},{'name':'Ed Discussion','link':'https://edstem.org/us/courses/66392/discussion/'}],
+  meetingTimes: '11:15a - 12:105p MWF',
+  dropinHelp:'TW 8:00p - 10:00p, 75SHS 205',
+  links: [{'name':'Canvas','link':'https://middlebury.instructure.com/courses/15553'},{'name':'Ed Discussion','link':'https://edstem.org/us/courses/66392/discussion/'}, {'name':'CS Help', 'link':'https://go.middlebury.edu/cshelp'}],
   content: {
     'index':'Home',
     'info': 'Course Info',

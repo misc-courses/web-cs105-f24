@@ -18,7 +18,7 @@
         },
         {
           "day": "fri",
-          "text": ["Abstractions"]
+          "text": ["[Abstractions](./lectures/lecture03-abstraction.pdf)"]
         }
       ]
     },
@@ -27,7 +27,9 @@
       "entries": [
         {
           "day": "mon",
-          "text": []
+          "text": [
+            "**Example** [Jump block](https://snap.berkeley.edu/snap/snap.html#present:Username=christopherandrews&ProjectName=f24%20-%20example%20-%20jump%20block)"
+          ]
         },
         {
           "day": "wed",
@@ -39,7 +41,7 @@
             "**Discussion** How Algorithms Shape Our Lives",
             "**Watch** [How Algorithms Shape our World](https://www.ted.com/talks/kevin_slavin_how_algorithms_shape_our_world)",
             "**Watch** [Inside OKCupid](https://www.youtube.com/watch?v=m9PiPlRuy6E#action=share)",
-            "**Read** [Hello World Ch 1](https://middlebury.instructure.com/courses/15553/files/folder/Readings?preview=2868976)"
+            "**Read** [Hello World by Hannah Fry Ch 1](https://middlebury.instructure.com/courses/15553/files/folder/Readings?preview=2868976)"
           ]
         }
       ]
@@ -49,7 +51,11 @@
       "entries": [
         {
           "day": "mon",
-          "text": []
+          "text": [
+            "[Variables](./lectures/lecture06-variables)",
+            "[Catch Alonzo 2](https://snap.berkeley.edu/snap/snap.html#present:Username=christopherandrews&ProjectName=F24%20-%20Catch%20Alonzo%202)",
+            "[for loop spirals](https://snap.berkeley.edu/snap/snap.html#present:Username=christopherandrews&ProjectName=F24%20-%20for%20loop)"
+          ]
         },
         {
           "day": "wed",
@@ -57,7 +63,12 @@
         },
         {
           "day": "fri",
-          "text": []
+          "text": [
+            "**Discussion** Recommendation systems",
+            "**Read** [Recommendation Systems](https://useinsider.com/what-is-recommendation-system/)",
+            "**Watch** [Tristan Harris Interview](https://www.youtube.com/watch?v=_aT9paPW5_g)",
+            "**READ** [The Making of a YouTube Radical](https://www.nytimes.com/interactive/2019/06/08/technology/youtube-radical.html)"
+          ]
         }
       ]
     },

@@ -1,7 +1,7 @@
 ---
 title: "CS 105 - Exercise Three"
-date: "2024-09-13"
-due: "2024-09-18T11:15"
+date: "2024-09-16"
+due: "2024-09-20T11:15"
 name: "Exercise 03"
 published: true
 ---

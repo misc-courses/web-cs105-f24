@@ -3,7 +3,7 @@ title: "CS 105 - Assignment One"
 date: "2024-09-16"
 due: "2024-09-23T11:15:00"
 name: "Assignment 01"
-published: false
+published: true
 ---
 
 #### Goals

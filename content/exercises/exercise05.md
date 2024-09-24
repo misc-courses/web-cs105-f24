@@ -1,9 +1,9 @@
 ---
 title: "CS 105 - Exercise Five"
-date: "2022-02-28"
-due: "2022-03-04T11:15:00"
+date: "2024-09-25"
+due: "2024-09-27T11:15:00"
 name: "Exercise 05"
-published: false
+published: true
 ---
 
 #### Goals
@@ -30,8 +30,7 @@ Add a ![clear](../images/snap-blocks/clear.png#inline) to clean up the stage at 
 
 Now, let's make the sprite bounce around.
 
-Put a ![move block](../images/snap-blocks/move.png#inline)
-in a ![forever block](../images/snap-blocks/forever.png#inline). You can leave the default 10, or you can change it if you feel like it.
+Put a ![move block](../images/snap-blocks/move.png#inline) in a ![forever block](../images/snap-blocks/forever.png#inline). You can leave the default 10, or you can change it if you feel like it.
 
 If you just run that, the sprite will run off the stage and disappear. We solved this before with our special predicate. However, Snap! comes with a block for handling this precise thing. If you look in the Motion palette, you will find the ![bounce block](../images/snap-blocks/bounce.png#inline). This handles both the edge detection AND the change in direction. Unlike our solution, which headed off in random directions, the ![bounce block](../images/snap-blocks/bounce.png#inline) will give us perfect reflections (well, almost, the shape of the sprite means we get some strange movement during the bounce).
 
@@ -111,7 +110,7 @@ You want to draw the line from (-x1, y1) to (-x2, y2). You can negate values usi
 
 Right after you draw the line, add a ![go to block](../images/snap-blocks/go-to-xy.png#inline) to return the sprite to (x2, y2).
 
-Try it out. While the sprite draws its curves, a second mirror curve is drawn, flipped across the Y axis.
+Try it out. While the sprite draws its lines, a second mirror line is drawn, flipped across the Y axis.
 
 ### Four way symmetry
 
@@ -148,7 +147,7 @@ Converting between two linear scales is pretty easy:
 
 So, to convert our mouse's x position to a hue, we can multiply it by `100/width of the stage`.
 
-Of course, 0, is in the middle of the stage, not on the left, so we need to add half of the width to the mouse position first. This gives us `(mouse x + width/2)*(100/width)`.
+Of course 0 is in the middle of the stage, not on the left, so we need to add half of the width to the mouse position first. This gives us `(mouse x + width/2)*(100/width)`.
 
 ### Add another variable
 
@@ -193,9 +192,9 @@ I'll be honest, I think this is really interesting and a big step up from the la
 
 ## Submitting
 
-Share the project using the instructions from [exercise 1](exercise01).
+Save the exercise using the instructions in the [Submission Guidelines](../resources/submissions).
 
-Visit the [exercise page](https://middlebury.instructure.com/courses/10245/assignments/166698) on Canvas to submit the URL.
+Visit the [exercise page](https://middlebury.instructure.com/courses/15553/assignments/289627) on Canvas to submit your work.
 
 # Challenge
 
@@ -203,4 +202,4 @@ _Challenges are a completely optional way to get some more practice. There is a 
 
 Change the color changing block so that the y-axis controls the saturation, the brightness, or the thickness of the lines.
 
-Once this is working , **share** the project and submit it on [Canvas](https://middlebury.instructure.com/courses/10245/assignments/166701).
+Once this is working , **share** the project and submit it on [Canvas](https://middlebury.instructure.com/courses/15553/assignments/289628).

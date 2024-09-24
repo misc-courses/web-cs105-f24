@@ -1,8 +1,8 @@
 ---
 title: "Reflection"
 date: "2024-09-13"
-due: ["2024-09-16T11:15"]
-deliverables: ["Reflection 01"]
+due: ["2024-09-16T11:15", "2024-09-23T11:15"]
+deliverables: ["Reflection 01", "Reflection 02"]
 name: "Reflection"
 published: true
 ---
@@ -15,8 +15,9 @@ As one of their roles is to inform the shape of the class, these should be compl
 
 [Reflection 01](https://middlebury.instructure.com/courses/15553/assignments/289698/edit?quiz_lti)
 
-<!-- [Reflection 02](https://middlebury.instructure.com/courses/10245/assignments/167188)
-[Reflection 03](https://middlebury.instructure.com/courses/10245/assignments/167945)
+[Reflection 02](https://middlebury.instructure.com/courses/15553/assignments/289641/edit?quiz_lti)
+
+<!-- [Reflection 03](https://middlebury.instructure.com/courses/10245/assignments/167945)
 [Reflection 04](https://middlebury.instructure.com/courses/10245/assignments/169237)
 [Reflection 05](https://middlebury.instructure.com/courses/10245/assignments/169806)
 [Reflection 06](https://middlebury.instructure.com/courses/10245/assignments/170337)
