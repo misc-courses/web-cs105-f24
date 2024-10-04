@@ -19,23 +19,19 @@ export function findAssignments(files) {
 
   files.forEach((entry) => {
     if (entry.type === "node" && entry.published && entry.due) {
-      const dates = Array.isArray(entry.due) ? entry.due : [entry.due];
+      let dueDates = Array.isArray(entry.due) ? entry.due : [entry.due];
+      dueDates = dueDates.map((d) => parseISO(d));
 
-      dates.forEach((date, index) => {
-        if (entry.deliverables) {
-          tmp.push({
-            ...entry,
-            name: entry.deliverables[index],
-            dueDate: parseISO(date),
-            assignedDate: parseISO(entry.date),
-          });
-        } else {
-          tmp.push({
-            ...entry,
-            dueDate: parseISO(date),
-            assignedDate: parseISO(entry.date),
-          });
-        }
+      dueDates.forEach((dueDate, index) => {
+        const name =
+          entry.deliverables && entry.deliverables[index]
+            ? entry.deliverables[index]
+            : entry.name;
+        const assignedDate = parseISO(
+          entry.dates && entry.date[index] ? entry.dates[index] : entry.date,
+        );
+
+        tmp.push({ ...entry, name, assignedDate, dueDate });
       });
     } else if (entry.type === "directory") {
       tmp.push(...findAssignments(entry.children));
