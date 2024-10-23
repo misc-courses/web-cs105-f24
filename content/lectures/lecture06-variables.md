@@ -5,8 +5,6 @@ date: "2024-09-23"
 published: true
 ---
 
-# Variables
-
 ## Goals for the day
 
 - Learn what a **variable** is and how to use it in a script

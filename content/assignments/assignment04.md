@@ -1,9 +1,9 @@
 ---
 title: "CS 105 - Assignment Four"
-date: "2022-03-14"
-due: "2022-03-30T23:59:00"
+date: "2024-10-09"
+due: "2024-10-16T11:15:00"
 name: "Assignment 04"
-published: false
+published: true
 ---
 
 #### Goals
@@ -106,9 +106,9 @@ Each reflection should contain the following things:
 
 ## Submitting
 
-Share the project using the instructions from [exercise 1](exercise01).
+You will submit your work through Canvas on the [assignment page](https://middlebury.instructure.com/courses/15553/assignments/289614).
 
-Visit the [assignment page](https://middlebury.instructure.com/courses/10245/assignments/167955) on Canvas to submit the URL.
+Please see the [submission guidelines](../resources/submissions) for details on how to submit your work.
 
 ---
 
@@ -122,4 +122,4 @@ A naïve implementation will not handle capital letters correctly. For example, 
 
 You challenge is to fix this. Identify when the first letter is a capital, convert it to lowercase, and then uppercase the new first letter.
 
-Save this challenge with a separate name and submit it [here](https://middlebury.instructure.com/courses/10245/assignments/167956#).
+Save this challenge with a separate name and submit it [here](https://middlebury.instructure.com/courses/15553/assignments/289615).

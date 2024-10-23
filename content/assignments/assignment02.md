@@ -1,17 +1,17 @@
 ---
 title: "CS 105 - Assignment Two"
-date: "2022-02-25"
-due: "2022-03-07T23:59:00"
+date: "2024-09-25"
+due: "2024-10-02T23:59:00"
 name: "Assignment 02"
-published: false
+published: true
 ---
 
 #### Goals
 
 - Demonstrate your ability to create custom blocks
 - Demonstrate your familiarity with spatial programming
-- Demonstrate your knowledge of the use of reporters and predicates
-- Demonstrate your knowledge of variables
+- Demonstrate your ability to use of reporters and predicates
+- Demonstrate your ability to use variables in new code
 
 ## Tasks
 
@@ -55,23 +55,11 @@ _You will want to turn off the ability to manually drag the sprite around. At th
 - There is a ![mouse on stage predicate](../images/assignments/assignment02/mouse-on-stage.png#inline) that is used to limit the sprite to just the Stage.
 - When the user clicks the mouse, a shape will be drawn, using the ![draw polygon block](../images/assignments/assignment02/draw-polygon.png#inline).
 
-## Reflection
-
-I would like you to write a short reflection about your process of completing each part of the assignment. The reflections should be embedded in your project as comments. To make a comment, right click in the script area of the Snap! editor. A context menu should pop up and give you the option to 'add comment'. Create a separate comment for each piece of the assignment.
-
-Each reflection should contain the following things:
-
-- If the block or script currently doesn't work, a description of what is not working and what you have tried to do to fix it
-- If the block or script is working, a description of what was the hardest part to accomplish
-- A description of what help you received to accomplish each piece
-- A description of what you learned
-- Your assessment of your ability to repeat this work later completely independently
-
 ## Submitting
 
-Share the project using the instructions from [exercise 1](exercise01).
+You will submit your work through Canvas on the [assignment page](https://middlebury.instructure.com/courses/15553/assignments/289611).
 
-Visit the [assignment page](https://middlebury.instructure.com/courses/10245/assignments/166914) on Canvas to submit the URL.
+Please see the [submission guidelines](../resources/submissions) for details on how to submit your work.
 
 ---
 
@@ -85,4 +73,4 @@ _Challenges are a completely optional way to get some more practice. There is a 
 - When the user clicks, check if one of the number keys is down. If any key between 3 and 9 is down, use that to set the number of sides of the drawn shape, otherwise, draw a triangle.
 - In the original version, dragging the cursor while the button is down will draw a line of shapes. Add a variable so you only draw one shape per click (i.e., the user needs to release the mouse button before another shape will be drawn).
 
-Save this challenge with a separate name and submit it [here](https://middlebury.instructure.com/courses/10245/assignments/166915).
+Save this challenge with a separate name and submit it [here](https://middlebury.instructure.com/courses/15553/assignments/289611).

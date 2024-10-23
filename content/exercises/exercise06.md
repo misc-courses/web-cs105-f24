@@ -1,9 +1,9 @@
 ---
 title: "CS 105 - Exercise Six"
-date: "2022-03-07"
-due: "2022-03-11T11:59"
+date: "2024-10-02"
+due: "2024-10-04T11:15"
 name: "Exercise 06"
-published: false
+published: true
 ---
 
 #### Goals
@@ -45,8 +45,10 @@ Start by talking through your observations and working with pen and paper. Don't
 
 ## Submitting
 
-Share the project using the instructions from [exercise 1](exercise01).
+Save the exercise using the instructions in the [Submission Guidelines](../resources/submissions).
 
-Only one person from each group needs to submit. When you submit the assignment you wil have the opportunity to create a group -- please remember to include your partner(s) in the group. If you don't see a place to create a group when you log in, click on the `People` link on the left, and then on the `Exercise 6 groups` tab. You can create a group there by dragging your two names into an empty group.
+Only one person from each group needs to submit the code. When you submit the assignment you wil have the opportunity to create a group -- please remember to include your partner(s) in the group. If you don't see a place to create a group when you log in, click on the `People` link on the left, and then on the `Exercise 6 groups` tab. You can create a group there by dragging your two names into an empty group.
 
-Visit the [exercise page](https://middlebury.instructure.com/courses/10245/assignments/167288) on Canvas to submit the URL.
+Submit your work at the [exercise page](https://middlebury.instructure.com/courses/15553/assignments/289629) on Canvas.
+
+Please write your reflections separately and submit them to [this separate page](https://middlebury.instructure.com/courses/15553/assignments/296049) on Canvas. Include in your reflection the name of the person you worked with and thoughts about the experience.

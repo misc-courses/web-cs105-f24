@@ -10,7 +10,7 @@ const config = {
   website: '<http://go.middlebury.edu/cs105>',
   meetingTimes: '11:15a - 12:105p MWF',
   dropinHelp:'TW 8:00p - 10:00p, 75SHS 205',
-  links: [{'name':'Canvas','link':'https://middlebury.instructure.com/courses/15553'},{'name':'Ed Discussion','link':'https://edstem.org/us/courses/66392/discussion/'}, {'name':'CS Help', 'link':'https://go.middlebury.edu/cshelp'}],
+  links: [{'name':'Canvas','link':'https://middlebury.instructure.com/courses/15553'},{'name':'Ed Discussion','link':'https://edstem.org/us/courses/66392/discussion/'}, {'name':'CS Help', 'link':'https://go.middlebury.edu/cshelp'}, {"name":"Course feedback", "link": "https://docs.google.com/forms/d/e/1FAIpQLSdZe8tXDgi0Zx5QI-t1UYtb61lGNxmJ9T2t7qtDpEdhZ5RFYA/viewform?usp=sf_link"}],
   content: {
     'index':'Home',
     'info': 'Course Info',

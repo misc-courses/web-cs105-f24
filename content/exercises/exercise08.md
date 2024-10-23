@@ -1,121 +1,88 @@
 ---
 title: "CS 105 - Exercise Eight"
-date: "2022-03-28"
-due: "2022-03-30T11:15"
+date: "2024-10-23"
+due: "2024-10-28T11:15"
 name: "Exercise 08"
-published: false
+published: true
 ---
 
 #### Goals
 
-- Get practice responding to user input
-- Get some more practice with lists
+- Gain some experience working with tabular data and high-order blocks
+
+## Prerequisites
+
+I have provided you with a [starter project](https://snap.berkeley.edu/snap/snap.html#present:Username=christopherandrews&ProjectName=F24E08%20-%20data%20summary) for this assignment. The project contains an imported CSV file (the same one we played with in class) and the final implementation for `average` that we came up with in class.
 
 ## Objective
 
-Our goal is to simulate a conversation with the sprite. It will ask us questions, wait for our response and then make a comment.
+In this exercise we are going to build a tool to help us summarize information from data stored in a CSV file.
 
-## User interaction
+## Find the minimum of a list
 
-As a refresher, we have five blocks of interacting directly with the user.
+In class, we found the average of a list of numbers, now I want you to find the smallest value in a list, and create a new block ![minimum block](../images/exercises/exercise09/minimum.png#inline).
 
-To communicate information to the user, we have been using the ![say block](../images/snap-blocks/say.png#inline) and ![say for block](../images/snap-blocks/say-for.png#inline) blocks. These do the same thing, except that the ![say for block](../images/snap-blocks/say-for.png#inline) clears the speech bubble after a set interval.
+The most straightforward way to do this is to loop through the list, look at each item, keeping the smallest one we have found so far. We might do that with the following algorithm:
 
-The speech bubble is replaced when you say something new, so to clear a speech bubble made with ![say block](../images/snap-blocks/say.png#inline), you just need to say something new, or use the ![say block](../images/snap-blocks/say.png#inline) block with no input.
+- create a new variable `smallest`
+- set `smallest` to the first value in the list (think of it as "the smallest we have seen so far")
+- for each item in the list:
+  - if the current value is less than `smallest`, set `smallest` equal to the current value
 
-We have not used the ![think block](../images/snap-blocks/think.png#inline) and ![think for block](../images/snap-blocks/think-for.png#inline) blocks, but they do the same thing except they use think bubbles instead of speech bubbles.
+Hopefully you could code that up without much difficulty at this point.
 
-I introduced you to the fifth block in the Text lecture -- the ![ask block](../images/snap-blocks/ask.png#inline), which you will find in the Sensing palette. This "says" whatever you pass in as input, and then provides a place for the user to type an answer. The script will pause until the user provides an answer, so you can assume that there is an answer by the time the next block executes.
+However, in class, we found the average of a list, using the ![combine block](../images/snap-blocks/combine.png#inline).
 
-The user's answer? That will be stored in ![answer variable](../images/snap-blocks/answer.png#inline).
+![average block contents](../images/exercises/exercise09/average-script.png)
 
-## A simple greeting
+Recall that the block in the grey ring is being applied to the elements of the input list. With the ![combine block](../images/snap-blocks/combine.png#inline), we expect there to be _two_ open inputs in the "ringed" block, one for the running total that will be returned at the end, and one for the current item of the list.
 
-Let's start by duplicating what I showed you in the video as a warm up.
+What we want to do now is create a similar block that finds the smallest value in the list.
 
-Create a short script to say hello to the user.
+We are going to follow the same algorithm that I laid out above, but we don't need a new `smallest` variable -- the [combine block](../images/snap-blocks/combine.png#inline) will keep track of the running value for us internally. All we need to handle is the last line of the algorithm -- check if the current item is less than the running value, and return it if it is, or else return the running value if it isn't.
 
-It should start by saying "hello" to the user. After a second or two, it should ask "What is your name?".
+Our not-so-secret weapon here is the ![if reporter ](../images/snap-blocks/if-reporter.png#inline). This block is a reporter that reports different values based on the input predicate. If you haven't played with it before, play around with it a little bit before you use it in your script until you understand how it works.
 
-Then, the sprite should say "Nice to meet you _name_", where _name_ is the name the user provided. In order to combine the text "Nice to meet you " and the response stored in ![answer variable](../images/snap-blocks/answer.png#inline), you should make use of the ![join block](../images/snap-blocks/join-text.png#inline) (which hopefully you will recall can be used to glue two pieces of text together to make one bigger one).
+One issue that you will have is that [combine block](../images/snap-blocks/combine.png#inline) is expecting two open inputs, and you should now have four (two in the predicate plus the two outputs). To make this easier to read and understand, click the little black arrow on the gray ring twice. This will reveal two variables corresponding to the running total and the current item (helpfully named `#1` and `#2`). Use these in the ringed block instead of leaving blank spaces.
 
-Click the script and introduce yourself.
+Test your new block out with some lists to make sure it returns the smallest value.
 
-## Question time!
+## Find the maximum of a list
 
-Now, it is time to make the sprite a little chatty.
+Now I would like you to create a new ![maximum block](../images/exercises/exercise09/maximum.png#inline). This will be virtually identical to ![minimum block](../images/exercises/exercise09/minimum.png#inline) with only a minor change required.
 
-Create a new variable called `questions`. It can be at the sprite level.
+## Summarize a field in a table
 
-Use the ![set block](../images/snap-blocks/set-variable.png#inline) to set `questions` to equal a list. Load the list with a couple of questions. They could be things like "What is your favorite color?", or "How are you doing today?". Be creative, write at least four of them.
+Now that we have the building blocks, it is time to build our data exploration tool. I would like you to build a block that takes in a table and a column name and reports back the average, the minimum, and the maximum values of the named column. It should return this data as a list of three lists -- each list contains the name of the metric ('average', 'minimum', or 'maximum') in the first position, and the associated value in the second:
 
-To get the sprite to ask the questions, use a ![for each block](../images/snap-blocks/for-each.png#inline). Using ![ask block](../images/snap-blocks/ask.png#inline).
+![summarize block with result](../images/exercises/exercise09/summarize-result.png)
 
-Click the script, and it should ask you a series of questions.
+If the named field doesn't exist in the table, it should return an empty list.
 
-## Answer time!
+![summarize block with empty result](../images/exercises/exercise09/summarize-result-bad.png)
 
-As conversations go, this seems a little one sided. Let's make the sprite even chattier. After the user responds to each question, the sprite should have some response.
+You algorithm for this will be
 
-Come up with a response for each one of your questions. They don't make use of the user's responses, but it is more fun if it seems like they do. So, for example, if the questions are ("What is your favorite color?", "Which instrument is your favorite?"), the responses could be ("That's mine too!", "Really? I am not that much of a fan, honestly").
+- Find the index of the named field in the first row of the table
+- If the named field is not found, report the empty list (you will need to remove the blank input in the default [list block](../images/snap-blocks/list.png#inline))
+- Extract the column of data using the `map` technique I showed you in class
+- use your two new reporters and the ![average block](../images/exercises/exercise09/average.png#inline) I provided to return a list of the specified structure
 
-Your script should now use an additional ![say for block](../images/snap-blocks/say-for.png#inline) so that after the user responds to each question, the sprite says the respective response.
-
-The challenge is to figure out how to implement this so that the questions and response are associated.
-
-There are two basic approaches we could take to this:
-
-### Use the position within the list (_Don't_ use this one)
-
-A reasonable solution (which I don't want you to use) would be to create a second list, where the question and corresponding response both have the same location within their respective lists.
-
-You could then switch the loop to use a ![for block](../images/snap-blocks/for-i.png#inline). Now, rather than visiting each question, you visit the _location_ of each question in the list. You would need to make use of a ![length block](../images/snap-blocks/length.png#inline) to control the loop, and an ![item block](../images/snap-blocks/item.png#inline) to retrieve each question out of the list, but the beauty of this solution is that you can use the same location to look things up in _both_ lists.
-
-But you aren't going to do that.
-
-### Store lists in your list (_Do_ use this one)
-
-As I discussed in the lists lecture, a powerful aspect of lists is that we can put other lists inside to create more complex _data structures_.
-
-In this case, I would like you to return to your `questions` list and replace every entry with a new ![list block](../images/snap-blocks/list.png#inline). Click the little black arrow on the blank list so you have two open inputs. Then put your question in the first input and then the response in the second one.
-
-When you are done you should have a list of two element lists.
-
-Here is a simplified example of what this might look like:
-
-![list of lists example](../images/exercises/exercise08/list-of-lists.png)
-
-If you show the variable on the stage, you will see that it no longer looks like a list -- it looks like a table, with each sub array as a separate row:
-
-![table view of the data](../images/exercises/exercise08/table-view.png)
-
-If you right click on the table you can chose 'list view' and see what this looks like with the list view that we have seen before:
-
-![list view of the data](../images/exercises/exercise08/list-view.png)
-
-Either view takes up a lot of room, so you probably want to hide it, but I want you to feel comfortable with this idea of nested lists/tables. We are going to work with some data going forward and it will be useful to have this mental model.
-
-Returning to the problem at hand, if you leave your script as is, you will find that the `item` variable from the loop now gives you an entire row. You should be able to extract the question and the response from this using ![item block](../images/snap-blocks/item.png#inline) reporters.
-
-### Put it all together
-
-Combine everything together so that when the ![green flag](../images/snap-icons/green-flag-button.png#inline) is pressed, the sprite greets you and learns your name, and then asks you the questions, making some remark after you answer each one.
-
-Finally, I would like the session to end by the sprite saying "Well, it was nice chatting with you _name_", where _name_ is the name of the user. This seems very straightforward, until you realize that ![answer variable](../images/snap-blocks/answer.png#inline) now contains the response to the last question...
-
-Create a new variable to store the name and save it right after you learn it form the user. _Now_, the final step should be pretty straightforward.
+_I suggest you do this incrementally. First report out the index of the named field and make sure that is working. Then add the check for a bad field name and make sure it returns an empty list. Next, return the data column and make sure you are getting it all (and that your didn't forget to skip the first row where the header is!). Only after all of that is working, start trying to assemble the output._
 
 #### What I will be looking for
 
-- When I click the ![green flag](../images/snap-icons/green-flag-button.png#inline), the sprite should say hello and ask my name
-- After asking my name, the sprite should greet me again by name
-- The sprite should ask a series of questions (at least 4)
-- Following each question, the sprite should make some comment about my answer
-- Finally, it should say "Well, it was nice chatting with you _name_", where _name_ is the name I typed in at the start
-- Internally, the questions and responses should be stored in a single list
+- a ![minimum block](../images/exercises/exercise09/minimum.png#inline)
+- a ![maximum block](../images/exercises/exercise09/maximum.png#inline)
+- a ![summarize block](../images/exercises/exercise09/summarize.png#inline)
+- the ![minimum block](../images/exercises/exercise09/minimum.png#inline) should report the smallest value in the list
+- the ![maximum block](../images/exercises/exercise09/maximum.png#inline) should report the largest value in the list
+- both ![minimum block](../images/exercises/exercise09/minimum.png#inline) and ![maximum block](../images/exercises/exercise09/maximum.png#inline) should make use of [combine block](../images/snap-blocks/combine.png#inline) and ![if reporter ](../images/snap-blocks/if-reporter.png#inline)
+- the ![summarize block](../images/exercises/exercise09/summarize.png#inline) should report an empty list if the field doesn't exist
+- the ![summarize block](../images/exercises/exercise09/summarize.png#inline) should report a summary list of lists if the field does exist, showing the average, minimum, and maximum values with labels.
 
 ## Submitting
 
-Share the project using the instructions from [exercise 1](exercise01).
+Save the exercise using the instructions in the [Submission Guidelines](../resources/submissions).
 
-Visit the [exercise page](https://middlebury.instructure.com/courses/10245/assignments/168943) on Canvas to submit the URL.
+Visit the [exercise page](https://middlebury.instructure.com/courses/15553/assignments/289633) on Canvas to submit your work.
